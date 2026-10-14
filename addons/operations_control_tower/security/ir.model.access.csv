@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_operations_control_item_user,operations.control.item.user,model_operations_control_item,operations_control_tower.group_operations_user,1,1,1,0
+access_operations_control_item_manager,operations.control.item.manager,model_operations_control_item,operations_control_tower.group_operations_manager,1,1,1,1

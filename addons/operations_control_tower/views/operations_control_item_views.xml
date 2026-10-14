@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_operations_control_item_list" model="ir.ui.view">
+        <field name="name">operations.control.item.list</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="is_overdue" decoration-muted="state in ['resolved', 'closed']" multi_edit="1">
+                <field name="priority" widget="priority"/>
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="area"/>
+                <field name="impact" widget="badge"/>
+                <field name="owner_id" widget="many2one_avatar_user"/>
+                <field name="deadline"/>
+                <field name="state" widget="badge"/>
+                <field name="is_overdue" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_operations_control_item_kanban" model="ir.ui.view">
+        <field name="name">operations.control.item.kanban</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column">
+                <progressbar field="state" colors='{"in_progress": "warning", "waiting_responsible": "warning", "waiting_information": "warning", "waiting_third_party": "warning", "blocked": "danger", "resolved": "success", "closed": "success"}'/>
+                <templates>
+                    <t t-name="card">
+                        <field name="reference" class="text-muted small"/>
+                        <field name="name" class="fw-bold fs-5"/>
+                        <div class="text-muted mt-1">
+                            <field name="area"/> · <field name="impact"/>
+                        </div>
+                        <div class="mt-2" t-if="record.next_action.raw_value">
+                            <strong>Next:</strong> <field name="next_action"/>
+                        </div>
+                        <div class="mt-2">
+                            <field name="state" widget="badge"/>
+                        </div>
+                        <footer>
+                            <field name="deadline"/>
+                            <field name="owner_id" widget="many2one_avatar_user" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_operations_control_item_form" model="ir.ui.view">
+        <field name="name">operations.control.item.form</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <form string="Control Item">
+                <sheet>
+                    <widget name="web_ribbon" title="Overdue" bg_color="text-bg-danger" invisible="not is_overdue"/>
+                    <div class="oe_title">
+                        <label for="reference"/>
+                        <h2><field name="reference"/></h2>
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="What needs operational attention?"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="owner_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="area"/>
+                            <field name="impact"/>
+                        </group>
+                        <group>
+                            <field name="state" string="Status"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="deadline"/>
+                            <field name="active" invisible="1"/>
+                            <field name="is_overdue" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Execution">
+                        <field name="next_action" placeholder="Define the next concrete action..."/>
+                        <field name="description" placeholder="Add operational context, blockers, or decision notes..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_operations_control_item_search" model="ir.ui.view">
+        <field name="name">operations.control.item.search</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="owner_id"/>
+                <field name="area"/>
+                <field name="impact"/>
+                <filter name="my_items" string="My Items" domain="[('owner_id', '=', uid)]"/>
+                <filter name="open_items" string="Open" domain="[('state', 'not in', ['resolved', 'closed'])]"/>
+                <filter name="overdue" string="Overdue" domain="[('deadline', '&lt;', context_today()), ('state', 'not in', ['resolved', 'closed'])]"/>
+                <filter name="blocked" string="Blocked" domain="[('state', '=', 'blocked')]"/>
+                <filter name="resolved" string="Resolved" domain="[('state', '=', 'resolved')]"/>
+                <filter name="closed" string="Closed" domain="[('state', '=', 'closed')]"/>
+                <filter name="critical" string="Critical Impact" domain="[('impact', '=', 'critical')]"/>
+                <separator/>
+                <filter name="group_state" string="Group by Status" context="{'group_by': 'state'}"/>
+                <filter name="group_area" string="Group by Area" context="{'group_by': 'area'}"/>
+                <filter name="group_owner" string="Group by Owner" context="{'group_by': 'owner_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_operations_control_item_calendar" model="ir.ui.view">
+        <field name="name">operations.control.item.calendar</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <calendar string="Control Item Deadlines" date_start="deadline" color="owner_id" mode="month">
+                <field name="name"/>
+                <field name="owner_id" filters="1"/>
+                <field name="state"/>
+                <field name="impact"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_operations_control_item_graph" model="ir.ui.view">
+        <field name="name">operations.control.item.graph</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <graph string="Control Item Analysis" type="bar" sample="1">
+                <field name="state"/>
+                <field name="area"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_operations_control_item_pivot" model="ir.ui.view">
+        <field name="name">operations.control.item.pivot</field>
+        <field name="model">operations.control.item</field>
+        <field name="arch" type="xml">
+            <pivot string="Control Item Analysis" display_quantity="1" sample="1">
+                <field name="area" type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_operations_control_item" model="ir.actions.act_window">
+        <field name="name">Operations Overview</field>
+        <field name="res_model">operations.control.item</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_operations_control_item_search"/>
+        <field name="context">{'search_default_open_items': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first control item</p>
+            <p>Track ownership, priority, deadlines, blockers, and completion.</p>
+        </field>
+    </record>
+
+    <record id="action_operations_control_deadlines" model="ir.actions.act_window">
+        <field name="name">Deadlines</field>
+        <field name="res_model">operations.control.item</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="search_view_id" ref="view_operations_control_item_search"/>
+        <field name="domain">[('deadline', '!=', False)]</field>
+    </record>
+
+    <record id="action_operations_control_analysis" model="ir.actions.act_window">
+        <field name="name">Operational Analysis</field>
+        <field name="res_model">operations.control.item</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="search_view_id" ref="view_operations_control_item_search"/>
+    </record>
+
+    <menuitem id="menu_operations_control_root" name="Operations Control" groups="operations_control_tower.group_operations_user" sequence="10"/>
+    <menuitem id="menu_operations_control_items" name="Overview" parent="menu_operations_control_root" action="action_operations_control_item" groups="operations_control_tower.group_operations_user" sequence="10"/>
+    <menuitem id="menu_operations_control_deadlines" name="Deadlines" parent="menu_operations_control_root" action="action_operations_control_deadlines" groups="operations_control_tower.group_operations_user" sequence="20"/>
+    <menuitem id="menu_operations_control_analysis" name="Analysis" parent="menu_operations_control_root" action="action_operations_control_analysis" groups="operations_control_tower.group_operations_manager" sequence="30"/>
+</odoo>

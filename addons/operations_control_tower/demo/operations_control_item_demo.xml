@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="item_define_kpis" model="operations.control.item">
+        <field name="name">Define the control tower KPI catalogue</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">strategy</field>
+        <field name="impact">high</field>
+        <field name="priority">1</field>
+        <field name="state">closed</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=10)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Agree on the first five management KPIs</field>
+        <field name="description">Create a compact KPI catalogue covering delivery, blockers, deadlines, ownership, and operational risk.</field>
+    </record>
+    <record id="item_configure_dashboard" model="operations.control.item">
+        <field name="name">Configure the operational dashboard</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">operations</field>
+        <field name="impact">critical</field>
+        <field name="priority">2</field>
+        <field name="state">closed</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=4)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Review the kanban flow and management filters</field>
+        <field name="description">Validate that the overview communicates priorities and blockers at a glance.</field>
+    </record>
+    <record id="item_connect_test_scenarios" model="operations.control.item">
+        <field name="name">Connect ERP test scenarios</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">it</field>
+        <field name="impact">critical</field>
+        <field name="priority">1</field>
+        <field name="state">closed</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=2)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Confirm the source-system test dataset</field>
+        <field name="description">Demonstrates how blockers and next actions are made visible to the operations team.</field>
+    </record>
+    <record id="item_prepare_portfolio" model="operations.control.item">
+        <field name="name">Prepare the portfolio walkthrough</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">strategy</field>
+        <field name="impact">medium</field>
+        <field name="priority">0</field>
+        <field name="state">closed</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=14)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Capture the main workflow and architecture decisions</field>
+        <field name="description">Prepare a concise demonstration of the business problem, implementation, and test coverage.</field>
+    </record>
+
+    <record id="item_reconcile_hydration_stock" model="operations.control.item">
+        <field name="name">Reconcile WMS and Odoo stock for Hydration Lemon tubs</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">inventory</field>
+        <field name="impact">critical</field>
+        <field name="priority">2</field>
+        <field name="state">in_progress</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=2)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Review the 42-unit variance with warehouse operations</field>
+        <field name="description">Fictional portfolio scenario: compare the warehouse snapshot with Odoo stock and document the root cause of the variance.</field>
+    </record>
+    <record id="item_release_energy_sample_batch" model="operations.control.item">
+        <field name="name">Release Energy sample box batch after quality review</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">quality</field>
+        <field name="impact">high</field>
+        <field name="priority">1</field>
+        <field name="state">waiting_information</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=1)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Confirm the laboratory result and record the release decision</field>
+        <field name="description">Fictional portfolio scenario: keep the batch on review until all required quality results are available.</field>
+    </record>
+    <record id="item_confirm_flavour_delivery" model="operations.control.item">
+        <field name="name">Confirm delivery date for natural flavour blend</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">procurement</field>
+        <field name="impact">high</field>
+        <field name="priority">1</field>
+        <field name="state">waiting_third_party</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=3)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Obtain a confirmed delivery date from the ingredient supplier</field>
+        <field name="description">Fictional portfolio scenario: monitor a supplier commitment that affects the next powder blending schedule.</field>
+    </record>
+    <record id="item_investigate_seal_deviation" model="operations.control.item">
+        <field name="name">Investigate sachet seal integrity deviation</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">production</field>
+        <field name="impact">critical</field>
+        <field name="priority">2</field>
+        <field name="state">blocked</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=1)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Run a controlled seal-temperature trial on the packing line</field>
+        <field name="description">Fictional portfolio scenario: isolate the affected sample and verify packaging parameters before production resumes.</field>
+    </record>
+    <record id="item_calibrate_filling_line" model="operations.control.item">
+        <field name="name">Calibrate the powder filling line before the next run</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">maintenance</field>
+        <field name="impact">high</field>
+        <field name="priority">1</field>
+        <field name="state">waiting_responsible</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=5)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Assign a maintenance owner and confirm the calibration window</field>
+        <field name="description">Fictional portfolio scenario: complete preventive calibration before the next scheduled production batch.</field>
+    </record>
+    <record id="item_prepare_carrier_handover" model="operations.control.item">
+        <field name="name">Prepare carrier handover for Iced Tea sample boxes</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">logistics</field>
+        <field name="impact">medium</field>
+        <field name="priority">0</field>
+        <field name="state">new</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=4)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Verify carton count, labels, and carrier collection slot</field>
+        <field name="description">Fictional portfolio scenario: coordinate the outbound handover for a sample-box shipment.</field>
+    </record>
+    <record id="item_review_electrolyte_reorder_point" model="operations.control.item">
+        <field name="name">Review the reorder point for electrolyte premix</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">inventory</field>
+        <field name="impact">high</field>
+        <field name="priority">1</field>
+        <field name="state">in_progress</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=7)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Compare demand coverage with supplier lead time</field>
+        <field name="description">Fictional portfolio scenario: adjust the replenishment threshold to reduce production shortage risk.</field>
+    </record>
+    <record id="item_resolve_missing_certificate" model="operations.control.item">
+        <field name="name">Resolve the missing certificate for Milkshake base powder</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">quality</field>
+        <field name="impact">critical</field>
+        <field name="priority">2</field>
+        <field name="state">waiting_third_party</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=2)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Request the signed certificate of analysis from the supplier</field>
+        <field name="description">Fictional portfolio scenario: prevent material release until the required supplier document is available.</field>
+    </record>
+    <record id="item_validate_wms_retry" model="operations.control.item">
+        <field name="name">Validate retry handling for WMS stock updates</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">it</field>
+        <field name="impact">high</field>
+        <field name="priority">1</field>
+        <field name="state">new</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=8)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Simulate a failed stock message and verify safe reprocessing</field>
+        <field name="description">Fictional portfolio scenario: confirm that integration retries do not create duplicate inventory movements.</field>
+    </record>
+    <record id="item_approve_launch_readiness" model="operations.control.item">
+        <field name="name">Approve stock readiness for a seasonal flavour launch</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="area">strategy</field>
+        <field name="impact">medium</field>
+        <field name="priority">0</field>
+        <field name="state">resolved</field>
+        <field name="deadline" eval="(DateTime.today() + relativedelta(days=14)).strftime('%Y-%m-%d')"/>
+        <field name="next_action">Record management sign-off and close after handover</field>
+        <field name="description">Fictional portfolio scenario: summarize ingredient, packaging, and finished-goods readiness for launch approval.</field>
+    </record>
+</odoo>

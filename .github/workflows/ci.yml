@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  repository-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Prepare environment
+        run: cp .env.example .env
+      - name: Validate repository content
+        run: python scripts/check_repository.py
+      - name: Compile Python sources
+        run: python -m compileall -q addons/operations_control_tower
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+
+  odoo-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare environment
+        run: cp .env.example .env
+      - name: Start PostgreSQL
+        run: docker compose up -d db
+      - name: Install addon and run tests
+        run: >-
+          docker compose run --rm -T odoo odoo
+          --database=operations_control_tower_ci
+          --init=operations_control_tower
+          --stop-after-init
+          --without-demo=true
+          --test-enable
+          --test-tags=/operations_control_tower
+          --db_host=db
+          --db_port=5432
+          --db_user=odoo
+          --db_password=replace_with_a_local_secret
+          --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons
+          --log-level=test
+      - name: Start Odoo and verify health
+        run: |
+          docker compose up -d odoo
+          curl --fail --retry 20 --retry-delay 3 --retry-connrefused http://localhost:8069/web/health
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose logs --tail=200
+      - name: Clean up
+        if: always()
+        run: docker compose down -v

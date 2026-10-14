@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_operations_control" model="ir.module.category">
+        <field name="name">Operations</field>
+        <field name="sequence">25</field>
+    </record>
+
+    <record id="res_groups_privilege_operations_control" model="res.groups.privilege">
+        <field name="name">Operations Control Tower</field>
+        <field name="description">Access levels for operations control items and reporting.</field>
+        <field name="sequence">10</field>
+        <field name="category_id" ref="module_category_operations_control"/>
+    </record>
+
+    <record id="group_operations_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="comment">Can create and manage assigned control items.</field>
+        <field name="sequence">10</field>
+        <field name="privilege_id" ref="res_groups_privilege_operations_control"/>
+        <field name="implied_ids" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_operations_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="comment">Can manage all control items and access operational reporting.</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="res_groups_privilege_operations_control"/>
+        <field name="implied_ids" eval="[Command.link(ref('group_operations_user'))]"/>
+        <field name="user_ids" eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"/>
+    </record>
+
+    <data noupdate="1">
+        <record id="rule_operations_control_item_company" model="ir.rule">
+            <field name="name">Control items: allowed companies</field>
+            <field name="model_id" ref="model_operations_control_item"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="rule_operations_control_item_user" model="ir.rule">
+            <field name="name">Control items: users manage assigned items</field>
+            <field name="model_id" ref="model_operations_control_item"/>
+            <field name="domain_force">[('owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[Command.link(ref('group_operations_user'))]"/>
+        </record>
+
+        <record id="rule_operations_control_item_manager" model="ir.rule">
+            <field name="name">Control items: managers see all</field>
+            <field name="model_id" ref="model_operations_control_item"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[Command.link(ref('group_operations_manager'))]"/>
+        </record>
+    </data>
+</odoo>
