@@ -35,14 +35,15 @@ Publication preparation: TASK-0006 now owns the requested GitHub sharing work.
 Public README/demo/setup/changelog now document accepted behavior and safe
 reproduction; static/link checks and independent review passed. After TASK-0007
 acceptance, the owner explicitly authorized commit/remote/push to
-https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is Needs Decision;
-the target returns API404 both anonymously and as the authenticated yusufondes
-account, so visibility/existence/repository access still needs confirmation.
-Local security/static/index gates passed and the local commit succeeded. The
-final Git ref check still returned repository-not-found/access-unavailable;
-no origin was added or push attempted. The owner must confirm the actual URL/
-access. No publication or remote CI pass is inferred; no renewed generic
-commit/push approval is needed for the already authorized exact target.
+https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is In Progress.
+On the same-target retry, authenticated yusufondes access succeeds: the exact
+repository is Private with push permission. Keep that visibility unchanged.
+Origin now points to the approved .git URL; fetched main contains only a project-
+title README root commit. A history-preserving merge is prepared, keeping the
+reviewed local source tree; no force, code/CI/license/data edits or push yet.
+Earlier authenticated404 notes are historical. Anonymous404 remains expected
+for a private repository. No publication or remote CI pass is inferred before
+the actual push/verification recorded in TASK-0006.
 The owner declared code ownership; D-014 records the narrow correction of the
 project copyright header and base-addon author from HOLY to Yusuf Ondes.
 LGPL/GPL and third-party notices remain unchanged; this is not an independent

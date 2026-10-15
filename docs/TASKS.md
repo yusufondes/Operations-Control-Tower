@@ -1180,7 +1180,7 @@ Reviewed document hashes before this final review note:
 
 ## TASK-0006 - Prepare a truthful portfolio source publication
 
-State: Needs Decision
+State: In Progress
 
 Current ownership update,2026-10-15: Yusuf Ondes explicitly stated that the code
 belongs to him and asked to continue. This resolves the ownership question on
@@ -1416,6 +1416,31 @@ visibility. Existing publication authorization remains valid for the supplied
 exact target; do not ask for generic commit/push approval again. A different
 target requires the owner's explicit correction. This documentation closeout
 will be a separate local commit preserving the accepted source commit above.
+
+Same-target retry,2026-10-15: the owner resent the exact approved URL. Stored
+credentials now authenticate as yusufondes and the repository API returns the
+exact owner/name,private=true,default_branch=main,admin/push permission,not
+archived/disabled. Anonymous404 is expected for this private repository and is
+not the current blocker; authenticated access and git ls-remote now succeed.
+Keep the owner's existing Private setting unchanged. The earlier failure notes
+remain historical; no new generic publication approval is required.
+
+Added origin at exactly https://github.com/yusufondes/Operations-Control-Tower.git
+and fetched main without tags, exit0. The remote root commit
+f83bf12b875d572e75ee067e784b0bb7c9f14964 contains only a26-byte README with the
+single expected project-title heading. Its history is unrelated to the local
+initial commit. To preserve both histories without force or losing reviewed
+source, prepared an ours-strategy unrelated-history merge with --no-commit;
+the staged tree matched the local pre-merge tree exactly. Only this publication
+status/plan documentation is being updated before the merge commit. The remote
+placeholder is retained in history; the reviewed local README remains the
+authoritative project description. No functional code, CI, license or data edits.
+
+Remaining execution: focused status-diff review, fresh index/history secret and
+whitespace checks, commit the two-parent merge, then normal git push -u origin
+main. Verify remote hash/contents and actual Actions status before recording
+success; publish a final documentation-only execution record and verify again.
+No Public conversion, deployment, force push, tag or GitHub Release.
 
 ## TASK-0007 - Complete the bounded campaign automation before publication
 
