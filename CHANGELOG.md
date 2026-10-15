@@ -32,7 +32,13 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 
 ### Fixed
 
-- Local preview helper supports Windows PowerShell5.1 schema-readiness polling
+- CI startup verification waits for the Compose healthcheck and retries
+  transient HTTP failures within bounded time limits. TASK-0012 records the
+  original connection-reset evidence and the actual remote verification.
+- Documentation distinguishes current public-sharing preparation from
+  historical private-publication and initial-setup snapshots. The preferred
+  business presentation uses visibility-independent GitHub wording.
+- Local preview helper supports Windows PowerShell 5.1 schema-readiness polling
   and JSON-based exact ownership inspection. Cleanup skips already-absent DBs
   and blocks DB deletion after failed container cleanup. TASK-0008 records real
   Start/Stop/login and mocked guard checks; local packaging is tracked in
@@ -50,11 +56,11 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 
 - Source was pushed to the owner's Private GitHub repository on 2026-10-15,
   preserving both initial histories. TASK-0006 records exact source hash, remote
-  verification and the first Actions failure: repository checks and8 base tests
-  passed, but the subsequent startup-health check returned curl56. No CI pass.
+  verification and the first Actions failure: repository checks and 8 base tests
+  passed, but the subsequent startup-health check returned curl 56. No CI pass.
   No public-visibility change, release tag, deployment or live installation.
 - TASK-0007 was explicitly accepted for its bounded source/test delivery on
-  2026-10-15 after final independent review,81 passing methods and11 campaign
+  2026-10-15 after final independent review, 81 passing methods and 11 campaign
   cases. This is not a working-system installation, published release or remote
   CI pass; its documented limits remain.
 - TASK-0004/TASK-0005 were explicitly accepted for source and disposable-test
@@ -66,7 +72,7 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
   No public-visibility change, outbound communication or authenticated customer consent.
   The accepted promise-only addon does not allocate or enforce dispatch; the
   new bounded campaign source adds those guards separately. TASK-0007 records
-  81 passing methods,11 campaign probes and browser repair evidence; independent
+  81 passing methods, 11 campaign probes and browser repair evidence; independent
   review and explicit owner acceptance are separate gates, not inferred passes.
 - Campaign scope excludes unsupported routes/uncovered unmanaged competition,
   consumer replacement flows, formal quality release, carrier/WMS adapters and

@@ -1,70 +1,80 @@
 # Project status and Codex working guide
 
 Snapshot date: 2026-10-15 (Europe/Berlin).
-Latest revalidation: TASK-0010 reran all81 custom methods (0 failures/errors),
-3 promise and11 campaign probes, plus24 authenticated HTTP cases and7 admin
-configuration checks. Standard-only diagnostics remain3 pass/7 gaps/1 observation.
-All newly owned test resources were removed; selected working fingerprint,
-shared service uptimes and the owner's existing preview were preserved. No
-application code change or remote CI rerun. Detailed current evidence, harness
-attempts and coverage exclusions are in TASKS.md under TASK-0010 (Review).
-Latest local follow-up: TASK-0008 repaired preview startup/cleanup for Windows
-PowerShell5.1 and verified real Start/Stop/login without working-DB writes.
-One separate synthetic campaign preview is intentionally running for owner
-manual tests; exact URL/resource IDs and private credential-file location are
-in TASKS.md. TASK-0011 tracks local commit packaging; remote publication and
-the separate CI-health fix are not implied.
 Authoritative repository: `C:\Users\yusuf\Operations-Control-Tower`.
-Implementation baseline: `d62b6bc2de98ef3e500a2c177d57d007b37ece68`
-(`main`, initial commit). Governance, validation scripts and the optional
-TASK-0004/TASK-0007 addons are now published source in the owner's Private GitHub
-repository, not a deployed release. TASK-0006 records the publication checkpoint.
-The accepted implementation is now committed locally as
-6337012b46251129c3f61cc515b07c2ca30281df, preserving that initial parent;
-Subsequent publication-status-only commits are separate from functional source.
-The history-preserving merge8057a3085a946c5aeb8d4546405aec0f653e5ce7 was
-successfully pushed and verified on remote main; both original roots remain.
 
-Latest verification: TASK-0007's bounded optional campaign source passed81
-methods (8 base+22 promise+51 campaign) and11 campaign cases in a generated owned
-DB, including own manufacture/900 dispatches and six real-connection pairs.
+## Current summary
+
+TASK-0012 tracks the explicitly authorized public-sharing preparation, pending
+source push, CI-health repair, disclosure checks and presentation wording update.
+Authorization is not execution evidence: use its final receipt and the linked
+Actions run for verified publication and CI results. No local unit-test rerun,
+application-feature change or working-database operation is included.
+
+TASK-0011 packaged the reviewed preview repair, presentation and regression
+evidence in three local commits, ending at
+`af3ddf88a203be38255ec548f6e12619dbc43ac4`. That is TASK-0012's baseline,
+not a promise that it remains the current Git tip.
+
+Latest local revalidation: TASK-0010 reran all 81 custom methods (0 failures/errors),
+3 promise and 11 campaign probes, plus 24 authenticated HTTP cases and 7 admin
+configuration checks. Standard-only diagnostics remain 3 passes, 7 gaps and
+1 observation, not 11 acceptance passes. Detailed commands, source digests,
+harness attempts and coverage exclusions are recorded under TASK-0010 (Review).
+No remote CI result is inferred from these local results.
+
+TASK-0008 repaired preview startup/cleanup for Windows PowerShell 5.1 and
+verified real Start/Stop/login without working-DB writes. At the TASK-0010
+checkpoint, all newly owned test resources were removed, the working fingerprint
+and shared-service uptimes matched, and the owner's separate synthetic preview
+was preserved. These are dated observations, not a fresh runtime inventory.
+
+Accepted bounded implementation: TASK-0007 passed 81 methods
+(8 base + 22 promise + 51 campaign) and 11 campaign cases in an owned temporary
+DB, including in-house production, 900 units dispatched and six real-connection pairs.
 Independent reviews found manual-preparation and nested raw-line capability
 bypasses; both were reproduced, repaired and retested, including standalone
 saved preparation and real browser refusal plus valid corporate partial dispatch.
-Final independent round2 review found no remaining confirmed defects and verified
-the final20-file source digest. TASK-0007 is Done after explicit owner acceptance
-on2026-10-15; no live installation is inferred from that acceptance. All owned test DBs
-and preview containers were removed; the working system remained unchanged.
-See evidence/task-0007/README.md for current evidence and limits.
+Final independent round 2 review found no remaining confirmed defects and verified
+the final 20-file source digest. TASK-0007 is Done after explicit owner acceptance
+on 2026-10-15; no live installation is inferred from that acceptance. At that
+checkpoint, its test DBs and previews were removed and the working system was unchanged.
+See [campaign evidence](evidence/task-0007/README.md) for evidence and limits.
 
-The TASK-0005 browser repair and30-method result below remain historical evidence
+The TASK-0005 browser repair and 30-method result below remain historical evidence
 for the accepted promise-only slice, not the total current campaign test scope.
 
 Latest acceptance: Yusuf Ondes explicitly accepted the TASK-0007 handover
-on2026-10-15, after its final review and81-method/11-case evidence. It is Done
+on 2026-10-15, after its final review and 81-method/11-case evidence. It is Done
 for the bounded source/test delivery, not deployment or publication acceptance.
 The separately authorized source push is recorded under TASK-0006. TASK-0004/0005
 also remain Done from their earlier explicit acceptance. Earlier Review/
 pending-acceptance notes are historical; all exclusions and known gaps remain.
 
-Publication preparation: TASK-0006 now owns the requested GitHub sharing work.
-Public README/demo/setup/changelog now document accepted behavior and safe
-reproduction; static/link checks and independent review passed. After TASK-0007
+## Initial source publication checkpoint (historical TASK-0006)
+
+Implementation baseline: `d62b6bc2de98ef3e500a2c177d57d007b37ece68`
+(initial source commit). The accepted implementation was committed as
+`6337012b46251129c3f61cc515b07c2ca30281df`, preserving that initial parent.
+The history-preserving merge `8057a3085a946c5aeb8d4546405aec0f653e5ce7`
+was pushed and verified on remote main; both original roots were retained.
+
+At TASK-0006, the README/demo/setup/changelog documented accepted behavior and
+safe reproduction; static/link checks and independent review passed. After TASK-0007
 acceptance, the owner explicitly authorized commit/remote/push to
 https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is Review:
 source push succeeded and git/API/tree checks matched remote main to the merge
-commit above with99 files. Origin tracks the approved .git URL; both histories
-are retained without force, and Private visibility is unchanged. Earlier
-authenticated404 notes are historical; anonymous404 is expected for Private.
-First Actions run38748554245 completed with failure: repository checks and8
-base Odoo tests passed, but the later startup HTTP-health check failed with
-curl56/connection reset. Cleanup succeeded. This is not a green CI result;
-readiness timing needs a separately scoped follow-up, not an unapproved code/CI
-edit. Its base-only scope is separate from local81-method/11-case evidence.
-Publication acceptance is still pending; no live code/module/database/service
-installation, deployment or CI/license change occurred. This final docs-only
-update will be pushed to record the result; use Git history/Actions for later
-exact tips and statuses.
+commit above with 99 files. Origin tracked the approved .git URL; both histories
+were retained without force and the repository remained private at that checkpoint.
+Earlier authenticated 404 notes are historical; anonymous 404 was expected for
+the private repository. First Actions run 38748554245 completed with failure:
+repository checks and 8 base Odoo tests passed, but the later startup
+HTTP-health check failed with
+curl 56/connection reset. Cleanup succeeded. This was not a green CI result;
+TASK-0012 now owns the separately authorized CI repair. The workflow's base-only
+scope is separate from local 81-method/11-case evidence. That publication did
+not install modules in the working DB or deploy a production system. Use
+TASK-0012, Git history and Actions for later tips, visibility and statuses.
 The owner declared code ownership; D-014 records the narrow correction of the
 project copyright header and base-addon author from HOLY to Yusuf Ondes.
 LGPL/GPL and third-party notices remain unchanged; this is not an independent
@@ -76,11 +86,12 @@ then-unimplemented stock-priority/tie/full-consumer rules or the wider roadmap.
 TASK-0007 now separately implements/tests the bounded approved rules; it does not
 complete the wider roadmap or authorize a working-DB rollout.
 
-## Evidence and capabilities
+## Initial base-addon evidence (historical TASK-0001 snapshot)
 
-Facts below were checked in source and, where stated, read-only runtime queries.
-Chat history alone is not proof of implementation or current validation.
-Recheck dated runtime observations before relying on them later.
+The following observations describe the original base-only setup before the
+optional integrations and remote publication. They are not the current source
+inventory or a fresh runtime check. Read the current summary above for later
+implementation and validation; recheck dated runtime observations before use.
 
 - Compose defines Odoo `19.0` and PostgreSQL `15`, named database/filestore volumes,
   loopback port `127.0.0.1:8069`, and no published PostgreSQL port.
@@ -190,7 +201,7 @@ Ask Codex to confirm the root, Git status and applicable AGENTS.md before work.
 Natural-language examples below are not custom slash commands; the owner may
 communicate the equivalent request in Turkish.
 
-1. **Plan:** "Draft TASK-0002 with an order-to-dispatch example. Compare standard
+1. **Plan:** "Draft TASK-XXXX with an order-to-dispatch example. Compare standard
    Odoo Community functionality and custom gaps. Record unresolved decisions.
    Do not implement." Planning is separate from implementation approval.
 2. **Approve:** "I approve TASK-XXXX, the scope and acceptance criteria currently
@@ -213,11 +224,13 @@ uncommitted changes. Availability is documented; this setup's demonstrated path
 uses a separate session subagent. Installed CLI help exposes
 `codex review --uncommitted`, but its execution has not been tested here.
 
-Continue TASK-0002 by checking the numerical walkthrough against standard
-Community functionality, then resolve incomplete-consumer reservation handling,
-missing-date/identical-confirmation handling, promise semantics and quality-release authority before
-approving the first implementation scope. Do not assume the proposed
-three-working-day dispatch target has been approved.
+### Historical planning context (TASK-0002, before TASK-0007)
+
+The next step at this planning checkpoint was to check the numerical walkthrough
+against standard Community functionality, then resolve incomplete-consumer
+reservation handling, missing-date/identical-confirmation handling, promise
+semantics and quality-release authority before approving the first implementation
+scope. The proposed three-working-day dispatch target was not approved.
 
 Source-only standard-feature assessment is now recorded in TASK-0002:
 standard sales/stock, purchase/receipt and manufacturing building blocks are

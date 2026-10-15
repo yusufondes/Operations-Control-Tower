@@ -17,7 +17,7 @@ const p=Presentation.create({slideSize:{width:1280,height:720}});
 const copies=[];
 const noteSource='Repository: docs/DEMO.md; docs/TASKS.md, TASK-0007; docs/evidence/task-0007/README.md.';
 const research='Presentation design reference: https://support.microsoft.com/en-us/powerpoint/tips-for-creating-and-delivering-an-effective-presentation and https://support.microsoft.com/en-us/powerpoint/combining-colors-in-powerpoint-mistakes-to-avoid';
-function cleanCopy(value){return value.replace(/,([A-Za-z0-9])/g,', $1').replace(/([a-z])([0-9])/g,'$1 $2');}
+function cleanCopy(value){return value.replace(/,([A-Za-z0-9])/g,', $1').replace(/([A-Za-z])([0-9])/g,'$1 $2');}
 function text(s,value,x,y,w,h,size=26,color=C.ink,bold=false,align='left'){
  const box=s.shapes.add({geometry:'textbox',name:'text-'+s.id+'-'+s.shapes.items.length,position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});
  box.text=cleanCopy(value); box.text.style={typeface:FONT,fontSize:size,bold,color,alignment:align,verticalAlignment:'top',autoFit:'none',wrap:'square',insets:0};
@@ -32,7 +32,7 @@ function slide(title,summary='',dark=false){
  text(s,String(i).padStart(2,'0')+' / '+SLIDE_COUNT,1110,677,106,23,17,dark?'#BAD4D2':C.muted,false,'right');
  return s;
 }
-function notes(s,body,sources=noteSource){s.speakerNotes.text=cleanCopy(body)+'\n\nSources: '+sources; copies.push({slide:p.slides.items.length,notes:cleanCopy(body),sources});}
+function notes(s,body,sources=noteSource){s.speakerNotes.text=cleanCopy(body)+'\n\nSources: '+cleanCopy(sources); copies.push({slide:p.slides.items.length,notes:cleanCopy(body),sources:cleanCopy(sources)});}
 async function image(s,file,x,y,w,h,crop,alt){
  const bytes=await fs.readFile(path.join(ROOT,file));
  s.images.add({blob:new Uint8Array(bytes),contentType:file.endsWith('.jpg')?'image/jpeg':'image/png',alt,fit:'contain',position:{left:x,top:y,width:w,height:h},...(crop?{crop}:{} )});
@@ -69,7 +69,7 @@ function pair(s,number,title,body,y){
  text(s,'Yusuf Ondes',67,552,500,38,25,C.white,true);
  text(s,'Fictional company. Synthetic business data.',67,600,525,36,21,'#BAD4D2');
  // Cover keeps one footer instead of competing with the image.
- notes(s,'HALY is a fictional powdered-drink manufacturer. This portfolio demonstrates a realistic campaign-fulfilment problem with synthetic data. The project connects accepted dispatch promises to stock allocation, controlled shipments and accountable exceptions. It is a local demonstration with source published to a Private GitHub repository, not a production client implementation. The cover is an AI-generated representative concept image, not a photograph of an actual HALY company or facility.',noteSource+' '+research+' Cover asset: docs/portfolio/assets/haly-cover-concept.png. Generated with the built-in image tool on 15 October 2026.');
+ notes(s,'HALY is a fictional powdered-drink manufacturer. This portfolio demonstrates a realistic campaign-fulfilment problem with synthetic data. The project connects accepted dispatch promises to stock allocation, controlled shipments and accountable exceptions. The source repository is on GitHub. This is a local portfolio demonstration with no production client implementation. The cover is an AI-generated representative concept image, not a photograph of an actual HALY company or facility.',noteSource+' '+research+' Cover asset: docs/portfolio/assets/haly-cover-concept.png. Generated with the built-in image tool on 15 October 2026.');
 }
 // 02
 {
@@ -92,7 +92,7 @@ function pair(s,number,title,body,y){
  pair(s,'03','Purchasing and production','HALY buys raw materials and manufactures the shortage.',376);
  pair(s,'04','Shipment','Individual orders ship in full. Corporate orders can ship in batches.',466);
  pair(s,'05','Exception follow-up','A linked risk item records the owner and next action.',556);
- notes(s,'This is the business workflow, not a claim that physical work happens automatically. Sales establishes the accepted warehouse dispatch commitment. The campaign addon allocates eligible stock under the approved policy. Procurement and manufacturing users record real input receipts and completed production. Warehouse users prepare and validate shipments. Derived risk information supports coordinated follow-up.');
+ notes(s,'This is the business workflow. Physical work does not happen automatically. Sales establishes the accepted warehouse dispatch commitment. The campaign addon allocates eligible stock under the approved policy. Procurement and manufacturing users record input receipts and completed production. Warehouse users prepare and validate shipments. All operations in this demonstration use synthetic records. Derived risk information supports coordinated follow-up.');
 }
 // 04
 {
@@ -112,13 +112,13 @@ function pair(s,number,title,body,y){
 {
  const s=slide('Stock follows the updated date',"B's accepted 14 December date comes before A's 15 December date.");
  await shot(s,'05-accepted-priority-reserves-500.png',64,208,1152,385,[25,165,1220,408],'Recorded synthetic B picking with demand600 and available quantity500 after accepted reprioritization');
- text(s,'B now has 500 units reserved. Prepared and non-campaign stock stays protected.',64,609,1152,54,27,C.teal,true);
+ text(s,'B now has 500 units reserved. Prepared and outside reservations stay protected.',64,609,1152,54,27,C.teal,true);
  notes(s,'This is a later browser state, not the initial200/300/0 allocation. B has an accepted date of14 December and now receives all500 eligible unprepared units against600 demand. It wins because its promise is earlier, not because it is corporate. The application preserves prepared moves and outside reservations. It refuses unsupported or unmanaged competition rather than taking stock silently. A partly prepared short individual order needs warehouse unprepare/recheck before extra allocation.','docs/evidence/task-0007/05-accepted-priority-reserves-500.png; '+noteSource);
 }
 // 07
 {
  const s=slide('Individual orders ship in full','Example: a user tries to ship 100 of the 200 units ordered.');
- await shot(s,'02-consumer-partial-blocked.png',64,215,1152,300,[60,255,1160,302],'Actual synthetic invalid-operation message refuses a100of200 individual partial shipment');
+ await shot(s,'02-consumer-partial-blocked.png',64,215,1152,300,[60,255,1160,302],'Actual synthetic invalid-operation message refuses a partial individual shipment of 100 out of 200 units');
  text(s,'The partial shipment cannot be validated.',64,560,1140,60,32,C.teal,true);
  notes(s,'The browser screenshot shows an actual refused synthetic consumer shipment. Demand is200 and the entered quantity is100. Every physical line of the supported individual order must ship completely in one picking. Allocated stock can remain reserved while the order waits for completion. This is a policy-specific control within the configured one-step,untracked-goods scope.','docs/evidence/task-0007/02-consumer-partial-blocked.png; '+noteSource);
 }
@@ -171,13 +171,13 @@ function pair(s,number,title,body,y){
  text(s,'Added controls',64,337,700,40,31,C.navy,true);
  text(s,'Date history, stock priority and shipment safeguards.',64,380,710,62,26);
  text(s,'Review and testing',64,459,700,40,31,C.navy,true);
- text(s,'Independent review and regression checks.',64,502,710,64,26);
+ text(s,'Code review and regression checks.',64,502,710,64,26);
  text(s,'81',904,215,286,90,76,C.teal,true);
  text(s,'local test methods\npassed',904,306,290,70,24);
  text(s,'11',904,410,286,90,76,C.teal,true);
  text(s,'campaign cases\npassed',904,501,290,70,24);
  text(s,'Future options: capacity planning and carrier integration.',64,612,1152,38,24,C.muted);
- notes(s,'Yusuf owns the project and approved its business rules. The work includes requirement clarification, standard-flow assessment, focused extensions, synthetic scenarios, negative/concurrency checks and review-driven repairs. AI-assisted implementation supported this work. The recorded local result is81 methods:8 base,22 promise,51 campaign,plus11 campaign probe cases. These are historical local results, not81 GitHub CI tests and not business performance KPIs. No time-saving,ROI or delivery-rate improvement has been measured. Date history makes commitments visible, priority controls stock decisions, shipment guards enforce customer policy and a linked risk item assigns follow-up. Supported scope is one-step make-to-stock with configured untracked goods. Staff record customer responses and physical work. Capacity planning, carrier/WMS integration, formal quality release, authenticated consent and production hosting are not delivered. Future options are proposals, not approved commitments.','docs/TASKS.md,TASK-0003 through TASK-0008; docs/ARCHITECTURE.md; docs/DECISIONS.md; docs/evidence/task-0007/README.md.');
+ notes(s,'Yusuf owns the project and approved its business rules. The work includes requirement clarification, standard-flow assessment, focused extensions, synthetic scenarios, negative/concurrency checks and review-driven repairs. AI-assisted implementation and a separate agent review supported this work. Local validation on 15 October 2026 passed 81 test methods with zero failures and zero errors: 8 base, 22 promise and 51 campaign methods. A separate campaign probe passed 11 cases. These historical local results are separate from GitHub CI and business performance KPIs. No time-saving, ROI or delivery-rate improvement has been measured. Date history makes commitments visible, priority controls stock decisions, shipment guards enforce customer policy and a linked risk item assigns follow-up. Supported scope is one-step make-to-stock with configured untracked goods. Staff record customer responses and physical work. Capacity planning, carrier/WMS integration, formal quality release, authenticated consent and production hosting are not delivered. Future options are proposals, not approved commitments.','docs/TASKS.md, TASK-0003 through TASK-0010; docs/ARCHITECTURE.md; docs/DECISIONS.md; docs/evidence/task-0007/README.md.');
 }
 // 14
 {
@@ -189,11 +189,11 @@ function pair(s,number,title,body,y){
  text(s,'Data and environment',700,216,500,40,29,'#9CD5CD',true);
  text(s,'PostgreSQL 15\nDocker and PowerShell validation helpers',700,266,510,100,27,C.white);
  text(s,'Version control',700,423,500,40,29,'#9CD5CD',true);
- const link=text(s,'Git and GitHub (private)',700,473,510,42,27,C.white);
- link.text.get('GitHub (private)').link={uri:'https://github.com/yusufondes/Operations-Control-Tower',isExternal:true};
- text(s,'Repository access required.',700,527,510,38,24,'#D4E6E2');
- text(s,'Synthetic demo. No production deployment. CI follow-up remains open.',64,609,1152,55,21,'#D4E6E2');
- notes(s,'Source repository: https://github.com/yusufondes/Operations-Control-Tower . The repository is Private at the verified publication checkpoint,so readers need access. No installation is needed to understand this deck. The source uses Odoo19 Community,Python,PostgreSQL15,Docker,XML/CSV and PowerShell. Git/GitHub retain both initial histories. Development was AI-assisted with Codex and independent agent review. Local81/11 checks passed. The first remote CI run passed repository checks and8 base tests but failed its later HTTP-health check with curl56; do not claim green CI or full campaign remote coverage. TASK-0008 preview-helper fixes are local/unpushed at this checkpoint. No production deployment or customer messaging exists.','README.md; compose.yaml; .github/workflows/ci.yml; docs/TASKS.md,TASK-0006,TASK-0008. Repository: https://github.com/yusufondes/Operations-Control-Tower . CI evidence: https://github.com/yusufondes/Operations-Control-Tower/actions/runs/38748554245 .');
+ const link=text(s,'Git and GitHub',700,473,510,42,27,C.white);
+ link.text.get('GitHub').link={uri:'https://github.com/yusufondes/Operations-Control-Tower',isExternal:true};
+ text(s,'Source code on GitHub',700,527,510,38,24,'#D4E6E2');
+ text(s,'Synthetic demo. No production deployment.',64,609,1152,55,21,'#D4E6E2');
+ notes(s,'Source repository: https://github.com/yusufondes/Operations-Control-Tower . No installation is needed to understand this deck. The source uses Odoo 19 Community, Python, PostgreSQL 15, Docker, XML/CSV and PowerShell. Git and GitHub preserve the project history. Development was AI-assisted with Codex and a separate agent review. Local validation on 15 October 2026 passed 81 custom-addon test methods and 11 separate campaign probe cases. GitHub CI covers repository checks and the eight base-addon test methods. The optional promise and campaign suites use a separate local validation runner. This deck does not claim full campaign coverage in remote CI. The repository README and Actions page provide current build status. No production deployment or automated customer messaging exists.','README.md; compose.yaml; .github/workflows/ci.yml; docs/TASKS.md, TASK-0010 and TASK-0012. Repository: https://github.com/yusufondes/Operations-Control-Tower . Actions: https://github.com/yusufondes/Operations-Control-Tower/actions .');
 }
 
 if(p.slides.items.length!==SLIDE_COUNT) throw new Error('Unexpected slide count.');
@@ -210,7 +210,7 @@ for(const [i,s] of p.slides.items.entries()){
 }
 const draft=path.join(BUILD,'draft.pptx');
 await(await PresentationFile.exportPptx(p)).save(draft);
-const finalName=process.env.HALY_DECK_FILENAME || 'HALY-Operations-Control-Tower-Case-Study.pptx';
+const finalName=process.env.HALY_DECK_FILENAME || 'HALY-Operations-Control-Tower-Case-Study-Revised.pptx';
 const result=await finalizePresentation({
  workspaceDir:WORK,candidatePath:draft,finalPath:path.join(OUT,finalName),explicitTotalSlideCount:SLIDE_COUNT,
  pythonExecutable:'C:/Users/yusuf/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe',

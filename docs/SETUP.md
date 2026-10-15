@@ -78,7 +78,7 @@ For the new bounded campaign source, explicitly opt into its separate mode:
 
 `-WithCampaign` includes the promise selection and campaign addon/tests/probes;
 it does not replace the default standard-field diagnostic or promise-only mode.
-TASK-0007 records81 passing local methods and11 campaign probe cases, the
+TASK-0007 records 81 passing local methods and 11 campaign probe cases, the
 independent-review gate and owner-acceptance status. A command is an execution
 procedure, not proof that a new run or environment has passed.
 
@@ -146,7 +146,7 @@ up a preview.
 
 ## Optional campaign preview
 
-TASK-0008 repairs Windows PowerShell5.1 startup and cleanup: module readiness
+TASK-0008 repairs Windows PowerShell 5.1 startup and cleanup: module readiness
 waits for the schema, and ownership inspection uses validated JSON instead of
 native-command-sensitive label quoting. Actual PS5.1 Start/Stop and temporary
 login were verified; stop refuses unknown/mismatched ownership and does not
@@ -168,8 +168,8 @@ localhost port, cron is disabled and its filestore remains container-local.
 Do not publish this preview or expose it to the network.
 
 The synthetic HALY fixture seeds 500 opening finished units, one warehouse/product
-pool, and orders A200/B600/C100 with explicit Consumer Complete/Corporate Partial
-policies and accepted dates 15/16/17 December 2026. Expected initial reservations
+pool, and orders A (200), B (600) and C (100) with explicit Consumer Complete or
+Corporate Partial policies and accepted dates 15/16/17 December 2026. Expected initial reservations
 are 200/300/0. No raw-material purchase, BoM or manufacturing fixture is included;
 no shipment or production is completed. Opening inventory is synthetic setup,
 not evidence of a physical receipt. Dates are examples, not an SLA.

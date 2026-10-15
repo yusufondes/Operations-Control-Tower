@@ -12,7 +12,7 @@ HALY identifies the fictional scenario; the software author is Yusuf Ondes.
 
 Start with the [14-slide business case PDF](docs/portfolio/HALY-Operations-Control-Tower-Case-Study-Revised.pdf)
 or the [editable PowerPoint](docs/portfolio/HALY-Operations-Control-Tower-Case-Study-Revised.pptx).
-They explain the stock gap, dispatch-date priority, own manufacture and shipment
+They explain the stock gap, dispatch-date priority, in-house production and shipment
 controls using actual synthetic demo screenshots. Technology is on the last slide.
 
 Project ownership and business-rule decisions: Yusuf Ondes. Implementation,
@@ -20,11 +20,13 @@ testing and review used AI assistance; approval and validation evidence are
 recorded in [the task registry](docs/TASKS.md). This is a synthetic portfolio
 case, not a real-client rollout or measured ROI claim.
 
-Latest local revalidation (2026-10-15): all81 custom test methods,3 promise
-probes,11 campaign cases,24 HTTP operational checks and7 configuration cases
+Latest local revalidation (2026-10-15): all 81 custom test methods, 3 promise
+probes, 11 campaign cases, 24 HTTP operational checks and 7 configuration cases
 passed. [TASK-0010](docs/TASKS.md#task-0010---rerun-the-complete-project-regression-and-operational-validation)
-records exact commands, source digests, cleanup and exclusions. The earlier
-remote CI startup-health failure remains open; local passes are not green CI.
+records exact commands, source digests, cleanup and exclusions. The original
+remote run failed its startup-health check; [TASK-0012](docs/TASKS.md#task-0012---final-public-portfolio-review-and-ci-repair)
+tracks the repair and public-sharing checks. Local passes do not prove remote
+CI success.
 
 This is a local source/demo project, not a production deployment or a universal
 fulfilment engine. Company/customer scenarios are fictional; no
@@ -47,9 +49,10 @@ test deliverables on 2026-10-15 (TASK-0004/0005). They are not installed in the
 existing working database. The standard customer Delivery Date is separate
 from the warehouse promise and is not rewritten by either integration addon.
 TASK-0007's bounded campaign source/test delivery was explicitly accepted on
-2026-10-15. Its reviewed source has now been pushed to the owner's Private
-GitHub repository under TASK-0006; it is not installed in the working database.
-Source presence alone is not test evidence, and Private visibility is unchanged.
+2026-10-15. The initial source publication is recorded under TASK-0006; the final
+public-sharing preparation is recorded under TASK-0012. Neither source publication
+nor acceptance installs these addons in the working database. Source presence
+alone is not test evidence.
 
 ![Synthetic promise history after the stale-response UI repair](docs/evidence/task-0005/05-stale-response-fixed.jpg)
 
@@ -120,7 +123,7 @@ the base addon and sets the admin password; it is not a harmless check or an
 upgrade procedure for an existing database. Never run it against valued data.
 
 ```powershell
-git clone <repository-url>
+git clone https://github.com/yusufondes/Operations-Control-Tower.git
 cd Operations-Control-Tower
 Copy-Item .env.example .env
 # Replace the placeholder password in .env before continuing.
@@ -163,8 +166,8 @@ Use the same prerequisites and cleanup procedure, with an explicit opt-in:
 ```
 
 This creates the optional campaign addon only in the owned preview DB. Its
-synthetic HALY fixture contains 500 opening units and discounted orders A200,
-B600 and C100, with expected reservations 200/300/0. It includes no purchase or
+synthetic HALY fixture contains 500 opening units and discounted orders A (200),
+B (600) and C (100), with expected reservations 200/300/0. It includes no purchase or
 manufacturing fixture and performs no physical dispatch. The temporary preview
 user combines Sales, Coordinator, Stock Manager and Operations Manager roles
 for demonstration; runtime tests use separated roles. Follow
@@ -222,8 +225,8 @@ default standard diagnostic and explicit promise-only mode remain available.
 TASK-0007 records the executed revision/results and independent-review gate;
 the commands alone are not evidence of a pass.
 
-Recorded campaign run on2026-10-15:81 methods (8 base+22 promise+51 campaign),
-0 failures/errors;11 campaign end-to-end/probe cases, including900 units and six
+Recorded campaign run on 2026-10-15: 81 methods (8 base + 22 promise + 51 campaign),
+0 failures/errors; 11 campaign end-to-end/probe cases, including 900 units and six
 real-connection pair scenarios. See [campaign evidence](docs/evidence/task-0007/README.md)
 for the review-discovered defect, repair, browser proofs and remaining limits.
 
@@ -234,8 +237,10 @@ not a guarantee for other environments or a remote CI result.
 
 The current GitHub Actions definition checks repository text, compiles/tests only
 the base addon, and checks service health. It does not run the optional promise
-suite, fulfilment/connection probes or browser cases. No remote CI success is
-claimed. CI's volume-deletion cleanup belongs only to its disposable runner;
+suite, fulfilment/connection probes or browser cases. See
+[Actions](https://github.com/yusufondes/Operations-Control-Tower/actions) and
+TASK-0012 for verified remote results. CI's volume-deletion cleanup belongs only
+to its disposable runner;
 never copy that cleanup into a local environment.
 
 ## Known limitations
@@ -255,7 +260,7 @@ never copy that cleanup into a local environment.
 
 ## Roadmap
 
-1. Accept the TASK-0006 source-publication delivery; agree viewer access or a visibility change separately before wider sharing. Any live rollout needs separate approval.
+1. Complete TASK-0012's final publication checks. Any live rollout needs separate approval.
 2. Extend justified synthetic scenarios and agree measurable KPIs before building them.
 3. Extend CI coverage, then verify actual remote runs before displaying CI claims.
 4. Add external adapters only with defined contracts; separately validate backup/restore and production deployment.

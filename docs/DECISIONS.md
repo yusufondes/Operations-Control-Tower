@@ -149,8 +149,8 @@ dispatch against the accepted date. If the customer rejects it, keep the
 existing commitment and pursue operational actions to meet it.
 
 Basis: the Product Owner explicitly specified the propose/accept/reject flow
-in the current chat. A proposal is not a confirmed promise; no response must
-not be inferred as acceptance. Customer rejection does not guarantee that
+in the current chat. A proposal is not a confirmed promise; silence must not
+be treated as acceptance. Customer rejection does not guarantee that
 the original date can physically be met.
 
 Planning consequence: distinguish original commitment, currently accepted

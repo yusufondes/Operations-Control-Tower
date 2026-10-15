@@ -96,6 +96,11 @@ The smoke test shares the Compose project, PostgreSQL server and Odoo filestore 
 
 Fresh-install smoke excludes demo XML and does not test migrations, upgrade paths, browser interactions or future ERP integrations. A passing health endpoint is only process-level evidence. Validate migrations on a disposable copy under separately approved scope before touching the working DB.
 
-CI defines fresh-install checks but has not run on a remote provider. Its volume-deletion cleanup belongs only to a disposable runner; never copy it into the local workflow.
+CI defines base-addon fresh-install checks. The first remote run passed repository
+checks and the eight base methods, then failed its startup HTTP-health step;
+TASK-0012 records the authorized repair and subsequent verification. Neither
+base-only CI nor a health response establishes optional-suite or production
+acceptance. CI's volume-deletion cleanup belongs only to a disposable runner;
+never copy it into the local workflow.
 
 Secret gate: inspect staged/unstaged/untracked candidates, filenames and high-confidence token/private-key/credential patterns with value redaction. Check local secret values for exact matches only in memory and report filenames/counts, never values. Pattern scans are a heuristic, not a completeness guarantee. Do not install scanners or services without authorization.

@@ -201,5 +201,5 @@ validate-fulfilment.ps1 -WithCampaign opts into fresh-install tests and
 validate_campaign.py in the owned DB while retaining the legacy diagnostic and
 promise-only modes. preview-dispatch.ps1 -WithCampaign seeds only opening stock
 and synthetic orders in a separate owned preview; it does not manufacture or
-dispatch. TASK-0007 and evidence/task-0007 own the executed81-method/11-case
+dispatch. TASK-0007 and evidence/task-0007 own the executed 81-method/11-case
 results, review gate and limitations. Source existence alone is not test evidence.

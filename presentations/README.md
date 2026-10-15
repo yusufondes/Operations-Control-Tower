@@ -9,7 +9,8 @@
   tagged-PDF equivalent; use the PowerPoint for editing and speaker notes.
 
 Use the Revised pair for sharing. The earlier 17-slide pair remains unchanged
-under its original names for recovery and comparison. The revision removes
+in the explicitly labelled [historical archive](../docs/portfolio/archive/README.md)
+for recovery and comparison. Its old access/CI notes are historical. The revision removes
 repeated explanations and shortens visible wording while retaining all seven
 evidence screenshots and detailed limitations in speaker notes.
 
@@ -17,8 +18,11 @@ The story explains the campaign stock gap, accepted dispatch dates, date-first
 allocation, complete individual shipments, corporate backorders, own manufacture,
 owned exceptions, demonstrated outcomes and project contributions. Technology is
 last. All HALY data is fictional/synthetic. No real-client results, measured ROI,
-production deployment or green remote CI are claimed. The source repository is
-Private at the verified publication checkpoint; readers require access.
+production deployment or full campaign coverage in remote CI are claimed. The
+last slide links to the source repository on GitHub. Its README and Actions page
+provide current build status. The recorded 81 local test methods and 11 campaign
+probe cases passed on 2026-10-15; they are separate from the eight base-addon
+test methods configured in GitHub CI.
 
 ## Source and design
 
@@ -80,5 +84,5 @@ tools or alter the ERP environment merely to reproduce the deck.
    deliverables and intentional source assets into the repository.
 
 Validation evidence and output hashes are recorded in `../docs/TASKS.md`,
-TASK-0009. Automated import/render checks are not native Microsoft PowerPoint
+TASK-0009 and TASK-0012. Automated import/render checks are not native Microsoft PowerPoint
 execution or a complete accessibility audit. Owner acceptance remains required.

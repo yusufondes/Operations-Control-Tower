@@ -192,6 +192,6 @@ of a successful remote run.
 The working database has not received the optional addon. Source acceptance and
 disposable-test evidence do not establish a production rollout, load capacity,
 migration safety, a browser matrix, or completion of the wider fulfilment roadmap.
-The campaign delivery has a separate recorded81-method pass and11 probe cases
+The campaign delivery has a separate recorded 81-method pass and 11 probe cases
 under TASK-0007; see its review/repair and acceptance record. The historical
 30-method result alone does not prove that delivery.
