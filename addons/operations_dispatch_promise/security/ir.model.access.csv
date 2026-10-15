@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dispatch_promise_read,dispatch.promise.read,model_oct_dispatch_promise,base.group_user,1,0,0,0
+access_dispatch_proposal_read,dispatch.proposal.read,model_oct_dispatch_proposal,base.group_user,1,0,0,0
+access_dispatch_promise_coordinator,dispatch.promise.coordinator,model_oct_dispatch_promise,group_dispatch_coordinator,1,1,1,0
+access_dispatch_proposal_coordinator,dispatch.proposal.coordinator,model_oct_dispatch_proposal,group_dispatch_coordinator,1,1,1,0
+access_dispatch_wizard_coordinator,dispatch.wizard.coordinator,model_oct_dispatch_wizard,group_dispatch_coordinator,1,1,1,1

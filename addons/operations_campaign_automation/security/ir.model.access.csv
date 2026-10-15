@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+campaign_pool_stock_read,Campaign pool stock read,model_oct_campaign_pool,stock.group_stock_user,1,0,0,0
+campaign_pool_sales_read,Campaign pool sales read,model_oct_campaign_pool,sales_team.group_sale_salesman,1,0,0,0
+campaign_pool_coordinator_read,Campaign pool coordinator read,model_oct_campaign_pool,operations_dispatch_promise.group_dispatch_coordinator,1,0,0,0
+campaign_pool_purchase_read,Campaign pool purchase read,model_oct_campaign_pool,purchase.group_purchase_user,1,0,0,0
+campaign_pool_manufacturing_read,Campaign pool manufacturing read,model_oct_campaign_pool,mrp.group_mrp_user,1,0,0,0
+campaign_pool_manager,Campaign pool configuration,model_oct_campaign_pool,stock.group_stock_manager,1,1,1,0
+campaign_confirmation_sales,Campaign confirmation sales,model_oct_campaign_confirmation,sales_team.group_sale_salesman,1,0,1,0
+campaign_confirmation_stock,Campaign confirmation stock read,model_oct_campaign_confirmation,stock.group_stock_user,1,0,0,0
+campaign_confirmation_coordinator,Campaign confirmation coordinator read,model_oct_campaign_confirmation,operations_dispatch_promise.group_dispatch_coordinator,1,0,0,0

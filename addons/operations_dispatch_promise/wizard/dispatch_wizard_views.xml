@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dispatch_wizard_form" model="ir.ui.view">
+        <field name="name">oct.dispatch.wizard.form</field>
+        <field name="model">oct.dispatch.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Dispatch Promise Workflow">
+                <div class="alert alert-info" role="status">Use synthetic response references in this portfolio. Nothing is sent to the customer; stock planning is unchanged.</div>
+                <group>
+                    <field name="operation" readonly="1"/>
+                    <field name="order_id"/>
+                    <field name="promise_id" invisible="operation == 'establish'"/>
+                    <field name="proposal_id" invisible="operation != 'respond'"/>
+                    <field name="dispatch_date" invisible="operation == 'respond'" required="operation in ['establish', 'propose']"/>
+                    <field name="reason" invisible="operation != 'propose'" required="operation == 'propose'"/>
+                    <field name="decision" invisible="operation != 'respond'" required="operation == 'respond'"/>
+                    <field name="response_person" invisible="operation != 'respond'" required="operation == 'respond'"/>
+                    <field name="response_channel" invisible="operation != 'respond'" required="operation == 'respond'"/>
+                    <field name="response_at" invisible="operation != 'respond'" required="operation == 'respond'"/>
+                    <field name="response_evidence" invisible="operation != 'respond'" required="operation == 'respond'"/>
+                </group>
+                <footer>
+                    <button name="action_apply" type="object" string="Record" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

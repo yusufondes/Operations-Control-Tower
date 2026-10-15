@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dispatch_wizard_campaign_notice" model="ir.ui.view">
+        <field name="name">oct.dispatch.wizard.campaign.notice</field>
+        <field name="model">oct.dispatch.wizard</field>
+        <field name="inherit_id" ref="operations_dispatch_promise.view_dispatch_wizard_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/div[@role='status']" position="replace">
+                <div class="alert alert-info" role="status">Use synthetic response references in this portfolio. Nothing is sent to the customer. An applicable accepted date automatically reprioritizes unprepared reservations only for configured campaign orders.</div>
+            </xpath>
+        </field>
+    </record>
+    <record id="dispatch_promise_campaign_notice" model="ir.ui.view">
+        <field name="name">oct.dispatch.promise.campaign.notice</field>
+        <field name="model">oct.dispatch.promise</field>
+        <field name="inherit_id" ref="operations_dispatch_promise.view_dispatch_promise_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[@role='status']" position="replace">
+                <div class="alert alert-info" role="status">For configured campaign orders, the accepted warehouse date controls unprepared reservation priority. Pending proposals and estimates do not. Standard customer Delivery Date and picking schedules remain separate. Responses are manually recorded, not authenticated customer consent.</div>
+            </xpath>
+        </field>
+    </record>
+    <record id="campaign_pool_list" model="ir.ui.view">
+        <field name="name">oct.campaign.pool.list</field>
+        <field name="model">oct.campaign.pool</field>
+        <field name="arch" type="xml">
+            <list delete="false">
+                <field name="name"/>
+                <field name="warehouse_id"/>
+                <field name="location_id"/>
+                <field name="responsible_id"/>
+                <field name="active"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+    <record id="campaign_pool_form" model="ir.ui.view">
+        <field name="name">oct.campaign.pool.form</field>
+        <field name="model">oct.campaign.pool</field>
+        <field name="arch" type="xml">
+            <form delete="false">
+                <header>
+                    <button name="action_reconcile" type="object" string="Reconcile Reservations" class="oe_highlight" groups="stock.group_stock_user"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="status">Supported scope: configured one-step, make-to-stock goods. Prepared and outside reservations remain protected. Missing promises cannot allocate or dispatch. Nothing here sends a customer message or performs physical work.</div>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="warehouse_id"/>
+                        <field name="location_id"/>
+                        <field name="product_ids" widget="many2many_tags"/>
+                        <field name="responsible_id"/>
+                        <field name="active"/>
+                        <field name="revision" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="campaign_pool_action" model="ir.actions.act_window">
+        <field name="name">Campaign Pools</field>
+        <field name="res_model">oct.campaign.pool</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="campaign_pool_menu" name="Campaign Pools" action="campaign_pool_action" parent="stock.menu_stock_root" sequence="85" groups="stock.group_stock_user"/>
+    <record id="sale_order_campaign_form" model="ir.ui.view">
+        <field name="name">sale.order.campaign.automation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Campaign Automation" name="oct_campaign_automation">
+                    <div class="alert alert-info" role="status">Select both pool and shipment policy on the quotation. They are frozen after confirmation. Priority uses only the accepted warehouse promise; pending proposals and estimates are not priority dates.</div>
+                    <group>
+                        <field name="oct_campaign_pool_id" readonly="oct_campaign_confirmed_at or state not in ('draft', 'sent')" domain="[('company_id', '=', company_id), ('warehouse_id', '=', warehouse_id)]"/>
+                        <field name="oct_campaign_policy" readonly="oct_campaign_confirmed_at or state not in ('draft', 'sent')"/>
+                        <field name="oct_campaign_confirmed_at" readonly="1"/>
+                        <field name="oct_campaign_status" readonly="1"/>
+                        <field name="oct_campaign_next_action" readonly="1"/>
+                        <field name="oct_campaign_supply_date" readonly="1"/>
+                        <field name="oct_campaign_blocker_id" readonly="1" groups="operations_control_tower.group_operations_user"/>
+                    </group>
+                    <button name="action_campaign_reconcile" type="object" string="Refresh Campaign Status" invisible="not oct_campaign_pool_id"/>
+                    <field name="oct_campaign_confirmation_ids" readonly="1">
+                        <list create="false" edit="false" delete="false">
+                            <field name="sequence_no"/>
+                            <field name="confirmed_at"/>
+                            <field name="actor_id"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

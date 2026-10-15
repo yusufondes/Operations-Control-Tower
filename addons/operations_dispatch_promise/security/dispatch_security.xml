@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_dispatch_coordinator" model="res.groups">
+        <field name="name">Dispatch Promise Coordinator</field>
+        <field name="comment">Records customer responses; separate Sales access is required. No customer acceptance override.</field>
+        <field name="implied_ids" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+    <record id="rule_dispatch_promise_company" model="ir.rule">
+        <field name="name">Dispatch promises: allowed companies</field>
+        <field name="model_id" ref="model_oct_dispatch_promise"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_dispatch_proposal_company" model="ir.rule">
+        <field name="name">Dispatch proposals: allowed companies</field>
+        <field name="model_id" ref="model_oct_dispatch_proposal"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

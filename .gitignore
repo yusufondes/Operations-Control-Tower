@@ -15,3 +15,30 @@ htmlcov/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local credentials and private-key containers. Review exceptions explicitly.
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Local database files and exports; keep legitimate SQL source trackable.
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.dump
+*.backup
+*.bak
+*.sql.gz
+*.sql.zip
+pgdata/
+filestore/

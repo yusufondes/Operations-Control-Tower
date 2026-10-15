@@ -4,6 +4,66 @@ All notable changes to this project are documented in this file.
 
 The format follows Keep a Changelog, and the project uses Odoo-compatible semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- Optional `operations_dispatch_promise` addon, version `19.0.1.0.0`, depending on
+  `sale_stock` and the base control-tower addon
+- Separate original/current warehouse dispatch commitments, internal estimates,
+  date proposals and manually recorded customer-response history
+- Role, source-order and company checks; protected history, stale-scope detection
+  and concurrency safeguards for the approved promise workflow
+- Guarded disposable standard-fulfilment validation and browser-preview helpers,
+  synthetic fixtures, and saved browser evidence
+- Project instructions, task/approval records, review protocol, decisions and
+  verified capability documentation
+- Optional `operations_campaign_automation` source, version `19.0.1.0.0`,
+  depending on the promise addon, `purchase_stock` and `sale_mrp`; TASK-0007
+  local validation is recorded separately from review/acceptance, not a release
+- Configured one-step make-to-stock, untracked-goods pool; explicit quotation
+  consumer/corporate policy; accepted warehouse date -> protected confirmation
+  timestamp -> order ID reservation priority; retained incomplete-consumer stock
+- Complete-consumer dispatch guards and corporate partial backorders without
+  implicit balance cancellation, prepared/outside-reservation protection,
+  missing-promise blocking and derived supply-risk owner/next-action visibility
+- Explicit `-WithCampaign` validation/preview modes preserving the default and
+  promise-only paths; preview seeds synthetic opening stock/orders only
+
+### Fixed
+
+- Manual preparation cannot claim unallocated campaign stock through saved
+  move quantities, raw lines, UoMs or context defaults; public unreserve
+  reconciles priority and direct demand cancellation/retargeting is guarded
+
+- Project copyright header and base-addon author metadata now name Yusuf Ondes
+  following the owner's declaration; LGPL/GPL and third-party notices are unchanged
+- Stale-response wizard notification navigation now includes a complete nested
+  form action; the response evidence remains saved without changing the promise
+
+### Validation and limits
+
+- TASK-0007 was explicitly accepted for its bounded source/test delivery on
+  2026-10-15 after final independent review,81 passing methods and11 campaign
+  cases. This is not a working-system installation, published release or remote
+  CI pass; its documented limits remain.
+- TASK-0004/TASK-0005 were explicitly accepted for source and disposable-test
+  scope on 2026-10-15. The recorded local regression passed 30 methods
+  (8 base + 22 optional), connection/Form probes and the browser walkthrough.
+- Existing GitHub Actions covers the base addon only. No remote CI pass is
+  claimed by these local results.
+- No optional-addon installation in the working database or production rollout.
+  No publication, outbound communication or authenticated customer consent.
+  The accepted promise-only addon does not allocate or enforce dispatch; the
+  new bounded campaign source adds those guards separately. TASK-0007 records
+  81 passing methods,11 campaign probes and browser repair evidence; independent
+  review and explicit owner acceptance are separate gates, not inferred passes.
+- Campaign scope excludes unsupported routes/uncovered unmanaged competition,
+  consumer replacement flows, formal quality release, carrier/WMS adapters and
+  capacity guarantees. Supply risk uses a one-level BoM/open-production/late-PO
+  signal, not exact order pegging. Physical events must still be recorded.
+  Standard diagnostic, shared-infrastructure and failure-path limits remain.
+
 ## [19.0.4.1.0] - 2026-10-14
 
 ### Added

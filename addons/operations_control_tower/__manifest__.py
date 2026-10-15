@@ -3,7 +3,7 @@
     "summary": "A lightweight operations control center for portfolio projects",
     "version": "19.0.4.1.0",
     "category": "Operations",
-    "author": "HOLY",
+    "author": "Yusuf Ondes",
     "license": "LGPL-3",
     "depends": ["base", "web"],
     "data": [

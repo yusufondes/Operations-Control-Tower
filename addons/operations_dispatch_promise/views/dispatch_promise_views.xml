@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dispatch_proposal_form" model="ir.ui.view">
+        <field name="name">oct.dispatch.proposal.form</field>
+        <field name="model">oct.dispatch.proposal</field>
+        <field name="arch" type="xml">
+            <form string="Date Proposal and Response" create="0" edit="0" delete="0" duplicate="0">
+                <header>
+                    <button name="action_respond" type="object" string="Record Customer Response" class="btn-primary" groups="operations_dispatch_promise.group_dispatch_coordinator" invisible="response_decision"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,accepted,rejected,stale"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-warning" role="status" invisible="not is_stale">This proposal no longer matches the outstanding order scope. Its response cannot change the promise.</div>
+                    <group>
+                        <field name="promise_id"/>
+                        <field name="order_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="proposed_date"/>
+                        <field name="base_revision"/>
+                        <field name="is_stale"/>
+                        <field name="reason"/>
+                        <field name="create_uid" string="Proposed By"/>
+                        <field name="create_date" string="Proposed At"/>
+                    </group>
+                    <group string="Manually Recorded Customer Response">
+                        <field name="response_decision"/>
+                        <field name="response_person"/>
+                        <field name="response_channel"/>
+                        <field name="response_at"/>
+                        <field name="response_evidence"/>
+                        <field name="response_user_id" string="Recorded By"/>
+                        <field name="write_date" string="Last Recorded At"/>
+                        <field name="applied"/>
+                    </group>
+                    <group string="Covered Outstanding Quantities (Snapshot)">
+                        <field name="scope_snapshot" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_dispatch_promise_form" model="ir.ui.view">
+        <field name="name">oct.dispatch.promise.form</field>
+        <field name="model">oct.dispatch.promise</field>
+        <field name="arch" type="xml">
+            <form string="Warehouse Dispatch Promise" create="0" edit="0" delete="0" duplicate="0">
+                <header>
+                    <button name="action_propose" type="object" string="Propose New Date" class="btn-primary" groups="operations_dispatch_promise.group_dispatch_coordinator"/>
+                    <button name="action_estimate" type="object" string="Update Estimate" groups="operations_dispatch_promise.group_dispatch_coordinator"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="status">Planning reference only. This does not change the customer's Delivery Date, stock reservations or picking schedule. Responses are manually recorded, not authenticated customer consent.</div>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="original_date"/>
+                        <field name="current_date"/>
+                        <field name="estimate_date"/>
+                        <field name="responsible_id"/>
+                        <field name="revision"/>
+                        <field name="create_uid" string="Established By"/>
+                        <field name="create_date" string="Established At"/>
+                    </group>
+                    <field name="proposal_ids" nolabel="1">
+                        <list create="0" edit="0" delete="0">
+                            <field name="proposed_date"/>
+                            <field name="state"/>
+                            <field name="is_stale"/>
+                            <field name="response_decision"/>
+                            <field name="response_at"/>
+                            <field name="response_user_id"/>
+                            <field name="applied"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_sale_order_dispatch_promise" model="ir.ui.view">
+        <field name="name">sale.order.dispatch.promise</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="warehouse_dispatch_promise" string="Warehouse Promise">
+                    <div class="alert alert-info" role="status">A separate warehouse commitment, not the standard customer Delivery Date. Corporate coverage is the full outstanding order balance.</div>
+                    <button name="action_open_dispatch_promise" type="object" string="Open / Establish Promise" class="btn-primary"/>
+                    <field name="oct_dispatch_promise_ids" readonly="1">
+                        <list create="0" edit="0" delete="0">
+                            <field name="original_date"/>
+                            <field name="current_date"/>
+                            <field name="estimate_date"/>
+                            <field name="responsible_id"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

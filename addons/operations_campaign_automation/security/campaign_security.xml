@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="campaign_pool_company_rule" model="ir.rule">
+        <field name="name">Campaign pools: active companies</field>
+        <field name="model_id" ref="model_oct_campaign_pool"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="campaign_confirmation_company_rule" model="ir.rule">
+        <field name="name">Campaign confirmations: active companies</field>
+        <field name="model_id" ref="model_oct_campaign_confirmation"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
