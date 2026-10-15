@@ -1,6 +1,19 @@
 # Project status and Codex working guide
 
 Snapshot date: 2026-10-15 (Europe/Berlin).
+Latest revalidation: TASK-0010 reran all81 custom methods (0 failures/errors),
+3 promise and11 campaign probes, plus24 authenticated HTTP cases and7 admin
+configuration checks. Standard-only diagnostics remain3 pass/7 gaps/1 observation.
+All newly owned test resources were removed; selected working fingerprint,
+shared service uptimes and the owner's existing preview were preserved. No
+application code change or remote CI rerun. Detailed current evidence, harness
+attempts and coverage exclusions are in TASKS.md under TASK-0010 (Review).
+Latest local follow-up: TASK-0008 repaired preview startup/cleanup for Windows
+PowerShell5.1 and verified real Start/Stop/login without working-DB writes.
+One separate synthetic campaign preview is intentionally running for owner
+manual tests; exact URL/resource IDs and private credential-file location are
+in TASKS.md. TASK-0011 tracks local commit packaging; remote publication and
+the separate CI-health fix are not implied.
 Authoritative repository: `C:\Users\yusuf\Operations-Control-Tower`.
 Implementation baseline: `d62b6bc2de98ef3e500a2c177d57d007b37ece68`
 (`main`, initial commit). Governance, validation scripts and the optional

@@ -4,3 +4,10 @@
 *.csv text eol=lf
 *.md text eol=lf
 *.ps1 text eol=crlf
+
+# Preserve document/image bytes; do not treat generated PDFs as source text.
+*.pdf binary
+*.pptx binary
+*.png binary
+*.jpg binary
+*.jpeg binary

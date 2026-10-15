@@ -8,6 +8,24 @@ The fictional scenario company is **HALY**, a powdered-drink manufacturer buying
 raw materials from multiple suppliers and serving individual/corporate customers.
 HALY identifies the fictional scenario; the software author is Yusuf Ondes.
 
+## Portfolio overview - no installation needed
+
+Start with the [14-slide business case PDF](docs/portfolio/HALY-Operations-Control-Tower-Case-Study-Revised.pdf)
+or the [editable PowerPoint](docs/portfolio/HALY-Operations-Control-Tower-Case-Study-Revised.pptx).
+They explain the stock gap, dispatch-date priority, own manufacture and shipment
+controls using actual synthetic demo screenshots. Technology is on the last slide.
+
+Project ownership and business-rule decisions: Yusuf Ondes. Implementation,
+testing and review used AI assistance; approval and validation evidence are
+recorded in [the task registry](docs/TASKS.md). This is a synthetic portfolio
+case, not a real-client rollout or measured ROI claim.
+
+Latest local revalidation (2026-10-15): all81 custom test methods,3 promise
+probes,11 campaign cases,24 HTTP operational checks and7 configuration cases
+passed. [TASK-0010](docs/TASKS.md#task-0010---rerun-the-complete-project-regression-and-operational-validation)
+records exact commands, source digests, cleanup and exclusions. The earlier
+remote CI startup-health failure remains open; local passes are not green CI.
+
 This is a local source/demo project, not a production deployment or a universal
 fulfilment engine. Company/customer scenarios are fictional; no
 affiliation or endorsement is implied. Publication preparation is tracked in

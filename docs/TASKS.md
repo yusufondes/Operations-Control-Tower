@@ -1721,3 +1721,461 @@ no confirmed defects or expanded authority; other task states were preserved.
 This was a focused new acceptance-record check, not a third source repair round.
 No .env read, runtime rerun, Git write, dependency install or service/data change.
 GitHub CLI was not found on PATH; authentication by other methods was not tested.
+
+## TASK-0008 - Repair Windows PowerShell preview startup and hand over a test URL
+
+State: Review
+
+Authorization: Yusuf Ondes,2026-10-15 (Europe/Berlin), explicitly approved fixing
+the preview script, cleaning verified leftovers from the failed attempts and
+opening a fresh campaign test screen without changing the working database.
+Baseline:4397cc013cdd155dc211b0d0e68d63e9a9f7354e. No commit/push, CI repair,
+production install, shared-service restart or working-data change in this scope.
+
+Confirmed failures: Docker Go-template label quotes do not survive the user's
+Windows PowerShell native argument path; the initial readiness query references
+ir_module_module before it exists and native stderr terminates PS5.1 despite
+redirection. Cleanup dropped the owned test DB but left its container running.
+Two matching helper-labeled containers were created six seconds apart by this
+same project:290256d9c2b3411f861812372d2dc845 and4cfdff56f17f4c42b3c18a2402e6eab7.
+Their exact IDs, labels and project workspace were inspected before any removal.
+
+Plan: replace label Go-template access with captured JSON/validated exact ID,
+name and label; probe schema existence before module state with caught native
+probe failures; avoid missing-DB notices on cleanup and never drop a DB after
+failed container cleanup. Verify parser/text checks, use actual Windows
+PowerShell5.1 for exact-identity Stop cleanup and fresh campaign Start/Stop,
+then leave one fresh loopback-only preview for user testing. Verify HTTP/login,
+synthetic fixture and unchanged working module/14-item fingerprint. Separate
+read-only review under REVIEWER.md, maximum two repair rounds. Record resource
+identities and private credential-file location, never its password. Hand over
+in Review with the URL; user acceptance is separate.
+
+Execution2026-10-15: Windows PowerShell5.1.26100.9711 Stop exited0 for both
+verified failed-attempt container IDs e0f9bc982dbd78ae8b416de831a9844063fa00ee21f10a5e68efc548f9236e1d
+and26d2b2a37352507cffa2a4ff5b86ceb308bc4cf2ba2b128bd5d392ac6a94dd0b.
+No preview DB or credential files from those attempts remain. Fresh PS5.1 Start
+-WithCampaign exited0 for4661f89fe7354223a34f5d142d02743b; login HTTP200 and
+real JSON-RPC synthetic authentication uid5 passed. PS5.1 Stop exited0 and
+verified removal of that fresh container, DB and temporary credential file.
+
+A second PS5.1 Start -WithCampaign exited0 and remains intentionally running
+for owner manual tests: container oct-ui-c0008313e42e4840a63c01ac75239c7a,
+database oct_scenario_c0008313e42e4840a63c01ac75239c7a,
+URL http://127.0.0.1:62553/web/login,login oct.ui.campaign.
+Credentials are only in the local temporary file
+C:\Users\yusuf\AppData\Local\Temp\oct-ui-c0008313e42e4840a63c01ac75239c7a.json;
+password was never printed or added to source. Final login HTTP200 and real
+authentication uid5 passed. Synthetic500 opening units and A200/B600/C100
+orders have expected reservations200/300/0; no purchase/MRP/physical dispatch
+fixture was added. Only this final scenario DB/container remains in inventory.
+Keep this owned preview running until the owner finishes; subsequent Stop must
+use these exact DB/container identities, not the working DB or broad cleanup.
+
+Each Start/Stop compared working modules and14-item fingerprint before/after;
+final independent read still14:17f2a87362f026a248dc420227dd452f with base19.0.4.1.0
+and optional Sales/Stock/Purchase/MRP/promise/campaign not installed. Shared
+services stayed healthy with unchanged uptime; main HTTP200. No shared-service
+restart, database migration, dependency install, commit, push or CI change.
+
+Validation: repository79-text check and git diff --check exit0; actual PS5.1
+parser check exit0. Script SHA2564021AD194F5B5934F0673A25660952982061BA864489CB4C553E0291D96F55E9.
+Separate /root/preview_ps51_review round1 source review found no confirmed
+defects; in-memory AST-extracted PS5.1 mocks passed six negative guard cases:
+wrong name,wrong label,missing schema,noisy/native probe exception,failed
+container removal preventing DB discovery/drop even with ownedDatabase=true,
+and already-missing DB skipping dropdb. Mocks shadowed Docker and performed
+no real resource/file writes. Reviewer did not read secrets or rerun real Docker.
+Existing81-method campaign suite was not rerun for this helper-only change;
+actual Start/Stop/authentication plus targeted guards are the new evidence.
+Full process-interruption/host-crash cleanup remains untested. Final handover
+review follows; Done still needs explicit owner acceptance of this repair.
+
+Final independent round1 report: no confirmed defects, no repairs required.
+Reviewer read the helper and four supporting documents; PS5.1 parser and six
+in-memory guards passed. Actual Docker/HTTP/auth/cleanup/main-fingerprint evidence
+was developer-supplied, not reviewer-reexecuted. Behavioral read-only protocol,
+not a technically separate sandbox. Final candidate secret scan:99 files,0
+high-confidence or exact-secret matches;2 actual secrets (DB and temporary UI)
+compared only in memory, never printed. No commit/push; only the retained owner
+preview is intentionally live. TASK-0008 is Review for user testing/acceptance.
+
+## TASK-0009 - Create an English business portfolio presentation
+
+State: Review
+
+Authorization: Yusuf Ondes,2026-10-15, requested a polished English PowerPoint
+for nontechnical business power users, explaining the realistic HALY case,
+problem, solution, actual workflow/screenshots, contributions and results,
+with technologies last. He asked for presentation research and content/visual
+validation, then explicitly asked to continue after an interruption.
+
+Plan: research primary presentation guidance; use a restrained navy/ivory/teal
+editorial design with editable text/tables, actual synthetic UI evidence and
+a clearly representative generated cover image. Build a17-slide local PPTX
+with speaker notes, evidence citations and simple business language. Distinguish
+the900-unit runtime scenario from independent browser examples, local81-method/
+11-case validation from base-only CI, fictional HALY from a real client, and
+Private source publication from production deployment. Show contributions,
+business value without invented ROI and future opportunities as proposals.
+Render and inspect every slide, verify layout/package/fonts and numbers,
+then independent evidence review. Deliver PPTX in docs/portfolio. Keep private
+build/render assets outside the repository. Preserve all TASK-0008 edits and
+the owner's running preview. No app/CI/data changes, commit, push or upload.
+
+Implementation and handover, 2026-10-15:
+
+- Created the 17-slide English business deck, editable native text/four tables,
+  17 evidence-backed speaker-note sections, seven actual synthetic browser
+  screenshots and a disclosed representative AI-generated cover. Added the
+  image-based sharing PDF. Technology is on the final slide.
+- Deliverables: `docs/portfolio/HALY-Operations-Control-Tower-Case-Study.pptx`
+  (2,052,499 bytes) and matching `.pdf` (3,889,922 bytes).
+- Reproducible authoring sources and design/provenance/build guidance are under
+  `presentations/`. Build caches, render PNGs and validation receipts remain in
+  the private local artifact workspace, not the repository.
+
+Validation record:
+
+- Environment: Windows, bundled Node v24.19.0, Artifact Tool, Arial, bundled
+  Python/ReportLab/pypdf and Poppler. Source baseline
+  `4397cc013cdd155dc211b0d0e68d63e9a9f7354e`, preserving pre-existing TASK-0008
+  changes. Builder SHA256:
+  `759f13cb3a6a4c998424247e1b25ce46f0181177adb4cd958dcd62303adaf009`.
+- `node build_haly_portfolio.mjs` with private workspace/runtime paths and a fresh
+  output filename: exit 0. Finalization passed package integrity (17 slides,
+  zero findings), layout/heading/table geometry (zero findings/warnings), Arial
+  font declarations (210 runs), four native editable tables, four arithmetic
+  column checks and first-party reimport of the exact finalized PPTX.
+- Main agent inspected every original slide render; final revised slide 10
+  inspected after reimport. Four table sums independently checked by the
+  finalizer. Source comparison keeps 900-unit runtime results distinct from
+  separate partial browser shipments and 800 raw-input units from 400 finished
+  units. Existing 81 local methods/11 cases are historical evidence, not rerun
+  by this presentation task or claimed as remote CI coverage.
+- `node export_haly_pdf.mjs INPUT.pptx OUTPUT.pdf PRIVATE_RENDER_DIR`: exit 0.
+  Reimported finalized PPTX rendered to 17 PNGs, then local ReportLab created a
+  visually matched 17-page 16:9 PDF. Native PDF export first failed because the
+  bundled `#standard-fonts/Helvetica` module was unavailable. No installation
+  or runtime-library patch was made. The delivered fallback is image-based;
+  editable/searchable text and speaker notes remain in the PPTX only.
+- `pdfinfo` and `pdftoppm -scale-to 1920 -png`: exit 0; all 17 PDF pages rendered.
+  pypdf checks: 17 unencrypted 960x540-point pages, expected final-page repository
+  link and no opening action. PPTX ZIP/XML checks: 17 note parts; the sole
+  external relationship is the intended repository hyperlink.
+- `node --check` for both `.mjs` sources, Python source compile, bundled Python
+  `scripts/check_repository.py`: passed (81 text files). `git diff --check`:
+  passed; existing preview-helper LF/CRLF warning is informational. The first
+  ad-hoc XML inspection command had a shell-quoting error; corrected inspection
+  passed. Repository checker is not a secret scanner.
+- Final output SHA256, unchanged when copied into the repository:
+  PPTX `38326887b84088d39c409cb4594df3d6221c4cc00c82518d4a6819632481f232`;
+  PDF `6a10dc9cc0384563465fed3d43a14156b889202279cea0e3ed5d5abafdb19f27`.
+
+Independent review:
+
+- `deck_business_review`, read-only by instruction (not a distinct enforced
+  sandbox), reviewed all slide copy/notes against repository evidence and
+  selected renders. No confirmed factual/business-clarity defects. Optional
+  slide-10 reservation caption added to distinguish 200 reserved from 300 due.
+- Focused final review of that caption, both export helpers and all 17 actual
+  PDF page renders: no confirmed visual/factual defects, clipped text, overlaps,
+  broken tables or missing glyphs. No reviewer writes, runtime/database/Git
+  operations, network calls or credential access.
+- Design guidance influenced readable typography/contrast and notes; the
+  generated cover is representative, not evidence. No invented client, ROI,
+  production use or green CI. Private repository access and the existing CI
+  startup-health follow-up remain explicit.
+
+Skipped/limits: no native Microsoft PowerPoint execution, full accessibility
+audit, new ERP tests, live screenshots, service/database operations or Git
+publication. Owner acceptance is pending; `Done` is not inferred from delivery.
+
+Final simplification revision authorized by Yusuf, 2026-10-15:
+
+The owner explicitly requested another full audit of all outputs, simpler
+language/layout, readable colors and restrained corporate styling. Revision
+plan: preserve the delivered 17-slide pair, revise the same authoring source to
+14 slides by combining repeated problem/date/capability explanations, preserve
+the seven real synthetic screenshot sources and key policy/validation boundaries,
+shorten visible text, strengthen accent contrast and retain detailed evidence
+in notes. Recheck numbers, links, fonts, native tables and all slide/PDF renders;
+request a fresh independent factual/visual review. Deliver a distinct Revised
+PPTX/PDF pair without overwriting the earlier outputs. No ERP/Git publication,
+service, database or application changes. State returns to Review after handover.
+
+Final simplification revision handover, 2026-10-15:
+
+- Preferred deliverables are the `-Revised.pptx` and `-Revised.pdf` pair under
+  `docs/portfolio/`. The original 17-slide pair is unchanged and retained for
+  recovery/comparison. `presentations/README.md` identifies the preferred pair.
+- The same source/design was reduced to 14 slides. Repeated problem, proposal
+  matrix and capability-summary material was merged into the workflow, date
+  history and contribution slides. Seven actual synthetic screenshots, own
+  manufacture, customer shipment policies, original/current dates, source-linked
+  ownership, stock guards, the full 900-unit outcome and technology-last order
+  remain. Native slide words fell from 881 to 677 (23.2%, excluding screenshot
+  pixels and notes). Detailed evidence/limits remain in 14 note sections.
+- Darker teal `#096A6E` replaces `#087F83`. Calculated text contrast is 5.96:1
+  teal/ivory, 5.49:1 muted/ivory, 14.85:1 white/navy and 9.06:1 technology accent/
+  navy. This is a palette calculation, not a complete accessibility audit.
+- Fresh read-only factual review found no confirmed factual defects. Three
+  precision improvements were applied: a valid accepted proposal rather than
+  merely the latest proposal, 500 reserved units rather than ambiguous receipt,
+  and cumulative supply of 900 rather than simultaneous availability. Two
+  further short subject/initial-allocation wordings improved clarity.
+- Focused final factual round 2 reviewed those five changes, exact source,
+  finalized PPTX and README: no confirmed defects or regressions. A distinct
+  visual reviewer inspected all 14 PDF pages individually, then refreshed pages
+  3/4/5/6/9 after the precision changes: no confirmed clipping, overlap, broken
+  tables, missing glyphs, distorted evidence crops or illegible main text.
+  Page-8 screenshot fine print is smaller than the main text; the relevant
+  300/200 quantities and Done/Ready states remain visible with plain captions.
+  Reviewer read-only behavior was instruction-based, not a technical sandbox.
+- Reviewers: `revision_evidence_audit` and `revision_visual_review`. No reviewer
+  writes, ERP/service/database/credential/network/Git changes. The final PDF
+  identity was explicitly rechecked after an initial report quoted the earlier
+  PDF hash; the visual findings refer to refreshed final-v2 page renders.
+
+Executed validation (same bundled Windows authoring environment, no ERP DB):
+
+- Builder source SHA256:
+  `f4fdb9d981514a1154cda21373327005d2b587b2f049f55c3721af9c034b391b`.
+  `node build_haly_portfolio.mjs` with private revised workspace and fresh output
+  filename: exit 0. Finalizer passed 14-slide/size contract, package integrity,
+  heading/layout geometry (zero findings/warnings), 174 Arial text runs,
+  two editable tables (slides 4/12), four arithmetic column checks and exact
+  first-party import. Main agent inspected all slides and revised final pages.
+- `node export_haly_pdf.mjs ...`, `pdfinfo` and
+  `pdftoppm -scale-to 1920 -png ...`: exit 0. Final PDF has 14 unencrypted
+  960x540-point pages, one finalized slide image per page, intended final-page
+  repository hyperlink, no opening action or JavaScript. It remains image-based
+  without editable/searchable text or speaker notes; PPTX is the editable source.
+- Read-only ZIP/XML checks: 14 slides/notes, all page markers 01-14/14, citations
+  in every note section, intended final wording, no placeholder text, sole
+  external relationship is the repository hyperlink, no macro/embedded executable
+  parts. All 8 source image SHA256 values (seven screenshots plus cover) exactly
+  match embedded media. No evidence pixels were rewritten.
+- Both Node syntax checks, Python helper source compilation and repository text
+  checks passed (81 text files), exit 0. `git diff --check` passed, with only the
+  existing preview-helper LF/CRLF informational warning. Historical 81-method/
+  11-case ERP results were source-audited, not rerun by this presentation task.
+- Final PPTX: 2,042,168 bytes, SHA256
+  `a61b77323a7b1332287da760f19ef88a35030a0a7a941d32e922a689c949d594`.
+  Final PDF: 3,555,389 bytes, SHA256
+  `e084ed53d5dcfeb7c60740c7ad447faa5abbfb82a7181af532af1d4c5d4e0b64`.
+  Copied unchanged from validated private `Revised-v2` outputs to stable
+  repository `-Revised` names; hashes rechecked after copy.
+
+Remaining limits: no native Microsoft PowerPoint execution, full accessibility
+audit or new ERP runtime tests. No application code, database, active preview,
+CI, remotes or publication changes. Pre-existing TASK-0008 files are preserved.
+The revision is ready for owner review, not automatically accepted or Done.
+
+## TASK-0010 - Rerun the complete project regression and operational validation
+
+State: Review
+
+Authorization: Yusuf Ondes, 2026-10-15, explicitly requested another run of all
+project unit tests and operational scenarios, with current validation results.
+This authorizes disposable synthetic tests, not deployment, changing business
+rules, repairing application/CI code, modifying the working DB or publication.
+
+Plan: inventory every custom-addon test and scenario, inspect runner effects,
+record source/environment digests and working/owner-preview baselines. Run the
+existing full `validate-fulfilment.ps1 -WithCampaign` entry (all 81 custom test
+methods plus standard, promise and campaign probes), static/Compose/parser
+checks, and safe additional isolated UI/helper checks where available. Preserve
+the owner preview and shared service uptimes; create only newly owned scenario
+DBs/previews, verify cleanup and the scoped working fingerprint afterward. Keep
+raw logs private with no resolved credentials in reports. Independently review
+coverage/results, distinguish passing assertions from standard diagnostic gaps,
+and report uncovered operations explicitly. Do not equate a finite regression
+suite with all conceivable ERP operations or green remote CI. No functional
+repairs, upgrade/bootstrap, shared-volume deletion, commit, remote or push.
+
+Execution and results, 2026-10-15:
+
+Environment: real Windows PowerShell 5.1, Docker Compose, Odoo19.0 image
+`sha256:dd9013e669caaa23d26765dc55814655eaeecca7cfc2c265dbabae913bce22fd`,
+PostgreSQL15 image
+`sha256:c961aa287d8698297cb26cdfadfbe9fd2cbaf77e53cfffe9636e8d8a1e4d842c`.
+HEAD remains `4397cc013cdd155dc211b0d0e68d63e9a9f7354e`; pre-existing
+TASK-0008/0009 changes preserved. No addon/business implementation was changed.
+Two explicit validation-only scripts were added for the expanded checks below.
+
+| Executed check | Result |
+| --- | --- |
+| Full custom-addon suite | 81 methods, 0 failed, 0 errors: 8 base, 22 promise, 51 campaign |
+| Promise real-connection/Form probes | 3 passed |
+| Campaign end-to-end/concurrency probes | 11 passed |
+| Authenticated HTTP operational checks | 24 passed, plus a separate linked-pool deletion observation |
+| Administrative configuration checks | 7 passed; fixtures rolled back |
+| Standard-only diagnostic | 11 observations: 3 pass, 7 known gaps, 1 observation; not 11 acceptance passes |
+| Static/source checks | 83 repository text files, 40 Python ASTs, 7 PowerShell parsers, Compose and Git whitespace passed |
+| HTTP harness target guards | 3 unsafe inputs refused before credential/network access |
+
+Commands and environments:
+
+- `powershell.exe -NoProfile -File scripts/validate-fulfilment.ps1 -WithCampaign`,
+  exit0. Newly owned DB `oct_scenario_d91ddda688cd4538b6f5d2f57ba1573b`.
+  Independently parsed exact `odoo.tests.result` line: `0 failed, 0 error(s) of
+  81 tests`. Per-module stats include class/setup accounting and are not summed
+  as method counts. Module source discovery confirms 8+22+51 actual methods,
+  all imported and no skip/expectedFailure decorators. Strict result-marker
+  identities/counts passed for all three runtime probes. Expected SQL NOWAIT/
+  serialization refusals in concurrency tests are not suite failures.
+- `preview-dispatch.ps1 -Action Start -WithCampaign` and matching exact `Stop`
+  executed under PS5.1 for three new owned preview identities:
+  `3da29d5b24924af7afae3bdc3020663b`, `2aeb8eeccb374a35851de495b7e7eed4`,
+  `68e3b799a7944cbe84909a5c786c1d3b`. All final Start/Stop operations exit0.
+  They do not identify the owner's pre-existing `c0008313...` preview.
+- Final HTTP command: bundled Python `scripts/validate_http_campaign.py
+  http://127.0.0.1:65150 oct_scenario_68e3b799a7944cbe84909a5c786c1d3b
+  oct-ui-68e3b799a7944cbe84909a5c786c1d3b`, exit0. Final result database,
+  24 passed case records and the separate observation independently asserted.
+  Credentials read only from that new preview's matching temporary file,
+  never logged. Passwords/cookies are not stored in reports.
+- `validate_campaign_configuration.py` piped into `odoo shell --no-http
+  --max-cron-threads=0 --workers=0` inside the exact labeled owned preview,
+  with matching `EXPECTED_DATABASE` injected. Exit0, 7 passed cases and
+  `fixtures_rolled_back=true`; absence of its CVAL warehouse was asserted.
+  This uses a synthetic administrative shell, not a least-privilege proof.
+- Bundled Python `check_repository.py`, read-only AST parsing without bytecode,
+  PowerShell `Language.Parser` over all seven scripts, `docker compose config
+  --quiet` and `git diff --check`: exit0. Existing preview-helper LF/CRLF
+  message is informational. The repository checker is not a secret scanner.
+
+Observed business operations:
+
+- The full runtime again bought two raw inputs, received 400 units of each,
+  manufactured 400 finished units and dispatched 900 total from 500 opening
+  stock. Initial allocation200/300/0; corporate batches300/200/100; A200 and
+  C100 completely shipped; main-SKU ending stock0; seven probe quants had no
+  negative or over-reserved quantities. Supplier delay produced a unique
+  source-linked owned blocker and repeated updates did not duplicate it.
+- Promise/campaign suites exercised original/current/estimate separation,
+  pending/rejected/accepted/stale responses, required evidence, retries and
+  conflicting responses; date/confirmation/ID priority, cancel/reconfirm,
+  missing dates, multiline/UoM completeness, stock protection, manual/raw-line/
+  relational/context bypass attempts, outside reservations, returns and
+  company/role restrictions. Six real-connection campaign pairs and two
+  promise race/snapshot cases passed; server Form workflows passed.
+- Fresh HTTP path: authenticate ordinary combined coordinator/stock/operations
+  manager; resolve sales/promise/response/pool forms; verify200/300/0; reject
+  frozen-policy edits and open-pool archive; require proposal reason and
+  response evidence; keep pending/estimate/rejection allocation unchanged;
+  accept C's earlier date and observe200/200/100 while retaining its original
+  date; reject conflicting finalized response. A100-of200 dispatch refused;
+  explicit unprepare/recheck restored200, then A200/C100 dispatched. Saved B300
+  preparation above200 allocation refused; B50 shipped, keeping550 demand and
+  150 reserved. A later quantity change made accepted evidence stale without
+  changing B's operative date.
+- HTTP base controls: all12 business areas,4 impacts,3 priorities and8 workflow
+  states persisted correctly; overdue calculation stopped in resolved/closed;
+  manager could delete its synthetic control item. Kanban/list/calendar/graph/
+  pivot server views resolved. This is not browser rendering or pixel QA.
+- Operational actor's warehouse creation refused with AccessError (native
+  Settings Administrator boundary). Separate admin configuration probe rejected
+  lot/serial goods, nonstorable goods, empty product scope, wrong stock source
+  and multi-step delivery; valid one-step untracked pool succeeded.
+- Linked pool unlink attempted by the operational manager was refused with
+  AccessError. ACL `campaign_pool_manager` has `perm_unlink=0`; a conditional
+  source concern about orphaned orders was NOT reproduced. No P2 defect is
+  asserted, and privileged superuser deletion was not tested.
+
+Harness development observations (not hidden application failures):
+
+1. First HTTP harness assumed alphabetical SO numbers identified A/B/C. The seed
+   intentionally confirms in reverse, so its read-only initial assertion failed.
+   Corrected fixture mapping uses unique200/600/100 ordered quantities.
+2. Next attempt tried to grow a prepared consumer100 to200 without unprepare/
+   availability recheck. The documented guard correctly refused it. The harness
+   now follows the supported explicit recovery before full dispatch. That owned
+   DB/preview was removed before a fresh run.
+3. Another attempt reached native warehouse creation after23 business HTTP
+   cases passed and was correctly denied Settings administration. The final
+   operational harness asserts that refusal; configuration cases run separately
+   with admin fixtures and rollback. The affected preview was removed first.
+
+Coverage limits:
+
+All existing project test methods ran. This is not all Odoo core tests or all
+conceivable operations. No fresh real-browser/device matrix, load/throughput,
+upgrade/migration/restore, cleanup-failure/host-crash injection, multi-company/
+multi-warehouse full end-to-end, isolated Purchase-only/MRP-only roles,
+procurement/MRP cancellation/BoM-edit permutations, accounting/tax/invoicing,
+capacity/SLA calculation, carrier/WMS, formal quality release or authenticated
+customer consent was validated here. Supported scope remains one-step,
+untracked make-to-stock goods. Physical events and customer evidence are
+synthetic/manual records, not real fulfilment or outbound communications.
+The seven standard diagnostic gaps remain standard-only observations; custom
+campaign policy is checked separately. Remote GitHub CI was not rerun or fixed;
+the previously recorded base-only CI health failure is not changed by local
+success. Smoke-test wrapper was not rerun: it duplicates base8, starts shared
+services and has weaker cleanup; full81 coverage used the safer owned runner.
+
+Cleanup and preservation, independently checked after execution:
+
+- Full regression DB and all three newly owned preview DBs/containers absent.
+  All three matching temporary credential files absent. Only postgres, working
+  `operations_control_tower` and owner's original `oct_scenario_c0008313...`
+  remain; no one-off run container remained. Removed test resources held only
+  synthetic fixtures and can be regenerated; no owner's data was removed.
+- Working selected module states plus14-item content fingerprint unchanged:
+  `14:17f2a87362f026a248dc420227dd452f`. Optional modules remain uninstalled/
+  absent there. This scoped comparison is not a whole-database integrity proof.
+- Main DB/Odoo and owner preview retained identical container IDs/StartedAt:
+  DB2026-10-14T20:09:36.293869929Z, Odoo2026-10-14T21:43:40.257398046Z,
+  owner preview2026-10-15T14:24:39.025987777Z. All healthy; both main8069 and
+  owner62553 health endpoints passed. No restart, live installation or migration.
+
+Evidence anchors:
+
+- Original50-file functional/runner aggregate remained
+  `26AD3C5219E3FAF0FBDB67B0D7525D868B5BF957A5E1FEECDC10173C69A37DC1`.
+  Algorithm: sorted relative slash-normalized path, colon, uppercase SHA256,
+  joined with LF/no final LF, then SHA256. Scope: all addon PY/XML/CSV plus
+  validate-fulfilment.ps1, validate_fulfilment.py, validate_dispatch_promise.py,
+  validate_campaign.py, preview-dispatch.ps1 and both seed scripts.
+- New HTTP probe SHA256
+  `3DFC332CE60A6E09A13F3B41A39C648FE3FAFAFECC31AFF22D7FB3BFE57D82B3`.
+  Configuration probe SHA256
+  `D838B696AB2084FB2A18D5CD8D8B962BBD8D10B69AFA4DEDB2D340C72790C17B`.
+- Raw logs retained privately under the local artifact workspace's
+  `regression-0010/`: full-suite.log, http-complete.log, configuration.log and
+  preview/harness attempt logs. Do not publish raw logs without a separate
+  content/secret review. Repository documentation contains sanitized results.
+
+Independent review: `regression_coverage_audit` read the actual test inventory,
+runner effects, raw final result logs, both new validation sources and pool ACL.
+Round1/round2 reviewed the exact final digests above. Final report: no confirmed
+application or final-probe defects; role/scope distinctions accurate; conditional
+pool-unlink concern not reproduced. Reviewer did not execute runtime commands,
+write files, access credentials/services/DB or use network/Git mutations.
+Read-only was behavioral, not a distinct enforced sandbox. Root independently
+verified cleanup afterward. No application fix, commit, remote, push or deployment.
+Ready for owner review; successful tests do not automatically mark Done.
+
+## TASK-0011 - Commit reviewed local work and prepare portfolio sharing
+
+State: In Progress
+
+Authorization: Yusuf Ondes, 2026-10-15, explicitly requested all pending commits
+and concise private/public sharing steps plus a short hiring-manager email.
+Scope: local Git commits of reviewed TASK-0008/0009/0010 work, sanitized evidence,
+portfolio entry point and sharing preparation. No push, visibility change,
+invitations, email send/draft mutation, deployment or CI/application repair is
+authorized by this task. Existing mail PDF draft remains unchanged.
+
+Plan: inspect tracked/untracked/ignored candidates and complete reachable Git
+history for sensitive paths/content, compare actual local secrets in memory
+without printing values, rerun static/whitespace/link checks and a focused
+independent preflight. Preserve original history, local identity/global config,
+working database and owner preview. Package coherent local commits on a
+codex/ preparation branch; record hashes and clean status. Keep private logs,
+credentials, DB exports, caches and generated build/render intermediates out.
+Make the preferred14-slide portfolio accessible from README and retain truthful
+local-test/failed-remote-CI/fictional-scope disclosures. Explain public anonymous
+viewing versus private personal-repository collaborator write access; make no
+external change until the owner chooses the route and authorizes publication.
