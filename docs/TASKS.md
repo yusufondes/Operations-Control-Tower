@@ -1180,7 +1180,7 @@ Reviewed document hashes before this final review note:
 
 ## TASK-0006 - Prepare a truthful portfolio source publication
 
-State: In Progress
+State: Needs Decision
 
 Current ownership update,2026-10-15: Yusuf Ondes explicitly stated that the code
 belongs to him and asked to continue. This resolves the ownership question on
@@ -1396,6 +1396,26 @@ check passed. Scanning the actual99 index blobs found0 high-confidence patterns,
 checked index inventory/whitespace, unchanged functional digest and final docs;
 no confirmed local-commit blocker remains. GitHub repository access remains
 unverified, so remote addition/push are not claimed by this local checkpoint.
+
+Local commit execution,2026-10-15: final99-index-file secret/whitespace gate
+passed; git commit exited0 and created
+6337012b46251129c3f61cc515b07c2ca30281df,
+"Add reviewed dispatch promises and campaign automation", as
+Yusuf Ondes <60218441+yusufondes@users.noreply.github.com>.
+Its parent is the originald62b6bc2de98ef3e500a2c177d57d007b37ece68;
+71 changed paths,99 total tree files, no unstaged/untracked changes after commit.
+No global/local Git identity edits, functional code edits or runtime/DB changes.
+
+Final target recheck still failed: noninteractive git ls-remote exited128 with
+repository-not-found/access-unavailable and unauthenticated API returned404.
+Earlier authenticated yusufondes API check also returned404 for that exact repo.
+No remote was added, push attempted, replacement repo created or permission
+changed; no publication or remote CI result is claimed. TASK-0006 is Needs
+Decision for the owner to confirm the actual browser URL and repository access/
+visibility. Existing publication authorization remains valid for the supplied
+exact target; do not ask for generic commit/push approval again. A different
+target requires the owner's explicit correction. This documentation closeout
+will be a separate local commit preserving the accepted source commit above.
 
 ## TASK-0007 - Complete the bounded campaign automation before publication
 

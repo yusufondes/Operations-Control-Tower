@@ -6,6 +6,9 @@ Implementation baseline: `d62b6bc2de98ef3e500a2c177d57d007b37ece68`
 (`main`, initial commit). Governance, validation scripts and the optional
 TASK-0004/TASK-0007 addons are source publication candidates, not a
 deployed release. TASK-0006 records the current commit/publication checkpoint.
+The accepted implementation is now committed locally as
+6337012b46251129c3f61cc515b07c2ca30281df, preserving that initial parent;
+subsequent publication-status-only commits are separate from functional source.
 
 Latest verification: TASK-0007's bounded optional campaign source passed81
 methods (8 base+22 promise+51 campaign) and11 campaign cases in a generated owned
@@ -32,10 +35,14 @@ Publication preparation: TASK-0006 now owns the requested GitHub sharing work.
 Public README/demo/setup/changelog now document accepted behavior and safe
 reproduction; static/link checks and independent review passed. After TASK-0007
 acceptance, the owner explicitly authorized commit/remote/push to
-https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is In Progress;
+https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is Needs Decision;
 the target returns API404 both anonymously and as the authenticated yusufondes
 account, so visibility/existence/repository access still needs confirmation.
-Local security/static gates passed; no push is inferred.
+Local security/static/index gates passed and the local commit succeeded. The
+final Git ref check still returned repository-not-found/access-unavailable;
+no origin was added or push attempted. The owner must confirm the actual URL/
+access. No publication or remote CI pass is inferred; no renewed generic
+commit/push approval is needed for the already authorized exact target.
 The owner declared code ownership; D-014 records the narrow correction of the
 project copyright header and base-addon author from HOLY to Yusuf Ondes.
 LGPL/GPL and third-party notices remain unchanged; this is not an independent
