@@ -2246,3 +2246,83 @@ https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-f
 No email sent, new mail draft, collaborator invitation, push, remote change,
 visibility change, CI fix, dependency install or working-system operation.
 External publication and owner acceptance remain separate decisions.
+
+## TASK-0012 - Final public portfolio review and CI repair
+
+State: In Progress
+
+Authorization: Yusuf Ondes, 2026-10-15, explicitly approved pushing pending
+commits, repairing CI, reviewing Actions logs before making the repository
+public, updating private-access wording in the presentation, and a final
+English/content/relevance review. The owner explicitly requested no repeated
+local unit-test run. Public visibility is authorized only after disclosure
+checks. No email send, invitations, production deployment, dependency upgrade,
+working database change or application-feature change is in scope.
+
+Baseline: af3ddf88a203be38255ec548f6e12619dbc43ac4. Preserve both initial
+histories and global Git settings. Work on codex/public-release-final-review.
+
+Plan and acceptance criteria:
+
+1. Inspect authenticated repository metadata, every retained Actions run/log
+   and artifact, reachable source history and final files for sensitive or
+   unrelated contents. Never print resolved secrets. Record limits honestly.
+2. Diagnose the failed remote CI step from actual logs. Apply a minimal
+   workflow-only repair and validate its syntax/control flow without local
+   ERP unit tests or changes to shared containers/databases.
+3. Review README/current documentation and all presentation slides/notes for
+   accurate business scope, arithmetic, English and consistent claims. Preserve
+   historical evidence. Update private-source wording for the approved public
+   release. Rebuild and visually verify the preferred PPTX/PDF without changing
+   the approved simple design. Keep temporary renders/logs outside Git.
+4. Run proportionate repository, link, whitespace, document/package and secret
+   checks. Obtain a separate read-only review, with at most two review/repair
+   rounds. Commit reviewed changes, fast-forward local main safely and push
+   without force. Wait for actual GitHub CI results; do not equate local tests
+   with a remote pass or extend CI scope without evidence.
+5. Recheck resulting Actions logs/artifacts before the visibility change. Make
+   the repository public only if the disclosure gate passes, then verify
+   public metadata and anonymous access to README and preferred deliverables.
+   Report final commit/run links, checks, remaining limits and sharing steps.
+
+No local unit tests will be repeated for this task. The normal remote CI may
+execute its existing base test suite as part of verifying the authorized fix.
+
+Pre-push disclosure/CI checkpoint, 2026-10-15:
+
+- Authenticated API confirmed the exact approved repository was private, main
+  at 4397cc013cdd155dc211b0d0e68d63e9a9f7354e. Both retained Actions runs
+  (38748554245 and 38749381389) had one attempt; all eight log archive entries
+  (251,813 uncompressed bytes) were inspected. Global artifact count was zero.
+  Three actual secrets (GCM token, local DB password and owner preview password)
+  and their base64 forms were compared only in memory: zero matches. Token,
+  private-key and credential-URI patterns also had zero matches. No email
+  addresses, Windows-user home paths or unrelated external URLs were found in
+  those logs. Masked provider output and the disposable committed example
+  password were distinguished from actual credentials. No logs were published
+  or deleted by this audit. This heuristic is not a completeness guarantee.
+- Both failed runs passed repository checks and eight base methods; their
+  health step started about 17 ms after Odoo reported Started, then curl exited
+  56 without a retry. Existing --retry-connrefused does not handle connection
+  reset. The repair waits for the existing Compose healthcheck (180 s maximum)
+  and uses a bounded, repeatable HTTP GET with --retry-all-errors, 10 s attempt
+  timeout and 90 s retry budget. Failure remains fatal and cleanup always runs.
+  The GitHub token is explicitly restricted to contents: read.
+- Independent ci_failure_audit round 1 reviewed the actual workflow diff against
+  af3ddf8: no confirmed defects. Reviewed workflow SHA256:
+  CE2B76DADFAC02F213CD91299A12B272073C611B3A96C695540C78F1426C8740.
+  All 10 extracted shell blocks passed Git Bash -n without execution; 40 Python
+  sources parsed as AST without bytecode, 83 repository text files passed and
+  17 Markdown documents had 74 relative targets with zero missing files.
+  No installed YAML parser was available; actual GitHub parsing/execution is
+  still required. No dependencies were installed and no ERP tests ran locally.
+- Root pre-push scan examined 110 candidate files and 136 reachable history
+  blobs, comparing the two actual project secret values only in memory:
+  zero matches and zero sensitive candidate paths. Whitespace check passed.
+  Image pixels are outside this pattern scan; slide/screenshot review is a
+  separate gate. Global Git identity and working services/DB remain untouched.
+
+The first scoped commit contains only this approved plan/checkpoint and the
+reviewed workflow repair. It can be pushed with the existing three pending
+commits while final editorial/artifact checks continue. Public visibility stays
+private until the resulting logs and final source/artifacts pass their gates.

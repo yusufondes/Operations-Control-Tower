@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   repository-checks:
     runs-on: ubuntu-latest
@@ -46,8 +49,10 @@ jobs:
           --log-level=test
       - name: Start Odoo and verify health
         run: |
-          docker compose up -d odoo
-          curl --fail --retry 20 --retry-delay 3 --retry-connrefused http://localhost:8069/web/health
+          docker compose up -d --wait --wait-timeout 180 odoo
+          curl --fail --silent --show-error --max-time 10 \
+            --retry 20 --retry-delay 3 --retry-max-time 90 \
+            --retry-all-errors http://127.0.0.1:8069/web/health
       - name: Show logs on failure
         if: failure()
         run: docker compose logs --tail=200
