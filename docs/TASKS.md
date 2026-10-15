@@ -2159,7 +2159,7 @@ Ready for owner review; successful tests do not automatically mark Done.
 
 ## TASK-0011 - Commit reviewed local work and prepare portfolio sharing
 
-State: In Progress
+State: Review
 
 Authorization: Yusuf Ondes, 2026-10-15, explicitly requested all pending commits
 and concise private/public sharing steps plus a short hiring-manager email.
@@ -2179,3 +2179,70 @@ Make the preferred14-slide portfolio accessible from README and retain truthful
 local-test/failed-remote-CI/fictional-scope disclosures. Explain public anonymous
 viewing versus private personal-repository collaborator write access; make no
 external change until the owner chooses the route and authorizes publication.
+
+Local packaging result, 2026-10-15:
+
+- Commit `4915b12690c7e312a1041eb7679a53b135a19db0`: PS5.1 preview readiness,
+  JSON ownership inspection, cleanup safeguards, changelog and setup guidance.
+- Commit `2a6b2a4d37ac51d408a0cdcdaf9571ee3ddddb81`: reviewed portfolio files,
+  sources, full regression evidence/probes, preferred README entry, ownership/
+  AI-assistance disclosure and explicit binary document/image attributes.
+- This final record is a separate local documentation commit, identifiable as
+  the following Git tip. Preparation used `codex/portfolio-sharing-preparation`;
+  the reviewed series is fast-forwarded to local main only if main still equals
+  the verified4397cc0 baseline. Both initial histories remain ancestors; no
+  force/reset/rebase or remote update is part of this action.
+- Original110 candidate files and117 reachable history blobs were scanned;
+  recheck after the first commit examined120 history blobs. Two actual project
+  secrets were compared only in memory,0 exact/pattern matches and0 sensitive
+  candidate paths. PPTX XML/rels included. This heuristic is not a completeness
+  guarantee or OCR/rights audit. Raw logs, actual credentials, DB data, caches
+  and private build/renders remain excluded. Ignore behavior verified explicitly.
+- Static83-file checks,40 Python ASTs, both Node source syntax checks, preview
+  PowerShell parser, relative Markdown links and staged whitespace passed.
+  No active Git hook was found. Local Git identity remains Yusuf Ondes and the
+  previously approved noreply email; global Git configuration unchanged.
+- Staged PDF whitespace checks initially treated generated documents as source
+  text. Added PDF/PPTX/PNG/JPG/JPEG binary attributes rather than editing their
+  bytes. Removed one terminal blank line in the builder, with no behavior change.
+  Current builder SHA256
+  `AAA573ABE1D0FFCDCB1C4C9059D13F9DEA91055979480372DE1086C3D3D6A078`;
+  TASK-0009 earlier hashes remain historical. All five staged media/document
+  blobs exactly match validated disk bytes; four final output hashes unchanged.
+- Independent `commit_preflight_review` checked tracked/untracked scope,
+  17 Markdown files (0 missing relative targets), intended assets/probe guards,
+  updated disclosures and final binary/EOF-only repair. Both rounds found no
+  confirmed blockers. Reviewer did not read actual secrets, mutate files/index,
+  run ERP tests or make external changes; main supplied the secret/history gate.
+
+Sharing route and release checklist (not executed externally):
+
+1. Start with the Revised PDF attached to a short targeted hiring-manager email;
+   no installation or GitHub access is necessary. Offer a brief walkthrough.
+2. Before sharing a latest-source link, authorize push of the reviewed main
+   series, inspect the resulting Actions run and resolve/disclose the known CI
+   HTTP-health failure. Full optional-suite remote CI coverage is not configured.
+3. Public is lowest-friction for broad portfolio viewing, but first review all
+   remote Actions logs/artifacts and history for public disclosure. Local source
+   history scanning does not audit remote Actions logs. Code/history can be
+   copied and public Actions logs become visible. Existing license/notices stay.
+   Visibility change requires explicit owner choice/authorization. Refresh the
+   presentation's current private-access label if that choice changes.
+4. Private: Settings, Collaborators, Add people; invitation must be accepted.
+   Personal-account private collaborators receive read/write, not read-only.
+   Prefer PDF first for recruiters, or a separately approved organization/read
+   access arrangement if source viewing must remain private and read-only.
+   Never share account credentials or personal access tokens.
+5. Send one short English note identifying a synthetic, locally validated Odoo
+   case, its purchasing/own-production/date-priority/dispatch problem and Yusuf's
+   actual role. Avoid production-client, measured ROI and green-CI claims. Send
+   only to an owner-selected recipient after explicit send authorization.
+
+Official guidance checked on2026-10-15:
+https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository
+https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository
+https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility
+
+No email sent, new mail draft, collaborator invitation, push, remote change,
+visibility change, CI fix, dependency install or working-system operation.
+External publication and owner acceptance remain separate decisions.
