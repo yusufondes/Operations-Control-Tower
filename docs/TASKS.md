@@ -2412,3 +2412,288 @@ working and owner-preview resources were not touched. Pattern and manual image
 checks are limited evidence, not proof of absence of every possible secret or
 rights issue. LGPL/GPL and third-party notices were preserved. Owner acceptance
 is still required for Done; publication authorization is not final acceptance.
+
+## TASK-0013 - Editorial redesign of the portfolio presentation
+
+State: Done
+
+Owner acceptance: Yusuf approved the redesigned presentation as the basis for
+the cover-only addition on 2026-10-16, then explicitly accepted the completed
+With-Company presentation and requested its GitHub publication in TASK-0015.
+Earlier no-publication statements below describe the original task boundary.
+
+Authorization: Yusuf Ondes, 2026-10-15, explicitly requested a complete natural-
+language and visual revision of the latest presentation, internet/forum research,
+application of the findings and internal validation without further approval.
+Deliver only an English PDF and editable PowerPoint for owner review. This task
+does not authorize a new push, repository metadata change, email send/draft,
+application change, local ERP tests or working-database/service operation.
+
+Baseline: 3dfed1f301e53bfb395e284dc94157432b35c0be. Preserve the published
+Revised files and all prior history. Work on codex/portfolio-editorial-redesign.
+
+Plan and acceptance criteria:
+
+1. Inspect the existing 14-slide deck, project evidence and actual screenshots.
+   Research reputable presentation/plain-English guidance and specific forum
+   experiences, distinguishing anecdotal preferences from established advice.
+   Apply audience-specific editorial, factual and visual review prompts, not
+   detector-evasion, false authorship or deliberately introduced imperfections.
+2. Replace the generated marketing-style cover, oversized headings/statistics,
+   repetitive layouts and slogans with familiar business typography, restrained
+   formatting, ordinary English, varied evidence-led layouts and clear captions.
+   Preserve the 7 evidence screenshots, 2 editable tables and business facts.
+3. Explain the case, agreed rules, standard versus custom work, recorded
+   decisions, outcomes and limits to a nontechnical reader without a presenter.
+   Keep technology last and retain truthful synthetic-data, manual-response,
+   local-versus-CI and AI-assisted implementation disclosures. Do not invent
+   real clients, manual-only authorship, measured ROI or production deployment.
+4. Create a new Business-Case PPTX/PDF pair, preserving earlier deliverables.
+   Keep drafts, research, scripts and renders in the private artifact workspace.
+   Prefer readable native/searchable PDF text when faithful export is possible.
+   Do not upload source material to external design/humanizer services or
+   install dependencies. Final exports belong in docs/portfolio.
+5. Validate arithmetic, source traceability, English, links, editable objects,
+   fonts, package/reimport integrity and every rendered slide/PDF page. Obtain
+   a separate read-only review, allow at most 2 review/repair rounds, and record
+   exact output hashes, commands, results and limitations. Hand over in Review;
+   Done still requires owner acceptance. No commit or push is part of delivery.
+
+Implementation and validation receipt, 2026-10-15:
+
+- Rebuilt the 14-slide business story in ordinary English with Calibri, a white
+  background, charcoal text and one muted plum accent. Removed the generated
+  cover photo, oversized numerical callouts and repeated marketing-style
+  treatments. Kept seven original Odoo screenshots and two editable tables.
+  Standard Odoo processes, custom controls, recorded customer responses, the
+  separate browser examples and full local test scenario remain distinguished.
+  The technology page is last. Synthetic/local, scope and AI-assistance
+  disclosures remain; no manual-only authorship, real client, ROI or production
+  deployment claim was introduced. Previously recorded tests were not rerun.
+- Research applied: Microsoft's effective-presentation guidance, NN/G's
+  asynchronous-report guidance and the Cabinet Office's plain-English advice.
+  Relevant r/powerpoint and r/consulting discussions informed layout preferences
+  only; forum opinions were not treated as proof of AI authorship. Editorial,
+  evidence-traceability and normal-laptop-size visual critique prompts were
+  applied. The source links are retained in relevant PowerPoint speaker notes;
+  the research brief, scripts and drafts remain in the private artifact workspace.
+  No external humanizer/design service, dependency install or source upload was
+  used. Familiar typography and clearer writing do not establish authorship.
+- New files, with the published Revised pair and archive preserved unchanged:
+  docs/portfolio/HALY-Operations-Control-Tower-Business-Case.pptx
+  (343710 bytes; SHA256
+  748aab111cfd92c42190ccacc45da753e9f946e38e6cac409f2470d8ef334854), and
+  docs/portfolio/HALY-Operations-Control-Tower-Business-Case.pdf
+  (533528 bytes; SHA256
+  db529a8313d41a919e1f09b9f55fb739d1f0352294c03c3d4734e53b44660de5).
+  The exact validated candidate bytes were copied without overwriting files;
+  destination hashes match. No README/publication pointer has been switched.
+- Executed bundled Node build_deck.mjs with the process-local bundled runtime
+  path: finalizer package/layout/font policy, first-party reimport and table
+  arithmetic passed with zero findings/warnings. There are 14 slides, 14 notes,
+  2 native tables and 7 original evidence-image blobs. Four explicit column
+  total contracts passed; all displayed table values match the shared manifest.
+  Calibri is installed locally; no fallback font was observed by the renderer.
+- Executed bundled Python export_pdf.py against the same content/layout
+  manifest: 14 native-text pages, 14 bookmarks, embedded Calibri and one working
+  repository hyperlink. All authored text and table cells are extractable;
+  the PDF has 5059 selectable text characters. Poppler rendered all 14 pages.
+  Main and separate reviewer inspected every slide/page for English, number/date
+  consistency, reading order, screenshot context, contrast, clipping and fit.
+- Executed bundled Python -B verify_final_pair.py, exit 0, against the exact
+  final candidate bytes. Confirmed slide/page counts, notes, editable tables,
+  manifest text and values, HTTPS source targets and unchanged source-image
+  streams in both formats. PDF has no attachments or inspected active-action
+  payloads; PPTX has no macro/ActiveX/embedded-object payload. High-confidence
+  extracted-text credential patterns returned zero findings. The QA harness was
+  calibrated to compare raw original JPEG streams (sources have .png filenames)
+  rather than pypdf's re-encoded extraction, and unchanged PDF content streams
+  rather than PNG renders at different resolutions; artifacts were not changed
+  for those harness corrections.
+- Independent human_deck_visual_critique review round 1 examined all 14 slides
+  and 14 PDF pages and found one P2 wording defect on slide 2: "make the shortage"
+  could imply creating the deficit. Repaired to "make the remaining units".
+  Focused round 2 passed with no remaining confirmed defects. Only the intended
+  slide-2 text changed; the other 13 PDF content streams remained identical.
+  The final reviewer verified the hashes above. A separate editorial audit also
+  checked source claims, actual extracted texts and all notes. Reviews were
+  behaviorally read-only, not enforced separate permission sandboxes.
+- Executed bundled Python -B scripts/check_repository.py (84 text files, exit 0),
+  git diff --check (exit 0), and the existing read-only commit_secret_gate.py
+  (113 candidate files, 156 reachable history blobs, 2 actual local secret values
+  compared in memory, zero sensitive candidate paths/findings, exit 0). Secret
+  values were not printed. Pattern/exact-value and manual-image checks are
+  limited evidence, not an exhaustive security, rights or provenance guarantee.
+
+Native Microsoft PowerPoint execution, full accessibility certification and
+tagged-PDF compliance were not verified. No unit/ERP/runtime tests, database
+reads/writes, service operations, application/functional-code changes, email,
+commit, staging, push or publication occurred. New files are for owner review;
+the previously published pair remains the public version until separately
+authorized. Owner acceptance is required before marking this task Done.
+
+## TASK-0014 - Company introduction on the presentation cover
+
+State: Done
+
+Owner acceptance: Yusuf explicitly approved this final form on 2026-10-16 and
+requested publication of its exact PDF/PowerPoint pair in TASK-0015. The earlier
+email cancellation and no-publication boundary below describe TASK-0014 only.
+
+Authorization: Yusuf Ondes, 2026-10-16, requested a short company definition
+and a small, simple beverage-can illustration on the first slide only. Preserve
+the liked presentation style and deliver the updated PDF and PowerPoint. The
+user explicitly cancelled the proposed email command: do not draft or send mail.
+No application change, new testing, commit, push or publication is authorized.
+
+Baseline: the TASK-0013 Business-Case pair (PPTX 748aab111cfd92c42190ccacc45da753e9f946e38e6cac409f2470d8ef334854;
+PDF db529a8313d41a919e1f09b9f55fb739d1f0352294c03c3d4734e53b44660de5).
+Continue the existing presentation-only branch and preserve its uncommitted
+artifacts and task history. Save a new With-Company pair; do not overwrite prior
+deliverables or switch public pointers.
+
+Plan and acceptance criteria:
+
+1. Keep slides 2-14, their figures, dates, tables, notes and disclosures unchanged.
+   The source identifies powdered drinks, so introduce HALY as a fictional
+   powdered-drink manufacturer with can packaging, not a new ready-to-drink
+   business model. Packaging is an illustrative owner-requested cover concept,
+   not a newly tested ERP packaging, recipe or compliance feature.
+2. Add a modest HALY / DRINK MIX canister product illustration on the cover,
+   keeping the existing white/Calibri/charcoal/plum design and editable text.
+   State clearly that the company and data are fictional/synthetic. Preserve the
+   case title and ownership/date context. Keep asset provenance in cover notes.
+3. Validate changed-slide fit/readability, exact unchanged content on slides
+   2-14, PDF searchable text, source link and PPTX package/layout/reimport. Obtain
+   focused separate read-only review, record final hashes and limitations, and
+   hand over in Review without email or publishing.
+
+Implementation and validation receipt, 2026-10-16:
+
+- Imported the exact TASK-0013 PowerPoint and edited only its cover. Replaced
+  the general case description with "HALY makes powdered drink mixes and packs
+  them in cans." Kept the case title, Calibri styling, owner/date, visible
+  fictional/synthetic disclosure and a short Odoo portfolio context line.
+- Added one small fictional packaging illustration. Used the built-in image
+  generation tool in product-mockup mode, with a brief for two plain metal
+  canisters, HALY / DRINK MIX text only, white/plum packaging, a white background
+  and no ingredients, flavors, health claims, soda styling or promotional text.
+  Original generated asset saved unchanged as
+  docs/portfolio/assets/haly-drink-mix-canisters.png. Cover notes explain its
+  provenance and distinguish this owner-requested packaging concept from tested
+  ERP packaging, recipe/BOM or compliance functionality.
+- New final files (prior Business-Case/Revised pairs remain unchanged):
+  docs/portfolio/HALY-Operations-Control-Tower-Business-Case-With-Company.pptx,
+  1404140 bytes, SHA256
+  2495cc233116a8f7bb0f09af430b898ed899d16813c44fa739174fd81c6d301a;
+  docs/portfolio/HALY-Operations-Control-Tower-Business-Case-With-Company.pdf,
+  2169787 bytes, SHA256
+  c18360c8680db6eb8577916b4b2f8d700aac28a39b1ee8fcdb17089c13090e6c.
+  Destination hashes match the exact validated private candidate bytes.
+- Executed bundled Node edit_cover.mjs: package/layout/reference-font/reimport
+  checks passed with zero findings/warnings. Retained 14 slides, 14 notes,
+  2 native editable tables and all 7 original evidence images, plus 1 new cover
+  image. All four explicit table-total contracts passed. Rendered all slides;
+  slides 2-14 are pixel-identical to the preceding version and their actual
+  speaker notes remain unchanged. No shared master/layout edit was made.
+- Executed bundled Python export_pdf.py against the corresponding shared
+  manifest: 14 searchable pages, 14 bookmarks, embedded Calibri, 1 repository
+  link and 5078 extractable text characters. Rendered all pages with Poppler;
+  changed cover was visually checked in both formats. PDF pages 2-14 retain
+  byte-identical decoded content streams to the original Business-Case PDF.
+- Executed bundled Python -B verify_cover.py, exit 0: original pair hashes,
+  unchanged manifest pages/notes, text/table values, all 8 source-image blobs,
+  unchanged 13 rendered PowerPoint pages/PDF streams and no inspected active
+  content/attachments or high-confidence extracted-text credential patterns.
+- Independent human_deck_visual_critique focused review round 1 passed with no
+  confirmed defects, verifying the exact hashes above, both covers and narrow
+  change boundary. No repair round was necessary. Behavioral read-only review
+  is not a separately enforced permission sandbox.
+- Executed bundled Python -B scripts/check_repository.py (84 text files,
+  exit 0), git diff --check (exit 0) and existing read-only commit_secret_gate.py
+  (116 candidates, 156 reachable history blobs, 2 local secret values compared
+  only in memory, zero sensitive candidate paths/findings, exit 0). Values were
+  not printed. Pattern checks are not an exhaustive security/rights guarantee.
+
+No native Microsoft PowerPoint execution or full accessibility certification
+is claimed. No application/ERP/unit/runtime tests, database/service operations,
+dependency changes, staging, commit, push, public pointer change or email
+draft/send occurred. The email cancellation was respected. This new pair is
+for owner review; final owner acceptance remains required for Done.
+
+## TASK-0015 - Publish the approved company-cover presentation
+
+State: Review
+
+Authorization: Yusuf Ondes, 2026-10-16, explicitly accepted the final presentation
+and requested the latest PDF and PowerPoint be uploaded to the existing GitHub
+repository, with README presentation links updated. This authorizes a scoped
+commit and normal fast-forward push, not an application change, new deployment,
+remote/visibility change, force push or dependency installation.
+
+Baseline: 3dfed1f301e53bfb395e284dc94157432b35c0be on
+codex/portfolio-editorial-redesign; origin/main verified at the same revision.
+Local author remains Yusuf Ondes with the previously approved repository-local
+noreply email. Preserve all existing work and published historical artifacts.
+
+Plan and acceptance criteria:
+
+1. Publish only the approved With-Company PDF/PowerPoint and its canister source
+   asset, preserving the TASK-0014 exact hashes. Leave the intermediate untracked
+   Business-Case pair local; no redundant intermediate deliverable is required.
+2. Point the root and presentation/archive README entry points to the latest
+   pair. Describe its searchable PDF, Calibri design and small fictional cover
+   accurately; label older source/build artifacts as historical rather than
+   claiming that they rebuild the latest private-workspace presentation.
+3. Check candidate scope, links, file integrity and sensitive content; obtain a
+   focused behavioral read-only review. Stage explicit paths only. Preserve
+   history, push without force and verify anonymous access and remote CI.
+4. Keep unrelated correspondence and recipient/contact details outside Git.
+   Record publication evidence and limitations without treating CI's base suite
+   as full local campaign validation. No local ERP/runtime tests or DB/service
+   operations are needed for this documentation/artifact publication.
+
+Pre-publication validation and review, 2026-10-16:
+
+- Root, presentation and historical-archive README entry points now target the
+  final With-Company pair. The current PDF is correctly described as searchable
+  with bookmarks, not the earlier image-based export. Current Calibri styling,
+  fictional packaging provenance, synthetic scope and local-versus-CI boundaries
+  are explicit. Previous scripts/exports are labelled historical; no current
+  private-workspace builder is misrepresented as a portable published source.
+- Exact approved final bytes are unchanged: PPTX SHA256
+  2495cc233116a8f7bb0f09af430b898ed899d16813c44fa739174fd81c6d301a;
+  PDF SHA256
+  c18360c8680db6eb8577916b4b2f8d700aac28a39b1ee8fcdb17089c13090e6c;
+  canister source image SHA256
+  76b68e5dd3dedba8755af3be7bdeecde9d9eb24eb2f6911be347b9d9e4a62935.
+  The earlier untracked Business-Case pair stays local, and all previously
+  tracked Revised/archive files retain their original bytes and history.
+- Executed bundled Python -B scripts/check_repository.py (84 text files, exit 0),
+  git diff --check (exit 0), a PowerShell relative-target check for all three
+  changed README files (31 existing targets, zero missing), and existing
+  commit_secret_gate.py (116 candidates, 156 reachable history blobs, 2 local
+  secret values compared only in memory, zero sensitive paths/findings, exit 0).
+  No credential value was printed. Reexecuted private verify_cover.py, exit 0:
+  approved source/output hashes, 14 slides/notes/pages, 2 editable tables,
+  8 original image blobs and unchanged slides 2-14 remain verified.
+- Independent public_content_audit round 1 reviewed the actual seven candidate
+  paths, README/task diff, full PPTX/PDF texts/notes/links/actions and cover asset.
+  No confirmed defects found. Its own 31-target link and whitespace checks
+  passed. All eight PPTX images exactly match the seven previously reviewed
+  synthetic screenshots and new canister source. The reviewer did not read
+  local secrets, mutate files/index/Git, run tests or change services/data.
+  Read-only review is behavioral, not a separately enforced permission sandbox.
+- Anonymous repository API confirms yusufondes/Operations-Control-Tower is
+  public with default branch main. git ls-remote confirms the expected baseline;
+  approved repository-local author and the existing HTTPS remote are unchanged.
+  Stage only the four README/task documents and three approved binary assets.
+  There is no application, script, workflow, configuration or dependency diff.
+
+These are pre-push checks, not a claimed new CI result. The authorized normal
+push, resulting commit and fresh CI/access outcome are verified at handoff and
+observable in Git/GitHub. No local ERP/runtime tests, installs, database/service
+operations or production deployment are part of this publication. No guarantee
+of native PowerPoint execution, accessibility certification or exhaustive
+security/rights audit is implied. Owner acceptance of the presentation is
+recorded above; this publication task remains in Review for handover.

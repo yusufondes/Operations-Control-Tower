@@ -10,10 +10,12 @@ HALY identifies the fictional scenario; the software author is Yusuf Ondes.
 
 ## Portfolio overview - no installation needed
 
-Start with the [14-slide business case PDF](docs/portfolio/HALY-Operations-Control-Tower-Case-Study-Revised.pdf)
-or the [editable PowerPoint](docs/portfolio/HALY-Operations-Control-Tower-Case-Study-Revised.pptx).
+Start with the [14-slide business case PDF](docs/portfolio/HALY-Operations-Control-Tower-Business-Case-With-Company.pdf)
+or the [editable PowerPoint](docs/portfolio/HALY-Operations-Control-Tower-Business-Case-With-Company.pptx).
 They explain the stock gap, dispatch-date priority, in-house production and shipment
 controls using actual synthetic demo screenshots. Technology is on the last slide.
+The PDF has selectable text and bookmarks. The cover introduces HALY and shows
+an illustrative can-packaging concept, not an additional tested ERP capability.
 
 Project ownership and business-rule decisions: Yusuf Ondes. Implementation,
 testing and review used AI assistance; approval and validation evidence are
