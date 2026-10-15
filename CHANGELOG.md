@@ -43,6 +43,11 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 
 ### Validation and limits
 
+- Source was pushed to the owner's Private GitHub repository on 2026-10-15,
+  preserving both initial histories. TASK-0006 records exact source hash, remote
+  verification and the first Actions failure: repository checks and8 base tests
+  passed, but the subsequent startup-health check returned curl56. No CI pass.
+  No public-visibility change, release tag, deployment or live installation.
 - TASK-0007 was explicitly accepted for its bounded source/test delivery on
   2026-10-15 after final independent review,81 passing methods and11 campaign
   cases. This is not a working-system installation, published release or remote
@@ -53,7 +58,7 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 - Existing GitHub Actions covers the base addon only. No remote CI pass is
   claimed by these local results.
 - No optional-addon installation in the working database or production rollout.
-  No publication, outbound communication or authenticated customer consent.
+  No public-visibility change, outbound communication or authenticated customer consent.
   The accepted promise-only addon does not allocate or enforce dispatch; the
   new bounded campaign source adds those guards separately. TASK-0007 records
   81 passing methods,11 campaign probes and browser repair evidence; independent

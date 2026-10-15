@@ -1180,7 +1180,7 @@ Reviewed document hashes before this final review note:
 
 ## TASK-0006 - Prepare a truthful portfolio source publication
 
-State: In Progress
+State: Review
 
 Current ownership update,2026-10-15: Yusuf Ondes explicitly stated that the code
 belongs to him and asked to continue. This resolves the ownership question on
@@ -1441,6 +1441,57 @@ whitespace checks, commit the two-parent merge, then normal git push -u origin
 main. Verify remote hash/contents and actual Actions status before recording
 success; publish a final documentation-only execution record and verify again.
 No Public conversion, deployment, force push, tag or GitHub Release.
+
+Successful source publication,2026-10-15 (Europe/Berlin): focused retry review
+/root/publication_gate found no confirmed defect in the two status-document
+changes or history-preserving merge plan. It verified MERGE_HEAD, exact local
+tree preservation, no conflicts and whitespace; API/auth evidence was supplied
+by the developer, not independently queried by the reviewer. No functional
+review round or runtime rerun was added.
+
+Fresh pre-push gate passed:99 actual index files plus236 historical file entries
+across the local and fetched root histories,0 high-confidence pattern matches
+and0 exact real local-secret matches; credentials/secrets only in memory.
+Repository79-text check and index whitespace passed, exit0. Git merge commit
+8057a3085a946c5aeb8d4546405aec0f653e5ce7 has parents
+377affcb09604c9a5be2c4334b38b68059cd268d and
+f83bf12b875d572e75ee067e784b0bb7c9f14964. It preserves both histories and the
+reviewed local source; only publication status docs differ from its first parent.
+
+git push -u origin main exited0, normal fast-forward from the remote root to
+8057a3085a946c5aeb8d4546405aec0f653e5ce7, with no force. Independent git ls-remote
+and authenticated GitHub tree/API checks confirmed that exact remote main hash,
+99 files, expected addons/evidence/workflow and no secret/database filenames.
+Repository remains Private,default main; no visibility/permission changes.
+The worktree was clean and main tracked origin/main after this source push.
+
+Actual Actions run for that pushed revision:
+https://github.com/yusufondes/Operations-Control-Tower/actions/runs/38748554245
+was in_progress at the first check, then completed with failure. Repository-
+checks succeeded. The integration job's install/test step succeeded with
+0 failed,0 errors of8 base tests; its subsequent "Start Odoo and verify health"
+step failed with curl exit56,"Recv failure: Connection reset by peer".
+CI cleanup succeeded. The observed failure is in the HTTP startup-health check,
+not an Odoo test assertion; a startup-readiness timing problem is a hypothesis,
+not a separately reproduced root cause. No CI/config/code repair was authorized
+or performed in this publication task. A focused readiness-check follow-up
+needs separate scope/approval; do not hide this failed run with a CI-pass claim.
+The existing workflow checks the base addon only; the81-method/11-case promise/
+campaign result remains the separate dated local evidence.
+
+Publication handover: source upload is verified; TASK-0006 is Review for explicit
+owner acceptance of this publication delivery, not Done inferred from push.
+This execution/status update is a documentation-only follow-up under the same
+commit/push approval, to be verified on remote main after its push. No live
+installation, deployment, GitHub Release/tag or functional/CI/license changes.
+Private repositories require granted access for other viewers; no automatic
+Public conversion is authorized or performed.
+
+Final publication-record review /root/publication_gate found no remaining
+confirmed defect in the five documentation-only changes. It checked the actual
+diff/whitespace, historical-vs-current publication state and truthful failed-CI
+reporting; developer API/job evidence was not independently rerun. No functional
+repair, CI change, secret read, external write or service/data change by reviewer.
 
 ## TASK-0007 - Complete the bounded campaign automation before publication
 

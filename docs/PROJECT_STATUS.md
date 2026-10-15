@@ -4,11 +4,13 @@ Snapshot date: 2026-10-15 (Europe/Berlin).
 Authoritative repository: `C:\Users\yusuf\Operations-Control-Tower`.
 Implementation baseline: `d62b6bc2de98ef3e500a2c177d57d007b37ece68`
 (`main`, initial commit). Governance, validation scripts and the optional
-TASK-0004/TASK-0007 addons are source publication candidates, not a
-deployed release. TASK-0006 records the current commit/publication checkpoint.
+TASK-0004/TASK-0007 addons are now published source in the owner's Private GitHub
+repository, not a deployed release. TASK-0006 records the publication checkpoint.
 The accepted implementation is now committed locally as
 6337012b46251129c3f61cc515b07c2ca30281df, preserving that initial parent;
-subsequent publication-status-only commits are separate from functional source.
+Subsequent publication-status-only commits are separate from functional source.
+The history-preserving merge8057a3085a946c5aeb8d4546405aec0f653e5ce7 was
+successfully pushed and verified on remote main; both original roots remain.
 
 Latest verification: TASK-0007's bounded optional campaign source passed81
 methods (8 base+22 promise+51 campaign) and11 campaign cases in a generated owned
@@ -18,7 +20,7 @@ bypasses; both were reproduced, repaired and retested, including standalone
 saved preparation and real browser refusal plus valid corporate partial dispatch.
 Final independent round2 review found no remaining confirmed defects and verified
 the final20-file source digest. TASK-0007 is Done after explicit owner acceptance
-on2026-10-15; no live installation or publication is inferred. All owned test DBs
+on2026-10-15; no live installation is inferred from that acceptance. All owned test DBs
 and preview containers were removed; the working system remained unchanged.
 See evidence/task-0007/README.md for current evidence and limits.
 
@@ -27,7 +29,8 @@ for the accepted promise-only slice, not the total current campaign test scope.
 
 Latest acceptance: Yusuf Ondes explicitly accepted the TASK-0007 handover
 on2026-10-15, after its final review and81-method/11-case evidence. It is Done
-for the bounded source/test delivery, not deployed or published. TASK-0004/0005
+for the bounded source/test delivery, not deployment or publication acceptance.
+The separately authorized source push is recorded under TASK-0006. TASK-0004/0005
 also remain Done from their earlier explicit acceptance. Earlier Review/
 pending-acceptance notes are historical; all exclusions and known gaps remain.
 
@@ -35,15 +38,20 @@ Publication preparation: TASK-0006 now owns the requested GitHub sharing work.
 Public README/demo/setup/changelog now document accepted behavior and safe
 reproduction; static/link checks and independent review passed. After TASK-0007
 acceptance, the owner explicitly authorized commit/remote/push to
-https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is In Progress.
-On the same-target retry, authenticated yusufondes access succeeds: the exact
-repository is Private with push permission. Keep that visibility unchanged.
-Origin now points to the approved .git URL; fetched main contains only a project-
-title README root commit. A history-preserving merge is prepared, keeping the
-reviewed local source tree; no force, code/CI/license/data edits or push yet.
-Earlier authenticated404 notes are historical. Anonymous404 remains expected
-for a private repository. No publication or remote CI pass is inferred before
-the actual push/verification recorded in TASK-0006.
+https://github.com/yusufondes/Operations-Control-Tower. TASK-0006 is Review:
+source push succeeded and git/API/tree checks matched remote main to the merge
+commit above with99 files. Origin tracks the approved .git URL; both histories
+are retained without force, and Private visibility is unchanged. Earlier
+authenticated404 notes are historical; anonymous404 is expected for Private.
+First Actions run38748554245 completed with failure: repository checks and8
+base Odoo tests passed, but the later startup HTTP-health check failed with
+curl56/connection reset. Cleanup succeeded. This is not a green CI result;
+readiness timing needs a separately scoped follow-up, not an unapproved code/CI
+edit. Its base-only scope is separate from local81-method/11-case evidence.
+Publication acceptance is still pending; no live code/module/database/service
+installation, deployment or CI/license change occurred. This final docs-only
+update will be pushed to record the result; use Git history/Actions for later
+exact tips and statuses.
 The owner declared code ownership; D-014 records the narrow correction of the
 project copyright header and base-addon author from HOLY to Yusuf Ondes.
 LGPL/GPL and third-party notices remain unchanged; this is not an independent

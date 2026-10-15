@@ -2,7 +2,9 @@
 
 Date:2026-10-15 (Europe/Berlin). Synthetic, local-only validation.
 Authoritative source: C:\Users\yusuf\Operations-Control-Tower.
-Baseline HEAD:d62b6bc2de98ef3e500a2c177d57d007b37ece68; changes are uncommitted.
+Validation baseline HEAD:d62b6bc2de98ef3e500a2c177d57d007b37ece68; changes were
+uncommitted at that checkpoint. Later source commits/publication are recorded
+under TASK-0006; the tested functional digest below remains the evidence anchor.
 
 ## Validation and review gate
 

@@ -29,8 +29,9 @@ test deliverables on 2026-10-15 (TASK-0004/0005). They are not installed in the
 existing working database. The standard customer Delivery Date is separate
 from the warehouse promise and is not rewritten by either integration addon.
 TASK-0007's bounded campaign source/test delivery was explicitly accepted on
-2026-10-15. It is not published or installed in the working database; source
-presence alone is not test evidence.
+2026-10-15. Its reviewed source has now been pushed to the owner's Private
+GitHub repository under TASK-0006; it is not installed in the working database.
+Source presence alone is not test evidence, and Private visibility is unchanged.
 
 ![Synthetic promise history after the stale-response UI repair](docs/evidence/task-0005/05-stale-response-fixed.jpg)
 
@@ -236,7 +237,7 @@ never copy that cleanup into a local environment.
 
 ## Roadmap
 
-1. Confirm the TASK-0006 repository, visibility and publication authorization before GitHub sharing; any live rollout needs separate approval.
+1. Accept the TASK-0006 source-publication delivery; agree viewer access or a visibility change separately before wider sharing. Any live rollout needs separate approval.
 2. Extend justified synthetic scenarios and agree measurable KPIs before building them.
 3. Extend CI coverage, then verify actual remote runs before displaying CI claims.
 4. Add external adapters only with defined contracts; separately validate backup/restore and production deployment.
