@@ -23,10 +23,13 @@ case, not a real-client rollout or measured ROI claim.
 Latest local revalidation (2026-10-15): all 81 custom test methods, 3 promise
 probes, 11 campaign cases, 24 HTTP operational checks and 7 configuration cases
 passed. [TASK-0010](docs/TASKS.md#task-0010---rerun-the-complete-project-regression-and-operational-validation)
-records exact commands, source digests, cleanup and exclusions. The original
-remote run failed its startup-health check; [TASK-0012](docs/TASKS.md#task-0012---final-public-portfolio-review-and-ci-repair)
-tracks the repair and public-sharing checks. Local passes do not prove remote
-CI success.
+records exact commands, source digests, cleanup and exclusions.
+
+Public source and presentation access were verified on 2026-10-15. After the
+startup-health repair, [GitHub CI passed](https://github.com/yusufondes/Operations-Control-Tower/actions/runs/38769265214)
+repository checks, the 8 base-addon tests and service health. This remote run
+does not cover the full 81-method local validation. [TASK-0012](docs/TASKS.md#task-0012---final-public-portfolio-review-and-ci-repair)
+records the publication, log-disclosure checks and original failure.
 
 This is a local source/demo project, not a production deployment or a universal
 fulfilment engine. Company/customer scenarios are fictional; no
@@ -50,7 +53,7 @@ existing working database. The standard customer Delivery Date is separate
 from the warehouse promise and is not rewritten by either integration addon.
 TASK-0007's bounded campaign source/test delivery was explicitly accepted on
 2026-10-15. The initial source publication is recorded under TASK-0006; the final
-public-sharing preparation is recorded under TASK-0012. Neither source publication
+public publication is recorded under TASK-0012. Neither source publication
 nor acceptance installs these addons in the working database. Source presence
 alone is not test evidence.
 
@@ -260,10 +263,9 @@ never copy that cleanup into a local environment.
 
 ## Roadmap
 
-1. Complete TASK-0012's final publication checks. Any live rollout needs separate approval.
-2. Extend justified synthetic scenarios and agree measurable KPIs before building them.
-3. Extend CI coverage, then verify actual remote runs before displaying CI claims.
-4. Add external adapters only with defined contracts; separately validate backup/restore and production deployment.
+1. Extend justified synthetic scenarios and agree measurable KPIs before building them.
+2. Extend CI coverage to the optional suites and verify actual remote runs.
+3. Add external adapters only with defined contracts; separately validate backup/restore and production deployment. Any live rollout needs separate approval.
 
 ## License
 

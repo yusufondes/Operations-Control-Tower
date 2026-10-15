@@ -54,11 +54,18 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 
 ### Validation and limits
 
+- TASK-0012 made the repository public on 2026-10-15 after source/history,
+  retained Actions logs/artifacts and screenshot disclosure checks. Anonymous
+  README and preferred 14-slide PDF/PowerPoint downloads matched reviewed
+  files. Both remote jobs, 8 base methods, health and cleanup passed in run
+  38769265214. This does not establish optional-suite remote coverage or
+  production readiness. The original 17-slide pair is clearly archived.
 - Source was pushed to the owner's Private GitHub repository on 2026-10-15,
   preserving both initial histories. TASK-0006 records exact source hash, remote
   verification and the first Actions failure: repository checks and 8 base tests
-  passed, but the subsequent startup-health check returned curl 56. No CI pass.
-  No public-visibility change, release tag, deployment or live installation.
+  passed, but the subsequent startup-health check returned curl 56. That first
+  run did not pass; no visibility change, release tag, deployment or live
+  installation occurred at that earlier checkpoint.
 - TASK-0007 was explicitly accepted for its bounded source/test delivery on
   2026-10-15 after final independent review, 81 passing methods and 11 campaign
   cases. This is not a working-system installation, published release or remote
@@ -69,7 +76,7 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 - Existing GitHub Actions covers the base addon only. No remote CI pass is
   claimed by these local results.
 - No optional-addon installation in the working database or production rollout.
-  No public-visibility change, outbound communication or authenticated customer consent.
+  No automated outbound communication or authenticated customer consent.
   The accepted promise-only addon does not allocate or enforce dispatch; the
   new bounded campaign source adds those guards separately. TASK-0007 records
   81 passing methods, 11 campaign probes and browser repair evidence; independent

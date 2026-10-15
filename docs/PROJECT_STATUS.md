@@ -5,11 +5,16 @@ Authoritative repository: `C:\Users\yusuf\Operations-Control-Tower`.
 
 ## Current summary
 
-TASK-0012 tracks the explicitly authorized public-sharing preparation, pending
-source push, CI-health repair, disclosure checks and presentation wording update.
-Authorization is not execution evidence: use its final receipt and the linked
-Actions run for verified publication and CI results. No local unit-test rerun,
-application-feature change or working-database operation is included.
+TASK-0012 delivered the authorized public source publication, CI-health repair,
+disclosure checks and presentation wording update on 2026-10-15. The repository
+is public. Anonymous README/PDF/PowerPoint downloads matched the reviewed local
+files byte for byte. Reviewed portfolio commit
+`96e8693885eba18ea791fc0cdf9caa8d71616557` passed
+[remote CI](https://github.com/yusufondes/Operations-Control-Tower/actions/runs/38769265214):
+repository checks, 8 base methods, health and cleanup. It does not run the
+full 81-method local validation. The task remains Review for owner acceptance;
+its receipt separates publication from deployment. No local unit tests,
+application features or working databases were changed for this delivery.
 
 TASK-0011 packaged the reviewed preview repair, presentation and regression
 evidence in three local commits, ending at

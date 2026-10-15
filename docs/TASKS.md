@@ -2249,7 +2249,7 @@ External publication and owner acceptance remain separate decisions.
 
 ## TASK-0012 - Final public portfolio review and CI repair
 
-State: In Progress
+State: Review
 
 Authorization: Yusuf Ondes, 2026-10-15, explicitly approved pushing pending
 commits, repairing CI, reviewing Actions logs before making the repository
@@ -2326,3 +2326,89 @@ The first scoped commit contains only this approved plan/checkpoint and the
 reviewed workflow repair. It can be pushed with the existing three pending
 commits while final editorial/artifact checks continue. Public visibility stays
 private until the resulting logs and final source/artifacts pass their gates.
+
+Delivery and publication receipt, 2026-10-15 (Europe/Berlin):
+
+- Commit 0457f0f4bcbbd330c12da4dbede494e7d56c7711 pushed the reviewed
+  CI repair and task record, including the previous three pending commits.
+  Run https://github.com/yusufondes/Operations-Control-Tower/actions/runs/38768548160
+  completed successfully: both jobs, 8 base methods (zero failures/errors),
+  Compose health, HTTP health and runner cleanup passed. All 24 log entries
+  (247,058 uncompressed bytes) were scanned in memory; zero actual-secret or
+  high-confidence pattern matches, unrelated personal information or artifacts.
+- Commit 96e8693885eba18ea791fc0cdf9caa8d71616557 pushed the final
+  editorial/artifact review. Run
+  https://github.com/yusufondes/Operations-Control-Tower/actions/runs/38769265214
+  also completed successfully with both jobs, the same 8 base methods, health
+  and cleanup passing. All 23 entries (245,036 bytes) passed the same in-memory
+  actual-secret/pattern and disclosure check; global artifact count remained 0.
+  Before visibility changed, all four retained runs/attempts had been checked:
+  55 log entries, 743,907 bytes. Old failed runs remain honest historical evidence.
+- Source/history gate immediately before public transition: 111 candidate files
+  and 152 reachable history blobs; zero sensitive paths or exact/pattern matches.
+  The two actual project secret values stayed in memory. Remote log checks also
+  compared the GCM token and encoded credential forms without printing them.
+  The sole remote branch was main; no tags, releases, issues/PRs or uploaded
+  artifacts introduced an unreviewed public surface. Credentials remain ignored.
+- The exact approved repository was changed from private to public only after
+  these gates and successful final-content CI. A short factual GitHub About
+  description identifies a synthetic Odoo portfolio, not a production service.
+  Anonymous README, Revised PDF and Revised PowerPoint downloads then succeeded
+  and exactly matched local reviewed bytes. No account invitation or token was
+  shared. Public visibility is publication, not production deployment.
+- English/content review corrected stale current-state claims (no remote/CI
+  never run/private access required), labelled original setup/publication
+  snapshots as historical, fixed clear wording/spacing, and linked the real
+  clone URL. Arithmetic, business rules, dates, local-vs-remote test counts and
+  synthetic/manual limitations were cross-checked. No unrelated tracked files
+  were found. No application, runtime-script, Compose or dependency change was
+  made relative to af3ddf8; only CI and publication documentation/artifacts.
+- All 21 tracked raster assets were individually inspected for visible
+  credentials, unrelated personal UI or real customer data; none was observed.
+  The preferred deck retains 14 slides/notes, 2 editable tables, 7 evidence
+  screenshots and the original cover; all 8 embedded images are byte-identical.
+  The private/access-required, unpushed and stale failed-CI snapshot wording was
+  removed. Dated local 81-method/11-case evidence remains separate from remote
+  8-method scope. Only slides 6, 13 and 14 changed visibly; root and independent
+  reviewer inspected every final slide. The original 17-slide PPTX/PDF moved
+  unchanged to docs/portfolio/archive with explicit historical/not-for-sharing
+  guidance; Git history preserves their old locations. No artifact was deleted.
+- Finalizer package/layout/font/table-arithmetic and first-party reimport passed
+  with zero findings/warnings. Fourteen Poppler PDF pages were individually
+  inspected; its GitHub hyperlink is preserved, with no JavaScript/macro payload.
+  The PDF remains image-based, not tagged/searchable. Native Microsoft PowerPoint
+  execution and full accessibility/provenance/security guarantees are not claimed.
+  Final PPTX SHA256:
+  cdae2768000743a72415a852bd7eb74af890c9901dd7ece097cfca1217914170.
+  Final PDF SHA256:
+  939ad06b400af28e149c3fb3310ef6292e1a4aaa8b974014bbbd22a5d68e31f1.
+  Builder SHA256 after output-name correction:
+  4df72ce82ca54d618db57d4bb29519179e047d38c8918d52764fed8848dc8edd.
+- Executed static checks: python scripts/check_repository.py (84 files, exit 0),
+  AST parse (40 Python files, no bytecode), node --check for both MJS sources,
+  Git Bash -n for all 10 CI shell blocks, git diff --check and staged whitespace.
+  Eighteen Markdown files had 77 relative targets and 15 heading fragments:
+  zero missing targets/fragments. GitHub accepted and executed the YAML twice;
+  no parser/dependency was installed locally. No local ERP unit tests reran.
+- Independent ci_failure_audit round 1 reviewed the exact workflow and final
+  editorial/builder/package/slide/archive diff: no confirmed defects. Separate
+  public_content_audit reviewed the textual inventory and all 21 image pixels.
+  Root independently checked real repo artifact bytes and all 14 slide renders.
+  Final publication-receipt wording receives the focused second review before
+  commit; review is behavioral read-only, not an enforced separate sandbox.
+
+The publication receipt is a final documentation-only commit after the two
+verified source pushes. It is fast-forwarded to local main only after checking
+the old main baseline; both original roots and the approved local author remain.
+It is pushed without force, and its resulting CI/logs are checked before final
+handover. Git history and Actions identify the final tip/run rather than treating
+the above reviewed portfolio commit as an eternal HEAD.
+
+No local ERP tests, installs, migrations, container restarts/cleanup, working DB
+reads/writes, remote changes beyond the approved push/public metadata, email
+draft/send, invitations, dependency installs or production deployment occurred.
+Automated CI resources exist only on disposable GitHub runners. Existing local
+working and owner-preview resources were not touched. Pattern and manual image
+checks are limited evidence, not proof of absence of every possible secret or
+rights issue. LGPL/GPL and third-party notices were preserved. Owner acceptance
+is still required for Done; publication authorization is not final acceptance.
