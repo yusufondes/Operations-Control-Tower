@@ -42,16 +42,34 @@ function Get-OwnedPreviewContainerId {
     if ($matchedContainers.Count -ne 1 -or $matchedContainers[0] -cne $Container) {
         throw 'Preview container identity could not be verified.'
     }
-    $inspection = @(docker inspect --type container --format '{{.Id}}|{{index .Config.Labels "oct.ui-preview"}}' $Container)
-    if ($LASTEXITCODE -ne 0 -or $inspection.Count -ne 1) {
+    # JSON avoids native-command quote loss in Windows PowerShell 5.1.
+    $inspectionText = @(docker inspect --type container $Container)
+    if ($LASTEXITCODE -ne 0) {
         throw 'Preview container ownership inspection failed.'
     }
-    $identityParts = $inspection[0].Split('|')
-    if ($identityParts.Count -ne 2 -or $identityParts[0] -cnotmatch '^[0-9a-f]{64}$' -or
-        $identityParts[1] -cne $Database) {
+    $inspections = ($inspectionText -join "`n") | ConvertFrom-Json
+    if (@($inspections).Count -ne 1) { throw 'Ambiguous preview container inspection.' }
+    $inspection = @($inspections)[0]
+    if ($inspection.Id -cnotmatch '^[0-9a-f]{64}$' -or
+        $inspection.Name -cne "/$Container" -or
+        $inspection.Config.Labels.'oct.ui-preview' -cne $Database) {
         throw 'Preview ownership label mismatch.'
     }
-    return $identityParts[0]
+    return $inspection.Id
+}
+
+function Test-PreviewModuleReady {
+    # Before initialization commits there may be no module table. In PS5.1,
+    # redirected native stderr can still terminate under ErrorAction Stop.
+    try {
+        $schemaReady = docker compose exec -T db psql -X -U $databaseUser -d $Database -At -v ON_ERROR_STOP=1 `
+            -c "SELECT to_regclass('public.ir_module_module') IS NOT NULL;" 2>$null
+        if ($LASTEXITCODE -ne 0 -or $schemaReady -ne 't') { return $false }
+        $installed = docker compose exec -T db psql -X -U $databaseUser -d $Database -At -v ON_ERROR_STOP=1 `
+            -c "SELECT count(*) FROM ir_module_module WHERE name='$previewModule' AND state='installed';" 2>$null
+        return ($LASTEXITCODE -eq 0 -and $installed -eq '1')
+    }
+    catch { return $false }
 }
 
 function Remove-Preview {
@@ -77,12 +95,20 @@ function Remove-Preview {
                 throw 'Preview container absent; DB ownership is unproven and its DB will not be dropped.'
             }
         }
-        catch { $cleanupErrors.Add($_.Exception.Message) }
+        catch {
+            $databaseCanBeRemoved = $false
+            $cleanupErrors.Add($_.Exception.Message)
+        }
     }
     if ($databaseCanBeRemoved) {
         try {
-            docker compose exec -T db dropdb -U $databaseUser --if-exists --force $Database
-            if ($LASTEXITCODE -ne 0) { throw 'Owned preview DB removal failed.' }
+            $present = docker compose exec -T db psql -X -U $databaseUser -d postgres -At -v ON_ERROR_STOP=1 `
+                -c "SELECT 1 FROM pg_database WHERE datname='$Database';"
+            if ($LASTEXITCODE -ne 0) { throw 'Owned preview DB discovery failed.' }
+            if ($present -eq '1') {
+                docker compose exec -T db dropdb -U $databaseUser --force $Database
+                if ($LASTEXITCODE -ne 0) { throw 'Owned preview DB removal failed.' }
+            }
             $left = docker compose exec -T db psql -X -U $databaseUser -d postgres -At -v ON_ERROR_STOP=1 `
                 -c "SELECT 1 FROM pg_database WHERE datname='$Database';"
             if ($LASTEXITCODE -ne 0 -or $left -eq '1') { throw 'Preview DB absence not verified.' }
@@ -153,9 +179,7 @@ try {
         $ownedContainer = $true
         $ready = $false
         for ($attempt=0; $attempt -lt 120; $attempt++) {
-            $installed = docker compose exec -T db psql -X -U $databaseUser -d $Database -At -v ON_ERROR_STOP=1 `
-                -c "SELECT count(*) FROM ir_module_module WHERE name='$previewModule' AND state='installed';" 2>$null
-            if ($LASTEXITCODE -eq 0 -and $installed -eq '1') { $ready=$true; break }
+            if (Test-PreviewModuleReady) { $ready=$true; break }
             Start-Sleep -Seconds 1
         }
         if (-not $ready) { throw 'Preview module initialization did not complete.' }

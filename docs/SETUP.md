@@ -146,6 +146,14 @@ up a preview.
 
 ## Optional campaign preview
 
+TASK-0008 repairs Windows PowerShell5.1 startup and cleanup: module readiness
+waits for the schema, and ownership inspection uses validated JSON instead of
+native-command-sensitive label quoting. Actual PS5.1 Start/Stop and temporary
+login were verified; stop refuses unknown/mismatched ownership and does not
+drop a preview DB if its container removal cannot be confirmed. This is local
+source validation, not a change to CI or the working database. See TASKS.md for
+the currently retained owner-test resource identities and cleanup command inputs.
+
 The same guarded helper has an explicit campaign mode exercised under TASK-0007:
 
 ```powershell

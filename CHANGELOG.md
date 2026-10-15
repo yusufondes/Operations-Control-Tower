@@ -32,6 +32,11 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 
 ### Fixed
 
+- Local preview helper supports Windows PowerShell5.1 schema-readiness polling
+  and JSON-based exact ownership inspection. Cleanup skips already-absent DBs
+  and blocks DB deletion after failed container cleanup. TASK-0008 records real
+  Start/Stop/login and mocked guard checks; local packaging is tracked in
+  TASK-0011, separately from any remote publication.
 - Manual preparation cannot claim unallocated campaign stock through saved
   move quantities, raw lines, UoMs or context defaults; public unreserve
   reconciles priority and direct demand cancellation/retargeting is guarded
