@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="shipment_plan_form" model="ir.ui.view">
+        <field name="name">oct.shipment.plan.form</field>
+        <field name="model">oct.shipment.plan</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" delete="false">
+                <header>
+                    <button name="action_respond" type="object" string="Record Customer Response" class="oe_highlight" invisible="state not in ('pending', 'stale') or response_at" groups="operations_dispatch_promise.group_dispatch_coordinator"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="status">Customer approval covers every listed batch quantity and latest dispatch date. Early dispatch is allowed. Quantity changes or postponements need a new approved remaining plan. Responses are manually recorded; no message is sent.</div>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="reason"/>
+                    </group>
+                    <field name="row_ids">
+                        <list create="false" edit="false" delete="false">
+                            <field name="batch"/>
+                            <field name="sale_line_id"/>
+                            <field name="quantity"/>
+                            <field name="latest_date"/>
+                        </list>
+                    </field>
+                    <group string="Customer Response">
+                        <field name="response_decision"/>
+                        <field name="response_person"/>
+                        <field name="response_channel"/>
+                        <field name="response_at"/>
+                        <field name="response_evidence"/>
+                        <field name="response_user_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shipment_plan_wizard_form" model="ir.ui.view">
+        <field name="name">oct.shipment.plan.wizard.form</field>
+        <field name="model">oct.shipment.plan.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Customer Shipment Plan">
+                <div class="alert alert-info" role="status">Include all remaining physical order quantities. Rows with the same batch number ship together and must share one latest date. Record the customer's actual response reference; this screen does not contact the customer.</div>
+                <group>
+                    <field name="operation" invisible="1"/>
+                    <field name="order_id" readonly="1"/>
+                    <field name="plan_id" readonly="1" invisible="operation != 'respond'"/>
+                    <field name="reason" invisible="operation != 'propose'" required="operation == 'propose'"/>
+                </group>
+                <field name="row_ids" invisible="operation != 'propose'">
+                    <list editable="bottom">
+                        <field name="batch"/>
+                        <field name="sale_line_id" domain="[('order_id', '=', parent.order_id), ('display_type', '=', False)]"/>
+                        <field name="quantity"/>
+                        <field name="latest_date"/>
+                    </list>
+                </field>
+                <group invisible="operation != 'respond'">
+                    <field name="decision" required="operation == 'respond'"/>
+                    <field name="person" required="operation == 'respond'"/>
+                    <field name="channel" required="operation == 'respond'"/>
+                    <field name="response_at" required="operation == 'respond'"/>
+                    <field name="evidence" required="operation == 'respond'"/>
+                </group>
+                <footer>
+                    <button name="action_apply" type="object" string="Record" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="sale_order_shipment_plan_form" model="ir.ui.view">
+        <field name="name">sale.order.shipment.plan</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="oct_shipment_plans" string="Customer Shipment Plans" invisible="oct_campaign_policy != 'corporate'">
+                    <div class="alert alert-info" role="status">Corporate Partial is not customer consent. Without an applicable approved batch plan only a complete remaining shipment against the current accepted full-order promise is allowed. Accepted batch dates control only their own quantities' allocation priority.</div>
+                    <button name="action_propose_shipment_plan" type="object" string="Propose Quantity and Date Plan" groups="operations_dispatch_promise.group_dispatch_coordinator" invisible="state != 'sale'"/>
+                    <field name="oct_shipment_plan_status" readonly="1"/>
+                    <field name="oct_shipment_plan_ids" readonly="1">
+                        <list create="false" edit="false" delete="false">
+                            <field name="create_date"/>
+                            <field name="reason"/>
+                            <field name="state"/>
+                            <field name="response_person"/>
+                            <field name="response_at"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -9,8 +9,7 @@ from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 
-@tagged("post_install", "-at_install")
-class TestCampaignAutomation(TransactionCase):
+class CampaignCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -145,6 +144,18 @@ class TestCampaignAutomation(TransactionCase):
                 move.write({"quantity": move.product_uom_qty, "picked": True})
 
     def _dispatch(self, order, quantity=None):
+        # Legacy operational fixtures now record explicit synthetic batch consent.
+        # Approval-denial tests call the raw picking path without this helper.
+        if order.oct_campaign_policy == "corporate" and len(order.order_line) == 1:
+            remaining = order.order_line.product_uom_qty - order.order_line.qty_delivered
+            take = quantity if quantity is not None else remaining
+            if 0 < take <= remaining:
+                current = order._shipment_current_plan()
+                batches = current._open_batches() if current and current._valid() else []
+                expected = batches[0].quantity if batches and len(batches[0]) == 1 else None
+                if (take < remaining or current) and expected != take:
+                    quantities = [take] + ([remaining - take] if take < remaining else [])
+                    self._approve_batches(order, quantities)
         picking = self._pickings(order)
         picking.ensure_one()
         self.assertFalse(picking.env.su)
@@ -163,6 +174,18 @@ class TestCampaignAutomation(TransactionCase):
         self.assertEqual(order.order_line.mapped("qty_delivered"), delivered)
         self.assertEqual((self.product.qty_available, self.second_product.qty_available), quantities)
 
+    def _approve_batches(self, order, quantities, dates=None):
+        dates = dates or [order.oct_dispatch_promise_ids.current_date] * len(quantities)
+        model = self._as(self.env["oct.shipment.plan"])
+        plan = model.browse(model.propose(order.id, [
+            {"batch": i + 1, "line_id": order.order_line.id, "quantity": qty, "latest_date": dates[i]}
+            for i, qty in enumerate(quantities)], "Synthetic customer-approved split shipment"))
+        plan.respond("accepted", "Synthetic Customer Contact", "email", fields.Datetime.now(), "Synthetic approval reference")
+        return plan
+
+
+@tagged("post_install", "-at_install")
+class TestCampaignAutomation(CampaignCase):
     def test_reverse_creation_priority_and_repeated_corporate_backorders(self):
         last = self._order(100, "consumer", "2030-12-17")
         corporate = self._order(600, "corporate", "2030-12-16")
@@ -458,6 +481,7 @@ class TestCampaignAutomation(TransactionCase):
         self._dispatch(earlier)
         self._seed(3)
         self._reconcile()
+        self._approve_batches(later, [2, 3])
         picking = self._pickings(later)
         picking.move_ids.write({"quantity": 2, "picked": True})
         self.assertEqual(self._reserved(later), 2)

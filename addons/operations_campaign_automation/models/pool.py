@@ -169,11 +169,40 @@ class CampaignPool(models.Model):
         ])
         eligible = managed.filtered(lambda move: not move.picked and move.sale_line_id.order_id.oct_campaign_confirmed_at
                                     and move.sale_line_id.order_id.oct_dispatch_promise_ids.current_date)
-        ordered = eligible.sorted(key=lambda move: (
-            move.sale_line_id.order_id.oct_dispatch_promise_ids.current_date,
-            move.sale_line_id.order_id.oct_campaign_confirmed_at,
-            move.sale_line_id.order_id.id, move.id,
-        ))
-        if ordered:
-            ordered.with_context(_oct_campaign_allocation_token=_ALLOCATION_TOKEN)._action_assign()
+        requests = []
+        for order in eligible.sale_line_id.order_id:
+            order_moves = eligible.filtered(lambda move: move.sale_line_id.order_id == order).sorted("id")
+            plan = order._shipment_current_plan() if order.oct_campaign_policy == "corporate" else False
+            if not plan:
+                for move in order_moves:
+                    requests.append((order.oct_dispatch_promise_ids.current_date, order, move, move.product_uom_qty))
+                continue
+            if not plan._valid():
+                continue
+            if any(move.move_orig_ids for move in order_moves):
+                raise UserError(_("Batch plans require unchained make-to-stock customer moves."))
+            used = {move.id: 0 for move in order_moves}
+            protected = {}
+            for line in order._shipment_goods():
+                protected[line.id] = sum(move.product_uom._compute_quantity(move.quantity, line.product_uom_id, round=False)
+                    for move in managed.filtered(lambda item: item.sale_line_id == line and item.picked))
+            for batch in plan._open_batches():
+                for row in batch:
+                    line = row.sale_line_id
+                    held = min(protected.get(line.id, 0), row.quantity)
+                    protected[line.id] = protected.get(line.id, 0) - held
+                    remaining = row.quantity - held
+                    for move in order_moves.filtered(lambda item: item.sale_line_id == line):
+                        demand = move.product_uom._compute_quantity(move.product_uom_qty - used[move.id], line.product_uom_id, round=False)
+                        take = min(remaining, demand)
+                        if line.product_uom_id.compare(take, 0) <= 0:
+                            continue
+                        quantity = line.product_uom_id._compute_quantity(take, move.product_uom, round=False)
+                        used[move.id] += quantity
+                        remaining -= take
+                        requests.append((row.latest_date, order, move, quantity))
+        for due, order, move, quantity in sorted(requests, key=lambda item: (
+                item[0], item[1].oct_campaign_confirmed_at, item[1].id, item[2].id)):
+            move.with_context(_oct_campaign_allocation_token=_ALLOCATION_TOKEN)._action_assign(force_qty=quantity)
+        eligible._recompute_state()
         orders._campaign_sync_status()

@@ -1,9 +1,21 @@
 # Project status and Codex working guide
 
-Snapshot date: 2026-10-15 (Europe/Berlin).
+Snapshot date: 2026-10-17 (Europe/Berlin).
 Authoritative repository: `C:\Users\yusuf\Operations-Control-Tower`.
 
 ## Current summary
+
+TASK-0018 is in Review (2026-10-17): customer-approved batch quantities and
+latest dates, early dispatch and renewed approval for changed quantities/late
+dispatch are implemented in campaign source 19.0.2.0.0. Final fresh disposable-
+DB validation passed 108 methods (27 new), three promise probes and thirteen
+campaign cases, including two new real-connection plan races. Independent final
+review found no new confirmed defect after two P2 repairs. Owned DB removal and
+scoped working fingerprint equality were verified. No working-DB installation
+or browser/upgrade test occurred. The owner has now authorized source commit
+and GitHub publication, without deployment or working-database access. See
+TASKS for exact digests and execution limits. Remote CI covers the base addon
+and health, not the full optional campaign suite validated locally.
 
 TASK-0012 delivered the authorized public source publication, CI-health repair,
 disclosure checks and presentation wording update on 2026-10-15. The repository

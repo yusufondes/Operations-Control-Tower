@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="operations_dispatch_promise.view_dispatch_wizard_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form/div[@role='status']" position="replace">
-                <div class="alert alert-info" role="status">Use synthetic response references in this portfolio. Nothing is sent to the customer. An applicable accepted date automatically reprioritizes unprepared reservations only for configured campaign orders.</div>
+                <div class="alert alert-info" role="status">Use synthetic response references; nothing is sent to the customer. Date-only approval covers the full remaining order, not a partial quantity. Once a batch plan is accepted, changes require a new quantity-and-date plan.</div>
             </xpath>
         </field>
     </record>
@@ -16,7 +16,7 @@
         <field name="inherit_id" ref="operations_dispatch_promise.view_dispatch_promise_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet/div[@role='status']" position="replace">
-                <div class="alert alert-info" role="status">For configured campaign orders, the accepted warehouse date controls unprepared reservation priority. Pending proposals and estimates do not. Standard customer Delivery Date and picking schedules remain separate. Responses are manually recorded, not authenticated customer consent.</div>
+                <div class="alert alert-info" role="status">The full-order promise and customer shipment plan are separate. Accepted batch dates rank only their listed quantities; pending proposals and estimates do not set priority. Standard Delivery Date and picking schedules remain separate. Staff record customer responses manually.</div>
             </xpath>
         </field>
     </record>
@@ -71,7 +71,7 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Campaign Automation" name="oct_campaign_automation">
-                    <div class="alert alert-info" role="status">Select both pool and shipment policy on the quotation. They are frozen after confirmation. Priority uses only the accepted warehouse promise; pending proposals and estimates are not priority dates.</div>
+                    <div class="alert alert-info" role="status">Select pool and policy on the quotation; both freeze after confirmation. Priority uses the accepted full-order promise or accepted batch quantities and latest dates. Pending proposals and estimates do not set priority. Corporate partial dispatch requires a customer-approved batch plan.</div>
                     <group>
                         <field name="oct_campaign_pool_id" readonly="oct_campaign_confirmed_at or state not in ('draft', 'sent')" domain="[('company_id', '=', company_id), ('warehouse_id', '=', warehouse_id)]"/>
                         <field name="oct_campaign_policy" readonly="oct_campaign_confirmed_at or state not in ('draft', 'sent')"/>

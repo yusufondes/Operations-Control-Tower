@@ -203,3 +203,37 @@ promise-only modes. preview-dispatch.ps1 -WithCampaign seeds only opening stock
 and synthetic orders in a separate owned preview; it does not manufacture or
 dispatch. TASK-0007 and evidence/task-0007 own the executed 81-method/11-case
 results, review gate and limitations. Source existence alone is not test evidence.
+
+## Customer-approved shipment batches - TASK-0018
+
+The campaign source now adds protected oct.shipment.plan and plan-row history.
+Each numbered batch has one latest date and explicit quantities in the source
+sales-line UoMs; all remaining goods must be covered. Coordinators use a
+transient proposal/response form. Source-order access and global company rules
+apply. CRUD cannot fabricate approvals, including sudo/default-context paths.
+Customer evidence is entered by staff; no external customer message is sent.
+
+The latest accepted plan supersedes only remaining work; pending/rejected plans
+do not change it. A dedicated protected scope revision detects quantity changes
+and restoration without invalidating legitimate completed batches. Completed
+native stock moves retain protected plan/batch links, not editable delivery
+counters. Acceptance and dispatch serialize through the existing pool/order
+mutex protocol. Prepared work must be reviewed/unprepared before new acceptance.
+
+Allocation sorts each batch's quantity against other demand by its latest date,
+confirmation event and order ID. Native unchained MTS reservation receives an
+additional quantity per request; native move states are recomputed afterwards.
+Chained-origin moves are rejected for batch-plan allocation because the native
+reservation branch does not honor the same forced-quantity cap. Prepared and
+outside reservations are preserved. One exact next batch is dispatched at a
+time; early is allowed, overdue or quantity-changed dispatch requires new
+approval. Native backorders retain outstanding quantities.
+Latest-date checks use the warehouse partner timezone, falling back to the
+company partner timezone and then UTC; an RPC timezone cannot extend the day.
+
+A date-only proposal cannot rewrite an accepted quantity plan. With no accepted
+batch plan, corporate partial dispatch is blocked; complete remaining dispatch
+against the accepted original commitment is still permitted. Consumer behavior
+is unchanged. No live installation, upgrade, migration, carrier integration,
+capacity feasibility or production guarantee follows from source delivery.
+TASK-0018 owns fresh execution/review evidence, not the earlier 81-method count.

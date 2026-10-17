@@ -73,7 +73,8 @@ main = goods("Drink")
 ingredient, packaging = goods("Ingredient"), goods("Packaging")
 probe_products = {name: goods(name) for name in ("Acceptance", "Supply Race", "Acceptance Race",
                                                "Order Phantom", "Line Phantom", "Scheduler",
-                                               "Move Preparation Race", "Line Preparation Race")}
+                                               "Move Preparation Race", "Line Preparation Race",
+                                               "Plan Acceptance Race", "Plan Dispatch Race")}
 pool = as_user(env["oct.campaign.pool"], planner).create({
     "name": "Synthetic Campaign Validation Pool", "warehouse_id": warehouse.id,
     "location_id": warehouse.lot_stock_id.id,
@@ -135,6 +136,17 @@ def validate(picking, quantity):
 
 
 def dispatch(record, quantity):
+    # Record explicit synthetic customer consent before each changed batch plan.
+    if record.oct_campaign_policy == "corporate":
+        line = record.order_line
+        remaining = line.product_uom_qty - line.qty_delivered
+        quantities = [quantity] + ([remaining - quantity] if quantity < remaining else [])
+        model = as_user(env["oct.shipment.plan"], sales)
+        plan = model.browse(model.propose(record.id, [
+            {"batch": i + 1, "line_id": line.id, "quantity": qty,
+             "latest_date": record.oct_dispatch_promise_ids.current_date}
+            for i, qty in enumerate(quantities)], "Synthetic customer approval for shipment batches"))
+        plan.respond("accepted", "Synthetic Customer Contact", "email", fields.Datetime.now(), "Synthetic manual batch consent")
     validate(open_pickings(record), quantity)
 
 
@@ -333,6 +345,19 @@ for path, name in (("move", "Move Preparation Race"), ("raw_line", "Line Prepara
     equal(reservation(prepared_late), 2, "Preparation initial reservation")
     equal(reservation(pending_early), 0, "Missing-promise competitor remains unallocated")
     preparation_fixtures.append((path, prepared_late, pending_early))
+
+plan_race_fixtures = []
+for name in ("Plan Acceptance Race", "Plan Dispatch Race"):
+    product = probe_products[name]
+    seed(product, 2)
+    record = order(product, 2, "2030-12-18")
+    model = as_user(env["oct.shipment.plan"], sales)
+    offer = model.browse(model.propose(record.id, [
+        {"batch": number, "line_id": record.order_line.id, "quantity": 1, "latest_date": "2030-12-18"}
+        for number in (1, 2)], "Synthetic race approval"))
+    if name == "Plan Dispatch Race":
+        offer.respond("accepted", "Synthetic Contact", "email", fields.Datetime.now(), "Synthetic race evidence")
+    plan_race_fixtures.append((record, offer))
 env.cr.commit()
 
 
@@ -444,6 +469,37 @@ with env.registry.cursor() as first_cursor, env.registry.cursor() as second_curs
         raise AssertionError("Stale response erased the original accepted promise.")
     first_cursor.commit()
     passed("repeatable_read_new_line_phantom", backend_pids=pids, stale_response_applied=False)
+
+accept_order, accept_offer = plan_race_fixtures[0]
+with env.registry.cursor() as first_cursor, env.registry.cursor() as second_cursor:
+    a, b, pids = sessions(first_cursor, second_cursor)
+    offer_a = a["oct.shipment.plan"].with_user(sales.id).browse(accept_offer.id)
+    offer_a.respond("accepted", "Synthetic Contact", "email", fields.Datetime.now(), "Synthetic race evidence")
+    must_refuse(lambda: validate(open_pickings(accept_order, b), 1),
+                "Dispatch ignored uncommitted customer plan acceptance.")
+    second_cursor.rollback()
+    first_cursor.commit()
+    b.invalidate_all()
+    validate(open_pickings(accept_order, b), 1)
+    delivered = b["sale.order"].with_user(sales.id).browse(accept_order.id).order_line.qty_delivered
+    equal(delivered, 1, "One batch dispatched after committed approval")
+    second_cursor.commit()
+    passed("two_connection_plan_acceptance_and_dispatch", backend_pids=pids, delivered=1)
+
+dispatch_order, dispatch_offer = plan_race_fixtures[1]
+with env.registry.cursor() as first_cursor, env.registry.cursor() as second_cursor:
+    a, b, pids = sessions(first_cursor, second_cursor)
+    validate(open_pickings(dispatch_order, a), 1)
+    must_refuse(lambda: validate(open_pickings(dispatch_order, b), 1),
+                "Two dispatch transactions consumed the same approved batch.")
+    second_cursor.rollback()
+    first_cursor.commit()
+    b.invalidate_all()
+    validate(open_pickings(dispatch_order, b), 1)
+    delivered = b["sale.order"].with_user(sales.id).browse(dispatch_order.id).order_line.qty_delivered
+    equal(delivered, 2, "Two different approved batches consumed once each")
+    second_cursor.commit()
+    passed("two_connection_approved_batch_dispatch", backend_pids=pids, delivered=2, approved_batches=2)
 
 env.cr.rollback()
 env.invalidate_all()

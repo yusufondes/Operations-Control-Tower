@@ -46,6 +46,9 @@ class DispatchProposal(models.Model):
         if not pools:
             return super().respond(decision, person, channel, response_at, evidence)
         self._coordinator_order()
+        if decision == "accepted" and self.order_id._shipment_current_plan():
+            from odoo.exceptions import UserError
+            raise UserError("Use a new quantity-and-date shipment plan to change an accepted batch plan.")
         with self.env.cr.savepoint():
             pools._campaign_lock()
             result = super(DispatchProposal, self.with_context(_oct_campaign_event_token=_EVENT_TOKEN)).respond(

@@ -8,6 +8,14 @@ The format follows Keep a Changelog, and the project uses Odoo-compatible semant
 
 ### Added
 
+- TASK-0018: customer-approved shipment batch quantities and latest dispatch
+  dates in campaign addon `19.0.2.0.0`, with protected manual response history,
+  proposal/response forms, source-scope guards and per-batch allocation priority
+- Early exact-batch dispatch; renewed approval for changed quantities or late
+  dispatch; corporate partials no longer follow from policy selection alone
+- Focused consent, quantity/date, backorder, source-security and form tests;
+  runtime evidence and installation limits are recorded in TASK-0018
+
 - Optional `operations_dispatch_promise` addon, version `19.0.1.0.0`, depending on
   `sale_stock` and the base control-tower addon
 - Separate original/current warehouse dispatch commitments, internal estimates,

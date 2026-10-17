@@ -1,5 +1,151 @@
 # Task registry
 
+## TASK-0018 - Customer-approved quantity and latest-dispatch plans
+
+State: Review
+
+Authorization: Yusuf Ondes explicitly requested implementation in this chat,
+then approved latest dispatch dates, early dispatch, and renewed customer
+approval whenever a batch quantity changes or its date is postponed.
+
+Plan and acceptance criteria:
+
+1. Extend the existing campaign addon, with no new ERP dependencies. Corporate
+   partial dispatch requires an applicable accepted plan containing all remaining
+   physical order-line quantities, split into explicit dated batches.
+2. Record immutable proposal/response history and manual contact/channel/time/
+   evidence. Pending/rejected/stale proposals do not replace the last accepted
+   plan. This is employee-recorded consent, not a customer portal or email send.
+3. Use each accepted batch's latest date for its stock-priority quantity; never
+   move the entire balance ahead using the first batch's date. Retain existing
+   prepared/outside reservations and consumer-complete enforcement.
+4. Permit early dispatch of an exact approved batch. Block changed quantities,
+   overdue dispatch, missing approval and scope-stale approval, including raw
+   stock completion paths. Reproposal/reapproval replaces only remaining work;
+   completed shipments and original commitment history are preserved.
+5. Keep the current accepted full-order commitment usable without a partial plan; a
+   corporate partial is no longer authorized merely by selecting Corporate
+   Partial. Date-only proposals cannot rewrite an accepted quantity plan.
+6. Provide usable Odoo proposal/response screens, source-order history and clear
+   approval/overdue status. Validate ACL/company/scope/default-context paths,
+   atomic dispatch, UoM, mixed lines, backorders and priority regressions.
+7. Run fresh-install/runtime tests only in a newly owned disposable database,
+   preserving the working database, existing services and owner files. Obtain
+   separate read-only review; at most two repair rounds. Handover in Review.
+
+Baseline: f83122926cbdeb10086d152ce9dc462cdcac5d0a. Preserve pre-existing
+docs/TASKS.md edits and untracked ZIP/PDF/PPTX. No presentation/Power BI edit,
+commit, push, working-DB install/upgrade, external message or deployment.
+
+Execution attempt 1:
+
+- Command: scripts/validate-fulfilment.ps1 -WithCampaign, local Odoo 19 and
+  PostgreSQL 15, owned DB oct_scenario_6ae084a33829487c84036c48c32415df.
+- Exit 1: 99 methods, zero assertion failures, one legacy fixture error. All
+  18 new shipment-plan methods passed; an older saved-partial preparation test
+  still expected onapproval-free corporate dispatch. Updated that fixture to
+  record explicit synthetic [2, 3] batch approval before preparation, retaining
+  its reservation/preparation assertions. No product bypass was introduced.
+- Runner verified owned DB removal and unchanged scoped working module/control
+  item fingerprint. Expected Odoo child cleanup/original-preview orphan warnings
+  were observed; no unknown preview/resource cleanup was attempted.
+- Added a fail-closed guard for chained-origin moves in accepted-plan allocation
+  after reading native Odoo's force-quantity branch; the supported unchained MTS
+  path reserves an additional batch quantity and recomputes native move states.
+- Full retry and independent review remain pending; source presence is not Done.
+
+Intermediate retry / independent review round 1:
+
+- DB oct_scenario_7d3fb6c3bc444e96ad9210402f9f060c: runner exit 0; 103 methods
+  with zero failures/errors, three promise probes and eleven campaign cases
+  passed. Owned DB removal/scoped working fingerprint equality verified.
+- This run's addon process loaded the pre-review-repair implementation; it is
+  intermediate evidence, not final validation of the later state/expiry repairs.
+- Separate read-only campaign_reviewer reported two P2 source findings: expired
+  pending proposals prevented truthful acceptance evidence/new proposals, and
+  an inbound return could make a superseded pending scope match again without
+  checking its stale state. Reviewer ran no DB tests; source reasoning was the
+  evidence. No other confirmed defect was reported in that snapshot.
+- Repaired validity to require pending/accepted state and reject expired pending
+  applicability; late/stale responses remain evidence without becoming consent.
+  Stale unanswered response UI remains usable. Added explicit expiry/return
+  regressions, UoM/company/source/default-context tests, prepared-stock guard
+  coverage, and two real-connection approval/dispatch probes to the owned runner.
+- Final fresh rerun and second/last independent review required before handover.
+
+Final frozen-source validation, 2026-10-17:
+
+- Command: scripts/validate-fulfilment.ps1 -WithCampaign, local Docker Odoo 19 /
+  PostgreSQL 15; exit 0. Owned DB:
+  oct_scenario_18cdc1d6c98049ca95a2d6eff6a15664.
+- Final result: 108 test methods, zero failures/errors, including 27 new shipment
+  plan methods. Three promise probes and thirteen campaign cases passed. The
+  latter includes two new real-connection approval/dispatch serialization cases
+  and the existing role-based purchasing/manufacturing/900-unit dispatch flow.
+- Exact next-batch quantities, inclusive latest date, early dispatch, late and
+  unapproved refusal, rejected replacement, scope change/restoration, immutable
+  response/defaults, multi-line/UoM conversion, company/source access, preserved
+  backorders/history and warehouse-local deadline enforcement passed.
+- Review regressions for expired pending evidence/supersession and a native
+  inbound return after superseding a pending plan passed. Applicability also
+  retains completed-move history; legitimate own-plan completions remain valid.
+- Local ignored final log: task-0018-final-validation.log, SHA256
+  e881859dadb5fabc8c8bdc21b5a977d916a54120a80fa1b85c9a61e68f9a6faa.
+- Final combined source SHA256 (campaign-addon .py/.xml/.csv files and
+  scripts/validate_campaign.py, 20 files total):
+  f885b120c3401ebf6f93650ab70012c846799443d15e9144290f4cd4825743f6.
+  Algorithm: sort full paths, normalize repository-relative paths with '/',
+  concatenate relative path + LF + lowercase raw-file SHA256 + LF in UTF-8,
+  then SHA256. Include scripts/validate_campaign.py; exclude __pycache__.
+- Main model SHA256:
+  4e9e9140ff82e5b85ade0bfb28d0ed833230c1805310f91ab9ab85fda54bbe50.
+  New tests SHA256:
+  2343bb6f730cde847437a0c36b80b209151405dee8dc1bc53756b4c1ea5f58c1.
+- Runtime image IDs: Odoo
+  dd9013e669caaa23d26765dc55814655eaeecca7cfc2c265dbabae913bce22fd;
+  PostgreSQL c961aa287d8698297cb26cdfadfbe9fd2cbaf77e53cfffe9636e8d8a1e4d842c.
+- Owned DB removal verified; scoped working module/control-item fingerprint
+  unchanged (14 control items, md5 17f2a87362f026a248dc420227dd452f). This is not
+  a proof of whole-database immutability. Existing healthy services and owner's
+  stopped c0008313 preview remain. Expected negative race SQL and child-process/
+  orphan warnings are not counted as failures or used to delete other resources.
+- Repository text/XML/CSV check and tracked whitespace check passed. Final
+  second independent review is pending at this receipt checkpoint.
+- Not run/claimed: browser rendering, live working-DB upgrade/migration,
+  production capacity/calendar feasibility, authenticated customer consent,
+  external customer messages, carrier integration, or production acceptance.
+  Server-side Form checks cover proposal and response forms, not browser UI.
+- No source changes after this final run; only documentation/review receipts may
+  be appended. No README/presentation/Power BI change, commit, push or deployment.
+
+Final independent review, round 2:
+
+- campaign_reviewer read the actual full diff/untracked implementation, all 27
+  new test methods and the completed final execution log. No new confirmed
+  defect found; the two round-1 P2 findings are closed. Verified all four
+  source/model/test/log hashes above and tracked whitespace check exit 0.
+- Reviewer performed only read-only Git/file/AST/hash checks, no runtime,
+  container, DB, credential, index or external mutation. Inherited permissions
+  remain a behavioral read-only restriction, not a separate enforced sandbox.
+- Source remains exactly the final tested/reviewed version. Only this outcome
+  receipt and PROJECT_STATUS handover wording were updated afterwards.
+- Handover is Review: explicit owner acceptance has not yet been received.
+  No third review/repair cycle, live deployment or automatic publication.
+
+Publication follow-up authorization, 2026-10-17:
+
+- Yusuf Ondes explicitly requested commit and push of the new Odoo feature,
+  inspection of the exact remote CI results, and no working-database access.
+- Publish only the reviewed TASK-0018 source, tests and related documentation.
+  Preserve earlier private role-review receipts locally; exclude the handoff
+  ZIP, unrelated artifacts, .env and ignored runtime logs from the index.
+- Verify the frozen source/log hashes, static checks and redacted secret gate.
+  Publish a normal fast-forward to main only if origin still has the approved
+  baseline. Do not force push, install/upgrade modules or access local databases.
+- Observe CI for the pushed SHA. Its existing base-addon/health scope is not
+  equivalent to the locally executed 108-method optional suite. Publication
+  is not deployment or exhaustive production acceptance.
+
 This file owns task scope, approval, validation evidence, and acceptance. Architecture facts belong in ARCHITECTURE.md; durable decisions in DECISIONS.md; the current snapshot in PROJECT_STATUS.md. A task label alone grants no authority.
 
 ## States and approvals

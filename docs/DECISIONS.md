@@ -245,11 +245,34 @@ silently. No physical receipt, manufacture or dispatch is inferred from a date.
 No live installation, external messages, carrier/WMS, capacity optimization,
 formal quality release or nine-area ERP roadmap is authorized by this package.
 
+## D-016 - Quantity-and-date customer shipment approval (TASK-0018)
+
+Status: Explicitly approved implementation policy, 2026-10-17.
+Product Owner: Yusuf Ondes, approval in the current chat.
+
+Corporate partial dispatch must follow an explicitly customer-approved plan of
+batch quantities and latest dispatch dates. Early dispatch is permitted; a
+quantity change or postponement requires renewed customer approval. A proposal
+or silence is not consent. Employee-entered contact/channel/time/evidence is
+retained; no authenticated portal or outbound integration is inferred.
+
+This supersedes D-012's one-date/automatic corporate-partial permission for
+TASK-0018's bounded campaign workflow and resolves O-003 within that scope.
+Each accepted batch date ranks only its own quantity. Original promise history,
+completed batches, consumer-complete policy and protected reservations remain.
+Pending/rejected proposals retain the current accepted plan. Source-scope
+changes invalidate applicability; a replacement covers all remaining goods.
+Overdue batches require a newly accepted remaining plan before dispatch.
+
+The original full remaining shipment remains possible without a split plan
+against its accepted commitment. This is not capacity planning, an assurance
+that production can meet the date, a working-DB upgrade or production acceptance.
+
 ## Open proposals - not approved
 
 | ID | Proposal/question | Required evidence or decision |
 | --- | --- | --- |
-| O-003 | Detailed per-batch schedules beyond the bounded scenario | D-012/D-015 and TASK-0007 cover one promise for outstanding quantity, corporate backorders, complete consumers and reservation policies. Future batch calendars/minimum quantities require a separately justified scope. |
+| O-003 | Detailed per-batch schedules beyond the original bounded scenario | D-016/TASK-0018 now authorizes explicit quantity/latest-date approval for campaign batches; minimum quantities, capacity planning and integrations remain outside scope. |
 | O-004 | Quality hold and release | Assess Community standard flows, actual blocking behavior, roles and possible custom gap. |
 | O-005 | A broader blocker engine beyond one derived campaign risk item | TASK-0007 covers the bounded source-linked owner/next action. Additional blocker types or cross-system coordination need separate justification. |
 | O-006 | Inventory reconciliation, CSV WMS, supplier/shipment tracking, CAPA, maintenance, alerts, executive KPIs and APIs | Candidate areas only; no nine-module commitment. Select features from an approved scenario. |

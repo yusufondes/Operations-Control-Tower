@@ -76,6 +76,17 @@ for each partial batch.
 
 ## Campaign walkthrough under validation
 
+TASK-0018 adds quantity-and-date approval to this walkthrough. Before the first
+corporate partial dispatch, use the order's shipment-plan proposal/response
+forms to record explicit synthetic consent for all remaining batch quantities
+and their latest dispatch dates. Policy selection and a date-only promise are
+not partial-shipment consent. Each dispatch must match the next batch in the
+applicable accepted plan; a new response is not required for every unchanged
+batch. Early exact-batch dispatch is allowed; changed
+quantities or postponement require a newly accepted plan. The older browser
+screenshots below do not demonstrate these new forms. This extension passed
+108 local methods and 13 campaign cases, not a new browser-render check.
+
 The [TASK-0007 browser record](evidence/task-0007/README.md) documents actual
 campaign checks, the review-discovered preparation defect and repair proofs.
 Review and owner acceptance remain separate gates. The TASK-0005 images above

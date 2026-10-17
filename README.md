@@ -22,7 +22,13 @@ testing and review used AI assistance; approval and validation evidence are
 recorded in [the task registry](docs/TASKS.md). This is a synthetic portfolio
 case, not a real-client rollout or measured ROI claim.
 
-Latest local revalidation (2026-10-15): all 81 custom test methods, 3 promise
+Latest campaign validation (2026-10-17): 108 test methods, 3 promise probes and
+13 campaign cases passed in an owned disposable database. The new quantity/date
+approval flow is recorded in [TASK-0018](docs/TASKS.md#task-0018---customer-approved-quantity-and-latest-dispatch-plans).
+No working-database installation or browser validation of this extension is
+claimed. Existing presentation screenshots predate this new extension.
+
+Earlier local revalidation (2026-10-15): all 81 custom test methods, 3 promise
 probes, 11 campaign cases, 24 HTTP operational checks and 7 configuration cases
 passed. [TASK-0010](docs/TASKS.md#task-0010---rerun-the-complete-project-regression-and-operational-validation)
 records exact commands, source digests, cleanup and exclusions.
@@ -46,7 +52,7 @@ in [TASK-0007](docs/TASKS.md#task-0007---complete-the-bounded-campaign-automatio
 | --- | --- | --- |
 | Operations Control Tower, 19.0.4.1.0 | Control items, owners, deadlines, next actions, views and role/company access | Follow-up workspace, not ERP integrations behind each card |
 | Optional Dispatch Promise, 19.0.1.0.0 | Original/current/estimated dates, proposals, manual accepted/rejected response evidence, stale-scope and duplicate protection | Does not reserve stock, reschedule pickings or send messages |
-| Optional Campaign Automation, 19.0.1.0.0 | Accepted-date reservation priority, protected confirmation history, complete consumer dispatch, corporate backorders and derived supply-risk ownership | Configured one-step make-to-stock, untracked goods only; see TASK-0007 for review and acceptance status |
+| Optional Campaign Automation, 19.0.2.0.0 | Customer-approved batch quantities/latest dates, per-batch reservation priority, complete consumer dispatch, corporate backorders and supply-risk ownership | Configured one-step make-to-stock, untracked goods only; TASK-0018 records local validation and exclusions |
 | Standard fulfilment validation | Raw-material purchasing, own production, 900 units dispatched and corporate 300/200/100 batches | Synthetic diagnostic; reported business-rule gaps are not acceptance passes |
 
 The promise addon and real-browser verification were accepted as scoped source/
@@ -94,9 +100,14 @@ date, then protected current confirmation timestamp, then smaller order ID.
 Unprepared campaign reservations can be reassigned; prepared/picked, completed
 and outside reservations remain protected. Incomplete consumers retain allocated
 stock but cannot dispatch partially. Corporate dispatch keeps outstanding
-backorders rather than silently cancelling them. Missing accepted dates block
-campaign allocation/dispatch and produce an owner/next action. These additions
-passed the recorded TASK-0007 local checks, not a production-release claim.
+backorders rather than silently cancelling them. Corporate partial dispatch
+requires staff-recorded customer approval of each batch quantity and latest
+dispatch date. Early dispatch is allowed; changed quantities or postponed dates
+require renewed approval. Selecting Corporate Partial alone is not consent.
+Missing accepted dates block
+campaign allocation/dispatch and produce an owner/next action. TASK-0007 records
+the original campaign checks; TASK-0018 records the new batch-approval checks.
+Neither is a production-release claim.
 
 Manual preparation cannot increase its pre-call allocation. Use Check Availability
 to obtain stock through campaign priority. A partly prepared short consumer move

@@ -10,4 +10,14 @@
         <field name="model_id" ref="model_oct_campaign_confirmation"/>
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="shipment_plan_company_rule" model="ir.rule">
+        <field name="name">Shipment plans: active companies</field>
+        <field name="model_id" ref="model_oct_shipment_plan"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="shipment_plan_row_company_rule" model="ir.rule">
+        <field name="name">Shipment plan rows: active companies</field>
+        <field name="model_id" ref="model_oct_shipment_plan_row"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>
